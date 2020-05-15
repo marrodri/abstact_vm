@@ -1,10 +1,11 @@
-#ifndef IOPERAND_H
-#define IOPERAND_H
+#ifndef IOPERAND_HPP
+#define IOPERAND_HPP
 #include <string>
 #include <iostream>
 
-//probably you should move it to it's .cpp file
-enum class eOperandType
+//this class gets inherited by all other operands, so all operands classes
+//become IOperands, also this is the factory
+enum eOperandType
 {
 	Int8, Int16, Int32, Float, Double
 };
@@ -14,6 +15,8 @@ class IOperand {
 private:
 	//use a switch case
 	//CreateOperand(class of the operand, input string the value int);
+	//use an array to check if the operand exists or not, if it exists then create
+	//if not handle error by saying operand type doesn't exist
 	IOperand const * createOperand(eOperandType type, std::string const & value) const;
 
 	//each function will create a class with the value added, and
