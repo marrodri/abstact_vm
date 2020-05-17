@@ -15,29 +15,32 @@ void get_line_instruction(char *filename)
 	int i = 0;
 	int j = 0;
 
-	
-
 	infile.open(filename);
 	std::cout <<  "reading fine" << std::endl;
-	//TODO, store the line commands in the double vector, instructions;
-	//each line is going to be a vector of a vector of words. 
 	while (std::getline(infile, instruction))
 	{
 		std::cout <<  "current line is: |" << instruction << "|" << std::endl;	
-		instructions.push_back(std::vector<std::string>());
 		std::istringstream ss(instruction);
-		do
+		if (instruction != "" && instruction != "\0")
 		{
-			std::string word;
-			ss >> word;
-			instructions[i].push_back(word);
-		} while (ss);
-		
+			instructions.push_back(std::vector<std::string>());
+			do
+			{
+				std::string word;
+				ss >> word;
+				instructions[i].push_back(word);
+			} while (ss);
+			i++;
+		}
+	}
+	std::cout <<  "Number of instructions | " << instructions.size() << "|" << std::endl;
+	for (int i = 0; i < instructions.size(); i++)
+	{
 		std::cout <<  "INSTRUCTION: |" << instructions[i][0]<< "|"  << std::endl;
-		if(instructions[i][0] != "")
-			std::cout <<  "VALUE: |" << instructions[i][1] << "|"  << std::endl;
+		std::cout <<  "VALUE: |" << instructions[i][1] << "|"  << std::endl;
 		i++;
 	}
+	//TODO, get an app that runs
 }
 
 void command_checker()
@@ -78,15 +81,15 @@ int main(int argc, char **argv)
 	// by finding the ";;" as the beggining and end of line
 	while (argc)
 	{
-		if(0)
+		if (0)
 		{
 
 		}
 		//for each exit command, get the argc to 0;
-		if(0)
+		if (0)
 		{
 			argc--;
 		}
 	}
-	return 0;
+	return (0);
 }
