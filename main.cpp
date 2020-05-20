@@ -7,74 +7,7 @@
 #include <fstream>
 #include <sstream>
 
-//for the parser, every instruction must be separated by a newline
-//if there's more than one instruction in one line, handle error
-
-std::vector<std::vector<std::string>> vector_parser(std::ifstream infile)
-{
-	std::string instruction;
-	std::vector<std::vector<std::string>> instructions;
-	int i = 0;
-	//transform this from getline, to newlines;
-	while (std::getline(infile, instruction))
-	{
-		std::cout <<  "current line is: |" << instruction << "|" << std::endl;	
-		std::istringstream ss(instruction);
-		if (instruction != "" && instruction != "\0")
-		{
-			//move this to another function for using both, the file, and the stdin
-			instructions.push_back(std::vector<std::string>());
-			do
-			{
-				std::string word;
-				ss >> word;
-				instructions[i].push_back(word);
-			} while (ss);
-			i++;
-		}
-	}
-	return instructions;
-}
-
-void get_line_instruction(char *filename)
-{
-	std::ifstream infile;
-	std::string instruction;
-
-	std::vector<std::vector<std::string>> instructions;
-	int i = 0;
-
-	infile.open(filename);
-	std::cout <<  "reading fine" << std::endl;
-	while (std::getline(infile, instruction))
-	{
-		std::cout <<  "current line is: |" << instruction << "|" << std::endl;	
-		std::istringstream ss(instruction);
-		if (instruction != "" && instruction != "\0")
-		{
-			//move this to another function for using both, the file, and the stdin
-			instructions.push_back(std::vector<std::string>());
-			do
-			{
-				std::string word;
-				ss >> word;
-				instructions[i].push_back(word);
-			} while (ss);
-			i++;
-		}
-	}
-
-	std::cout <<  "Number of instructions | " << instructions.size() << "|" << std::endl;
-	for (int i = 0; i < instructions.size(); i++)
-	{
-		std::cout <<  "INSTRUCTION: |" << instructions[i][0]<< "|"  << std::endl;
-		std::cout <<  "VALUE: |" << instructions[i][1] << "|"  << std::endl;
-		i++;
-	}
-	//TODO, get an app that runs
-}
-
-void command_checker()
+void command_checker(std::vector<std::vector<std::string>> instructions)
 {
 	//TODO
 	// define the command_checker for any instruction inputed
@@ -84,34 +17,86 @@ void command_checker()
 	//if the instruction doesn't exist, then handle the error 
 }
 
+std::string new_line_concatonate(std::string curr_str, std::string conca_str)
+{
+	if (curr_str == "\0")
+		curr_str = conca_str;
+	else
+	{			
+		curr_str += "\n";
+		curr_str += conca_str;
+	}
+	return (curr_str);
+}
+
+//for the parser, every instruction must be separated by a newline
+//if there's more than one instruction in one line, handle error
+
+std::vector<std::vector<std::string>> vector_parser(std::string input)
+{
+	std::string								instruction;
+	std::vector<std::vector<std::string>>	instructions;
+	std::stringstream						ss_input(input);
+	int										i = 0;
+
+	while (std::getline(ss_input, instruction, '\n'))
+	{
+		// std::cout <<  "current line is: |" << instruction << "|" << std::endl;	
+		std::stringstream ss(instruction);
+		if (instruction != "")
+		{
+			instructions.push_back(std::vector<std::string>());
+			do
+			{
+				std::string word;
+				ss >> word;
+				instructions[i].push_back(word);
+			} while (ss);
+			i++;
+		}
+	}
+	
+	// std::cout <<  "Number of instructions | " << instructions.size() << "|" << std::endl;
+	// for (int j = 0; j < instructions.size(); j++)
+	// {
+	// 	std::cout <<  "INSTRUCTION: |" << instructions[j][0]<< "|"  << std::endl;
+	// 	std::cout <<  "VALUE: |" << instructions[j][1] << "|"  << std::endl;
+	// }
+	return (instructions);
+}
+
+void file_instruction_to_string(char *filename)
+{
+	std::ifstream							infile;
+	std::string								instruction = "\0";
+	std::string								file_str = "\0";
+	std::vector<std::vector<std::string>>	instructions_list;
+
+	infile.open(filename);
+	while (std::getline(infile, instruction))
+		file_str = new_line_concatonate(file_str, instruction);
+	// std::cout <<  "==============INSTRUCTIONS FROM FILE==============" << std::endl;
+	// std::cout <<  file_str << std::endl;
+	// std::cout <<  "=============================================" << std::endl;
+	instructions_list = vector_parser(file_str);
+}
+
 void read_from_stdin()
 {
 	std::string input = "\0";
 	std::string instructions_string = "\0";
-	int str_length;
-	//while running the getline, keep inputing, if a ;; is founded, break
-	//and start parsing the whole input stream
+	std::vector<std::vector<std::string>> instructions_list;
+
 	while (std::getline(std::cin, input))
 	{
 		if(input == ";;")
 			break;
-		if(instructions_string == "\0")
-		{
-			instructions_string = input;
-			//initialize the input string from the getline
-		}
-		else
-		{
-			str_length = instructions_string.length();
-			instructions_string[str_length - 1] = '\n';
-			instructions_string += input;
-			//if already initialize, then change last char with a newline,
-			//  and then concatonate both string for the parser
-		}
+		instructions_string = new_line_concatonate(instructions_string, input);
 	}
-	std::cout <<  "==============INSTRUCTIONS FROM STDIN==============" << std::endl;
-	std::cout <<  instructions_string << std::endl;
-	std::cout <<  "=============================================" << std::endl;
+	// std::cout <<  "==============INSTRUCTIONS FROM STDIN==============" << std::endl;
+	// std::cout <<  instructions_string << std::endl;
+	// std::cout <<  "=============================================" << std::endl; 
+	instructions_list = vector_parser(instructions_string);
 }	
 
 //here's where the program runs
@@ -131,7 +116,7 @@ int main(int argc, char **argv)
 		//if the file has an exit instruction, exit the VM, if not
 		//the VM is still active
 		
-		get_line_instruction(argv[1]);
+		file_instruction_to_string(argv[1]);
 		argc = 0;
 	}
 	else
