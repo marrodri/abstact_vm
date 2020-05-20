@@ -1,9 +1,8 @@
 #include "IOperand.hpp"
-#include "stack.hpp"
+#include "vm_stack.hpp"
 #include <string>
 #include <iostream>
 #include <vector>
-#include <stack>
 #include <fstream>
 #include <sstream>
 
@@ -11,10 +10,14 @@ void command_checker(std::vector<std::vector<std::string>> instructions)
 {
 	//TODO
 	// define the command_checker for any instruction inputed
-	
+
 	//if the instruction exists, run that instruction for the stack and IOperand
-	
+
 	//if the instruction doesn't exist, then handle the error 
+	do
+	{
+
+	} while(0);
 }
 
 std::string new_line_concatonate(std::string curr_str, std::string conca_str)
@@ -102,11 +105,8 @@ void read_from_stdin()
 //here's where the program runs
 int main(int argc, char **argv)
 {
-	// initialize an array here that runs as a stack
-	//for every new Operand created return a 
-	//pointer of the class to the new space
-	//of the stack
-	std::stack<IOperand> VM_heap;
+	//this is like the struct app, it has all the instructions this class.
+	vm_stack stack;  
 
 	// if argc is higher than 1, then check the files, if the
 	// files are correctly parsed, then execute the program
