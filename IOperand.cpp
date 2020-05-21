@@ -1,21 +1,10 @@
 
 #include "IOperand.hpp" 
+#include "Int8.hpp"
+#include "Int16.hpp"
+#include "Int32.hpp"
+#include "Float.hpp"
+#include "Double.hpp"
 
 
-IOperand const * createOperand(eOperandType type, std::string const & value )
-{
-
-}
-
-IOperand::IOperand(IOperand const & src)
-{
-}
-
-IOperand::~IOperand()
-{
-}
-
-IOperand & IOperand::operator=(IOperand const & rhs)
-{
-}
-
+// IOperand const * Int8::createOperand(std::string const &value)const {}
