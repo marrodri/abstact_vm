@@ -13,29 +13,63 @@ Abstract_vm::~Abstract_vm()
 {
 }
 
+
+
+
+IOperand const * Abstract_vm::createOperand(eOperandType type, std::string const & value) const
+{
+	// IOperand const *(operandFactory[5])() = {};
+
+	// checkpoint
+}
+
+IOperand const * Abstract_vm::createInt8(std::string const & value) const
+{
+	char val = std::stoi(value);
+	return (new Int8(val));
+}
+
+IOperand const * Abstract_vm::createInt16(std::string const & value) const
+{
+
+	short val = std::stoi(value);
+	return (new Int16(val));
+}
+
+IOperand const * Abstract_vm::createInt32(std::string const & value) const
+{
+	int val = std::stoi(value);
+	return (new Int32(val));
+}
+
+IOperand const * Abstract_vm::createFloat(std::string const & value) const
+{
+	float val = std::stod(value);
+	return (new Float(val));
+}
+
+
+IOperand const * Abstract_vm::createDouble(std::string const & value) const
+{
+	double val = std::stod(value);
+	return (new Double(val));
+}
+
 void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 {
 	//TODO define the method that calls the instructions from the vector
 	//if the instruction needs a value check the next 
 }
 
-
-IOperand const * Abstract_vm::createInt8(std::string const & value) const
-{
-	Int8 *pInt8 = new Int8();
-}
-
-
 void Abstract_vm::push_value(std::string value)
 {
 
 }
 
-//ask how can we return a popped IOperand value class
-// IOperand Abstract_vm::pop()
-// {
+IOperand *Abstract_vm::pop()
+{
 
-// }
+}
 
 void Abstract_vm::dump()
 {

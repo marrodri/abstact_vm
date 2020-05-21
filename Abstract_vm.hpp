@@ -5,9 +5,14 @@
 #include <string>
 #include <vector>
 #include "Int8.hpp"
+#include "Int16.hpp"
+#include "Int32.hpp"
+#include "Float.hpp"
+#include "Double.hpp"
 
 
 // FACTORY !!!
+typedef std::string t_string;
 class Abstract_vm
 {
 private:
@@ -53,7 +58,7 @@ public:
 
 	//pop function
 	//call the pop function to the private stack, returns the popped Ioperand value
-	IOperand pop();
+	IOperand *pop();
 
 	//dump
 	void dump();
