@@ -1,5 +1,5 @@
 #include "IOperand.hpp"
-#include "vm_stack.hpp"
+#include "Abstract_vm.hpp"
 #include <string>
 #include <iostream>
 #include <vector>
@@ -106,7 +106,11 @@ void read_from_stdin()
 int main(int argc, char **argv)
 {
 	//this is like the struct app, it has all the instructions this class.
-	vm_stack stack;  
+	Abstract_vm virtual_machine;
+	IOperand *test;
+
+	// test = stack.createInt8("3242");
+
 
 	// if argc is higher than 1, then check the files, if the
 	// files are correctly parsed, then execute the program
