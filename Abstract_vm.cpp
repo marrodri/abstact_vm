@@ -22,7 +22,7 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 
 IOperand const * Abstract_vm::createInt8(std::string const & value) const
 {
-	return new Int8();
+	Int8 *pInt8 = new Int8();
 }
 
 
