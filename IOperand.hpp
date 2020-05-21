@@ -11,8 +11,7 @@ enum eOperandType
 };
 
 class IOperand {
-
-protected:
+public:
 	//use a switch case
 	//CreateOperand(class of the operand, input string the value int);
 	//use an array to check if the operand exists or not, if it exists then create
@@ -20,16 +19,20 @@ protected:
 
 	//each function will create a class with the value added, and
 	//pushed right away into the stack
-	IOperand const * createInt8(std::string const & value) const;
+	
+	//testing, for creating an int8 class
+	// IOperand const * createInt8(std::string const & value) const;
+	
+	
 	IOperand const * createInt16(std::string const & value) const;
 	IOperand const * createInt32(std::string const & value) const;
 	IOperand const * createFloat(std::string const & value) const;
 	IOperand const * createDouble(std::string const & value) const;
-
-public:
 	//this one could be used in the stack class.
 	IOperand const * createOperand(eOperandType type, std::string const & value) const;
 
+
+	//virtual functions for the operand classes
 	virtual int				getPrecision( void ) const = 0; //precision of the type of the instance
 	virtual eOperandType	getType(void) const = 0; //type of the instance
 	//ask if it should be a plain type or a class type for the enum

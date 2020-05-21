@@ -1,25 +1,18 @@
 
+#include "Int32.hpp" 
 
-#include "Int8.hpp" 
-
-// Int8::Int8(char value)
-// {
-// 	this->int8 = value;
-// }
-
-Int8::Int8()
+Int32::Int32(/* args */)
 {
-	this->int8 = 0;
 }
 
-
-
-IOperand const * Int8::createInt8(std::string const & value) const
+Int32::Int32(Int32 const & src)
 {
-	// return new Int8();
 }
 
-//check how to override
+Int32::~Int32()
+{
+}
+
 int IOperand::getPrecision(void) const{}
 eOperandType IOperand::getType(void) const{}
 IOperand const *IOperand::operator+(IOperand const & rhs) const{}

@@ -1,7 +1,9 @@
 #ifndef DOUBLE_HPP
 #define DOUBLE_HPP
 
-class Double
+#include "IOperand.hpp"
+
+class Double : public IOperand
 {
 private:
 	double var_double;

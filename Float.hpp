@@ -1,7 +1,8 @@
 #ifndef FLOAT_HPP
 #define FLOAT_HPP
 
-class Float
+#include "IOperand.hpp"
+class Float : public IOperand
 {
 private:
 	float var_float;

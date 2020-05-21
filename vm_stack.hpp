@@ -4,6 +4,8 @@
 #include <stack>
 #include <string>
 #include <vector>
+
+/*NOTE: THIS IS THE FACTORY!!!!*/
 class vm_stack
 {
 private:

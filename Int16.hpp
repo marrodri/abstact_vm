@@ -1,7 +1,9 @@
 #ifndef INT16_HPP
 #define INT16_HPP
 
-class Int16
+#include "IOperand.hpp"
+
+class Int16 : public IOperand
 {
 private:
 	short int16;
