@@ -102,45 +102,56 @@ void read_from_stdin()
 	instructions_list = vector_parser(instructions_string);
 }	
 
+//TODO tasks
+//move the parser functions to the abstract_vm function or to a new class
+//set precision
+//set the operators for each operand(start with sum of Int8 and Int16)
+//test the operators(if all works, then copy paste)
+//set the error handling class
+
 //here's where the program runs
 int main(int argc, char **argv)
 {
 	//this is like the struct app, it has all the instructions this class.
 	Abstract_vm virtual_machine;
-	IOperand *test;
+	// IOperand *test
+	Operand_factory op_builder;
 
+
+	const IOperand *test = op_builder.createOperand(int8,"23");
 	// test = stack.createInt8("3242");
 
+	// std::cout <<  "test val is |" << test- << "|" << std::endl;
 
 	// if argc is higher than 1, then check the files, if the
 	// files are correctly parsed, then execute the program
-	read_from_stdin();
-	if (argc >= 2)
-	{
-		//if the file has an exit instruction, exit the VM, if not
-		//the VM is still active
+	// read_from_stdin();
+	// if (argc >= 2)
+	// {
+	// 	//if the file has an exit instruction, exit the VM, if not
+	// 	//the VM is still active
 		
-		file_instruction_to_string(argv[1]);
-		argc = 0;
-	}
-	else
-	{
-		std::cout <<  "NO FILE, GETTING FROM STDIN" << std::endl;
-		argc = 0;
-	}
-	//if argc is 1; the program runs, and each execution is started
-	// by finding the ";;" as the beggining and end of line
-	while (argc)
-	{
-		if (0)
-		{
+	// 	file_instruction_to_string(argv[1]);
+	// 	argc = 0;
+	// }
+	// else
+	// {
+	// 	std::cout <<  "NO FILE, GETTING FROM STDIN" << std::endl;
+	// 	argc = 0;
+	// }
+	// //if argc is 1; the program runs, and each execution is started
+	// // by finding the ";;" as the beggining and end of line
+	// while (argc)
+	// {
+	// 	if (0)
+	// 	{
 
-		}
-		//for each exit command, get the argc to 0;
-		if (0)
-		{
-			argc--;
-		}
-	}
+	// 	}
+	// 	//for each exit command, get the argc to 0;
+	// 	if (0)
+	// 	{
+	// 		argc--;
+	// 	}
+	// }
 	return (0);
 }
