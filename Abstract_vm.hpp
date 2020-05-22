@@ -1,18 +1,10 @@
 #ifndef ABSTRACT_VM_HPP
 #define ABSTRACT_VM_HPP
-#include "IOperand.hpp"
+#include "Operand_factory.hpp"
 #include <stack>
 #include <string>
 #include <vector>
-#include "Int8.hpp"
-#include "Int16.hpp"
-#include "Int32.hpp"
-#include "Float.hpp"
-#include "Double.hpp"
 
-
-// FACTORY !!!
-typedef std::string t_string;
 class Abstract_vm
 {
 private:
@@ -51,13 +43,10 @@ public:
 	//there's an edge case to check for mod too
 	void mod();
 	void print();
-	
+
 	//this function could be used to call the instructions methods that can be private;
 	void call_instructions(std::vector<std::string> instruction);
 
 	//exit(this one could be in another place)
-
-
-
 };
 #endif

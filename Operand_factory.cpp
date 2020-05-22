@@ -24,8 +24,9 @@ IOperand const * Operand_factory::createOperand(eOperandType type, std::string c
 		createDouble
 	};
 
-	// checkpoint
-	// return ((operandFactory[0])(value));
+	//NOTE: the 'this' is the object required to call the pointer-to-member function
+	//the this pointer address, I can get the method from the current object
+	return ((this->*operandCreators[type])(value));
 }
 
 IOperand const * Operand_factory::createInt8(std::string const & value) const
