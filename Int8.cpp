@@ -4,22 +4,22 @@
 
 Int8::Int8(char value)
 {
-	this->int8 = value;
+	this->int8_val = value;
 }
 
 Int8::Int8()
 {
-	this->int8 = 0;
+	this->int8_val = 0;
 }
 
 void Int8::setValue(char value)
 {
-	this->int8 = value;
+	this->int8_val = value;
 }
 
 char const Int8::getValue()
 {
-	return this->int8;
+	return this->int8_val;
 }
 
 //check how to override
@@ -34,5 +34,7 @@ IOperand const *Int8::operator%(IOperand const & rhs) const{}
 
 std::string const &Int8::toString(void) const 
 {
-	return NULL;
+
+	std::string output = std::to_string((int)this->int8_val);
+	return output;
 }

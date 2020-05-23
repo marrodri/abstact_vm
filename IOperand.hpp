@@ -2,7 +2,7 @@
 #define IOPERAND_HPP
 #include <string>
 #include <iostream>
-
+#include <stddef.h>
 
 /*
 ** this class gets inherited by all other operands,
@@ -17,20 +17,20 @@ enum eOperandType
 
 class IOperand {
 public:
-	IOperand(){};
+	// IOperand(){};
 	virtual	~IOperand( void ) {};
 
 	//virtual functions for the operand classes
 	virtual int				getPrecision( void ) const = 0; //precision of the type of the instance
 	virtual eOperandType	getType(void) const = 0; //type of the instance
-	
+
 	//OPERATORS for the OPERANDS
 	virtual IOperand const	*operator+(IOperand const & rhs) const = 0;
 	virtual IOperand const	*operator-(IOperand const & rhs) const = 0;
 	virtual IOperand const	*operator*(IOperand const & rhs) const = 0;
 	virtual IOperand const	*operator/(IOperand const & rhs) const = 0;
 	virtual IOperand const	*operator%(IOperand const & rhs) const = 0;
-	
+
 	//string representation of the instance
 	virtual std::string const & toString( void ) const  = 0; //string representation of the instance
 };

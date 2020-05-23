@@ -5,7 +5,7 @@
 class Int32 : public IOperand
 {
 private:
-	int int32;
+	int int32_val;
 public:
 	Int32();
 	Int32(int value);

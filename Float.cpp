@@ -5,6 +5,11 @@ Float::Float(/* args */)
 {
 }
 
+Float::Float(float value)
+{
+	this->float_val = value;
+}
+
 Float::Float(Float const & src)
 {
 }
@@ -14,10 +19,11 @@ Float::~Float()
 }
 
 
-int IOperand::getPrecision(void) const{}
-eOperandType IOperand::getType(void) const{}
-IOperand const *IOperand::operator+(IOperand const & rhs) const{}
-IOperand const *IOperand::operator-(IOperand const & rhs) const{}
-IOperand const *IOperand::operator*(IOperand const & rhs) const{}
-IOperand const *IOperand::operator/(IOperand const & rhs) const{}
-IOperand const *IOperand::operator%(IOperand const & rhs) const{}
+int Float::getPrecision(void) const{}
+eOperandType Float::getType(void) const{}
+IOperand const *Float::operator+(IOperand const & rhs) const{}
+IOperand const *Float::operator-(IOperand const & rhs) const{}
+IOperand const *Float::operator*(IOperand const & rhs) const{}
+IOperand const *Float::operator/(IOperand const & rhs) const{}
+IOperand const *Float::operator%(IOperand const & rhs) const{}
+std::string const &Float::toString(void) const {return NULL;}

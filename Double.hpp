@@ -6,7 +6,7 @@
 class Double : public IOperand
 {
 private:
-	double var_double;
+	double double_val;
 public:
 	Double();
 	Double(double val);

@@ -21,7 +21,7 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 }
 
 void Abstract_vm::push_value(std::string value){}
-IOperand *Abstract_vm::pop(){}
+IOperand *Abstract_vm::pop(){ return NULL;}
 void Abstract_vm::dump(){}
 void Abstract_vm::assert(std::string){}
 void Abstract_vm::add(){}

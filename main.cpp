@@ -119,6 +119,11 @@ int main(int argc, char **argv)
 
 
 	const IOperand *test = op_builder.createOperand(int8,"23");
+	const IOperand *test2 = op_builder.createOperand(int32,"3243");
+
+
+	std::cout <<  "IOperand created with a val of |" << test->toString() << "|" << std::endl;
+	std::cout <<  "IOperand created with a val of |" << test2->toString() << "|" << std::endl;
 	// test = stack.createInt8("3242");
 
 	// std::cout <<  "test val is |" << test- << "|" << std::endl;

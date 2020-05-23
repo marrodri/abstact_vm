@@ -6,7 +6,7 @@
 class Int16 : public IOperand
 {
 private:
-	short int16;
+	short int16_val;
 public:
 	Int16();
 	Int16(short value);

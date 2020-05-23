@@ -5,7 +5,7 @@
 class Float : public IOperand
 {
 private:
-	float var_float;
+	float float_val;
 public:
 	Float();
 	Float(float value);

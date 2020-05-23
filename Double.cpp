@@ -5,6 +5,11 @@ Double::Double(/* args */)
 {
 }
 
+Double::Double(double value)
+{
+	this->double_val = value;
+}
+
 Double::Double(Double const & src)
 {
 }
@@ -13,10 +18,11 @@ Double::~Double()
 {
 }
 
-int IOperand::getPrecision(void) const{}
-eOperandType IOperand::getType(void) const{}
-IOperand const *IOperand::operator+(IOperand const & rhs) const{}
-IOperand const *IOperand::operator-(IOperand const & rhs) const{}
-IOperand const *IOperand::operator*(IOperand const & rhs) const{}
-IOperand const *IOperand::operator/(IOperand const & rhs) const{}
-IOperand const *IOperand::operator%(IOperand const & rhs) const{}
+int Double::getPrecision(void) const{}
+eOperandType Double::getType(void) const{}
+IOperand const *Double::operator+(IOperand const & rhs) const{}
+IOperand const *Double::operator-(IOperand const & rhs) const{}
+IOperand const *Double::operator*(IOperand const & rhs) const{}
+IOperand const *Double::operator/(IOperand const & rhs) const{}
+IOperand const *Double::operator%(IOperand const & rhs) const{}
+std::string const &Double::toString(void) const {return NULL;}

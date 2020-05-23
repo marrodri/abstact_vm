@@ -7,7 +7,7 @@
 class Int8 : public IOperand
 {
 private:
-	char int8;
+	char int8_val;
 	//create attribute members here
 public:
 	Int8();
