@@ -12,7 +12,7 @@
 //ask if it should be a plain type or a class type for the enum
 enum eOperandType
 {
-	int8, int16, int32, float_val, double_val
+	int8, int16, int32, float_class, double_class
 };
 
 class IOperand {

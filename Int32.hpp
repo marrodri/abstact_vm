@@ -6,6 +6,7 @@ class Int32 : public IOperand
 {
 private:
 	int int32_val;
+	std::string instance;
 public:
 	Int32();
 	Int32(int value);
@@ -14,8 +15,8 @@ public:
 
 	//get function
 	//set function
-	char const getValue();
-	void setValue(char value);
+	// char const getValue();
+	// void setValue(char value);
 
 	//override functions from the IOperands
 	int	getPrecision(void) const override; 

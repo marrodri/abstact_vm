@@ -8,6 +8,7 @@ class Int8 : public IOperand
 {
 private:
 	char int8_val;
+	std::string instance;
 	//create attribute members here
 public:
 	Int8();

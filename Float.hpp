@@ -6,6 +6,7 @@ class Float : public IOperand
 {
 private:
 	float float_val;
+	std::string instance;
 public:
 	Float();
 	Float(float value);

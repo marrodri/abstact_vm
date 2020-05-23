@@ -118,7 +118,7 @@ int main(int argc, char **argv)
 	Operand_factory op_builder;
 
 
-	const IOperand *test = op_builder.createOperand(int8,"23");
+	const IOperand *test = op_builder.createOperand(int8,"48");
 	const IOperand *test2 = op_builder.createOperand(int32,"3243");
 
 

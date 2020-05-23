@@ -7,6 +7,7 @@ class Int16 : public IOperand
 {
 private:
 	short int16_val;
+	std::string instance;
 public:
 	Int16();
 	Int16(short value);

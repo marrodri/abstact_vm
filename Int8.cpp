@@ -4,28 +4,23 @@
 
 Int8::Int8(char value)
 {
-	this->int8_val = value;
+	// this->int8_val = value;
+	this->int8_val = (int)value;
+	int inst = value;
+	this->instance = std::to_string(inst);	
 }
 
-Int8::Int8()
+void Int8::setValue(char value){}
+int Int8::getPrecision(void) const
 {
-	this->int8_val = 0;
+	return (8);
 }
 
-void Int8::setValue(char value)
+eOperandType Int8::getType(void) const
 {
-	this->int8_val = value;
+	return (int8);
 }
 
-char const Int8::getValue()
-{
-	return this->int8_val;
-}
-
-//check how to override
-//THIS HAS ALL THE OPERAND CLASSES
-int Int8::getPrecision(void) const{}
-eOperandType Int8::getType(void) const{}
 IOperand const *Int8::operator+(IOperand const & rhs) const{}
 IOperand const *Int8::operator-(IOperand const & rhs) const{}
 IOperand const *Int8::operator*(IOperand const & rhs) const{}
@@ -34,7 +29,5 @@ IOperand const *Int8::operator%(IOperand const & rhs) const{}
 
 std::string const &Int8::toString(void) const 
 {
-
-	std::string output = std::to_string((int)this->int8_val);
-	return output;
+	return (this->instance);
 }

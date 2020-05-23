@@ -7,6 +7,7 @@ class Double : public IOperand
 {
 private:
 	double double_val;
+	std::string instance;
 public:
 	Double();
 	Double(double val);
