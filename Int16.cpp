@@ -25,7 +25,23 @@ eOperandType Int16::getType(void) const
 	return (int16);
 }
 
-IOperand const *Int16::operator+(IOperand const & rhs) const{}
+IOperand const *Int16::operator+(IOperand const & rhs) const
+{
+	if( rhs.getPrecision() == this->getPrecision())
+	{
+		std::cout <<  "Both have the same prec, sum normal + 16int" << std::endl;
+	}
+	if( rhs.getPrecision() > this->getPrecision())
+	{
+		std::cout <<  "the rhs has a better prec, return the rhs + 16int" << std::endl;
+	}
+	if( rhs.getPrecision() < this->getPrecision())
+	{
+		std::cout <<  "the rhs has a worser prec, return this class + 16int" << std::endl;
+	}
+	return this;
+}
+
 IOperand const *Int16::operator-(IOperand const & rhs) const{}
 IOperand const *Int16::operator*(IOperand const & rhs) const{}
 IOperand const *Int16::operator/(IOperand const & rhs) const{}
