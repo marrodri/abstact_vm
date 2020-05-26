@@ -23,18 +23,21 @@ eOperandType Int8::getType(void) const
 
 IOperand const *Int8::operator+(IOperand const & rhs) const
 {
-	if( rhs.getPrecision() == this->getPrecision())
-	{
-		std::cout <<  "Both have the same prec, sum normal + 8i	nt" << std::endl;
-	}
-	if( rhs.getPrecision() > this->getPrecision())
-	{
-		std::cout <<  "the rhs has a better prec, return the rhs + 8int" << std::endl;
-	}
-	if( rhs.getPrecision() < this->getPrecision())
-	{
-		std::cout <<  "the rhs has a worser prec, return this class + 8int" << std::endl;
-	}
+	// if( rhs.getPrecision() == this->getPrecision())
+	// {
+	// 	return this;
+	// }
+	// if( rhs.getPrecision() < this->getPrecision())
+	// {
+	// 	std::cout <<  "the rhs has a better prec, return the rhs + 8int" << std::endl;
+	// 			return this;
+	// }
+	// if( rhs.getPrecision() < this->getPrecision())
+	// {
+	// 	std::cout <<  "the rhs has a worser prec, return this class + 8int" << std::endl;
+	
+	// }
+	std::cout <<  "Both have the same prec, sum normal + 8i	nt" << std::endl;
 	return this;
 }
 

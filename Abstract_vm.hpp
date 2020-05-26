@@ -12,35 +12,24 @@ private:
 	//for every new Operand created return a 
 	//pointer of the class to the new space
 	//of the stack
-	std::stack<IOperand> vm_heap;
+	std::stack<const IOperand*> vm_heap;
 public:
 	Abstract_vm();
 	Abstract_vm(Abstract_vm const & src);
 	~Abstract_vm();
+	Operand_factory opFactory;
 
-	//set function
-	//setter's are like the push value, so it should be fine
-	//push VALUE
-	//from the parameters, it will call the IOperand create* function
-	//with the value inputed, and then it will be push to the stack
+	//setter and getter
 	void push_value(std::string value);
-	
-	//get function
-	//getter for the stack, like pop()??
-	IOperand *pop();
+	const IOperand *pop();
 
-	void dump(); //check how it works
+	//abtract VM main instructions
+	void dump();
 	void assert(std::string value);
-
-	//add
-	//pops the top 2 values, then it makes the sum of those popped values,
-	//and the result is pushed back to the stack
 	void add();
 	void sub();
 	void mul();
-	//same as previous but with division, there's an edge case to check
 	void div();
-	//there's an edge case to check for mod too
 	void mod();
 	void print();
 

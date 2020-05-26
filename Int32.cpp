@@ -25,11 +25,11 @@ eOperandType Int32::getType(void) const
 	return (int32);
 }
 
-IOperand const *Int32::operator+(IOperand const & rhs) const{}
-IOperand const *Int32::operator-(IOperand const & rhs) const{}
-IOperand const *Int32::operator*(IOperand const & rhs) const{}
-IOperand const *Int32::operator/(IOperand const & rhs) const{}
-IOperand const *Int32::operator%(IOperand const & rhs) const{}
+IOperand const *Int32::operator+(IOperand const & rhs) const{return NULL;}
+IOperand const *Int32::operator-(IOperand const & rhs) const{return NULL;}
+IOperand const *Int32::operator*(IOperand const & rhs) const{return NULL;}
+IOperand const *Int32::operator/(IOperand const & rhs) const{return NULL;}
+IOperand const *Int32::operator%(IOperand const & rhs) const{return NULL;}
 
 std::string const &Int32::toString(void) const 
 {
