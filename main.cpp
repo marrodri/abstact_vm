@@ -109,7 +109,10 @@ void read_from_stdin(Abstract_vm &abstract_vm)
 
 	//
 	//iterate through instructions
-	abstract_vm.call_instructions(instructions_list[0]);
+	for(int i = 0; i < instructions_list.size(); i++)
+	{
+		abstract_vm.call_instructions(instructions_list[i]);
+	}
 }	
 
 //TODO tasks
@@ -132,9 +135,16 @@ int main(int argc, char **argv)
 	const IOperand *test2 = op_builder.createOperand(float_class,"3243");
 
 
-	std::cout <<  "IOperand created with a val of |" << test->toString() << "|" << std::endl;
-	std::cout <<  "IOperand created with a val of |" << test2->toString() << "|" << std::endl;
+	// std::cout <<  "IOperand created with a val of |" << test->toString() << "|" << std::endl;
 	
+	// std::cout <<  "IOperand created with a val of |" << test2->toString() << "|" << std::endl;
+
+	// virtual_machine.push_value("inT32(1231)");
+
+	// const IOperand *popped = virtual_machine.pop();
+
+	// std::cout <<  "POPPED IOperand with a val of |" << popped->toString() << "|" << std::endl;
+
 	// const IOperand *sum_test = test + test2;
 	// test = stack.createInt8("3242");
 
@@ -143,6 +153,7 @@ int main(int argc, char **argv)
 	// if argc is higher than 1, then check the files, if the
 	// files are correctly parsed, then execute the program
 	read_from_stdin(virtual_machine);
+	// virtual_machine.dump();
 	// if (argc >= 2)
 	// {
 	// 	//if the file has an exit instruction, exit the VM, if not

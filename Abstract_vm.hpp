@@ -22,7 +22,7 @@ public:
 
 	//setter and getter
 	void push_value(std::string value);
-	const IOperand *pop();
+	void pop();
 
 	//abtract VM main instructions
 	void dump();
