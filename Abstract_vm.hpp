@@ -3,8 +3,14 @@
 #include "Operand_factory.hpp"
 #include <regex>
 #include <stack>
+#include <map>
 #include <string>
 #include <vector>
+
+enum InstructionValue	{ push_val, pop_val, 
+						dump_val, assert_val, add_val,
+						sub_val, mul_val, div_val, mod_val,
+						print_val };
 
 class Abstract_vm
 {
@@ -14,17 +20,21 @@ private:
 	//pointer of the class to the new space
 	//of the stack
 	std::stack<const IOperand*> vm_heap;
+	std::map<std::string, eOperandType> operandTypes_map;
+	std::map<std::string, InstructionValue> instructionTypes_map;
+	void operandTypes_map_init(std::map<std::string, eOperandType> &op_map);
+	void instructionsTypes_map_init(std::map<std::string, InstructionValue> &instr_map);
+
 public:
 	Abstract_vm();
 	Abstract_vm(Abstract_vm const & src);
 	~Abstract_vm();
 	Operand_factory opFactory;
 
-	//setter and getter
-	void push_value(std::string value);
-	void pop();
 
 	//abtract VM main instructions
+	void push_value(std::string value);
+	const IOperand * pop();
 	void dump();
 	void assert(std::string value);
 	void add();
@@ -34,9 +44,11 @@ public:
 	void mod();
 	void print();
 
+	//helping functions
+	eOperandType getOperandType(std::string operand);
+	
 	//this function could be used to call the instructions methods that can be private;
 	void call_instructions(std::vector<std::string> instruction);
-	eOperandType getOperandType(std::string operand);
 	//exit(this one could be in another place)
 };
 #endif

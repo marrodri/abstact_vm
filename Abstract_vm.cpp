@@ -20,17 +20,40 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 	
 }
 
+void	Abstract_vm::operandTypes_map_init(std::map<std::string, eOperandType> &op_map)
+{
+	op_map["int8"] = int8;
+	op_map["int16"] = int16;
+	op_map["int32"] = int32;
+	op_map["float"] = float_class;
+	op_map["double"] = double_class;
+}
+
 eOperandType Abstract_vm::getOperandType(std::string operand)
 {
-	
-	if (operand == "int8") { return (int8); }
-	else if (operand == "int16") { return (int16); }
-	else if (operand == "int32") { return (int32); }
-	else if (operand == "float") { return (float_class); }
-	else if (operand == "double") { return (double_class); }
-	else
+	operandTypes_map_init(operandTypes_map);
+
+
+	switch(operandTypes_map[operand])
 	{
-		std::cout <<  "OPERAND TYPE DOESNT EXIST, HANDLE ERROR" << std::endl;
+		case int8:
+			return int8;
+			break;
+		case int16:
+			return int16;
+			break;
+		case int32:
+			return int32;
+			break;
+		case float_class:
+			return float_class;
+			break;
+		case double_class:
+			return double_class;
+			break;
+		default:
+			std::cout <<  "throw error" << std::endl;
+			break;
 	}
 }
 
@@ -55,9 +78,12 @@ void Abstract_vm::push_value(std::string value)
 	}
 }
 
-void Abstract_vm::pop()
+const IOperand *Abstract_vm::pop()
 {
+	const IOperand *topval = vm_heap.top();
+
 	vm_heap.pop();
+	return topval;
 }
 
 void Abstract_vm::dump()

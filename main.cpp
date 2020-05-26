@@ -139,11 +139,12 @@ int main(int argc, char **argv)
 	
 	// std::cout <<  "IOperand created with a val of |" << test2->toString() << "|" << std::endl;
 
-	// virtual_machine.push_value("inT32(1231)");
+	virtual_machine.push_value("inT32(1231)");
 
-	// const IOperand *popped = virtual_machine.pop();
+	const IOperand *popped = virtual_machine.pop();
 
-	// std::cout <<  "POPPED IOperand with a val of |" << popped->toString() << "|" << std::endl;
+	std::cout <<  "POPPED IOperand with a val of |" << popped->toString() << "|" << std::endl;
+	std::cout <<  "POPPED IOperand with a val of |" << popped->getType() << "|" << std::endl;
 
 	// const IOperand *sum_test = test + test2;
 	// test = stack.createInt8("3242");
@@ -152,7 +153,7 @@ int main(int argc, char **argv)
 
 	// if argc is higher than 1, then check the files, if the
 	// files are correctly parsed, then execute the program
-	read_from_stdin(virtual_machine);
+	// read_from_stdin(virtual_machine);
 	// virtual_machine.dump();
 	// if (argc >= 2)
 	// {
