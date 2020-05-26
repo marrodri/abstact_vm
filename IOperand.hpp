@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <stddef.h>
+#include <algorithm>
 
 /*
 ** this class gets inherited by all other operands,

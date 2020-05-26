@@ -17,12 +17,28 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 {
 }
 
+eOperandType Abstract_vm::getOperandType(std::string operand)
+{
+
+	std::transform(operand.begin(),operand.end(), operand.begin(), ::tolower);
+	if(operand == "int8"){ return (int8); }
+	else if(operand == "int16"){ return (int16); }
+	else if(operand == "int32"){ return (int32); }
+	else if(operand == "float"){ return (float_class); }
+	else if(operand == "double"){ return (double_class); }
+	else
+	{
+		std::cout <<  "HANDLE ERROR" << std::endl;
+	}
+}
+
 void Abstract_vm::push_value(std::string value)
 {	
 	//TODO 
 	//separate the instruction list, the first string transform it to enum
 	//the second string should be the value
-	const IOperand* new_operand = opFactory.createOperand(int8, "1231");
+	eOperandType op_type = getOperandType("int8");
+	const IOperand* new_operand = opFactory.createOperand(op_type, "1231");
 	this->vm_heap.push(new_operand);
 }
 
@@ -40,6 +56,7 @@ void Abstract_vm::dump()
 	//iterate through the stack to print the whole values
 	std::cout <<  "DUMPING THE WHOLE STACK TO THE TERMINAL" << std::endl;
 }
+
 void Abstract_vm::assert(std::string)
 {
 	const IOperand *top_val = vm_heap.top();
