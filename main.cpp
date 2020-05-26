@@ -6,19 +6,19 @@
 #include <fstream>
 #include <sstream>
 
-void command_checker(std::vector<std::vector<std::string>> instructions)
-{
-	//TODO
-	// define the command_checker for any instruction inputed
+// void command_checker(std::vector<std::vector<std::string>> instructions)
+// {
+// 	//TODO
+// 	// define the command_checker for any instruction inputed
 
-	//if the instruction exists, run that instruction for the stack and IOperand
+// 	//if the instruction exists, run that instruction for the stack and IOperand
 
-	//if the instruction doesn't exist, then handle the error 
-	do
-	{
+// 	//if the instruction doesn't exist, then handle the error 
+// 	do
+// 	{
 
-	} while(0);
-}
+// 	} while(0);
+// }
 
 std::string new_line_concatonate(std::string curr_str, std::string conca_str)
 {
@@ -84,7 +84,7 @@ void file_instruction_to_string(char *filename)
 	instructions_list = vector_parser(file_str);
 }
 
-void read_from_stdin()
+void read_from_stdin(Abstract_vm &abstract_vm)
 {
 	std::string input = "\0";
 	std::string instructions_string = "\0";
@@ -100,6 +100,16 @@ void read_from_stdin()
 	// std::cout <<  instructions_string << std::endl;
 	// std::cout <<  "=============================================" << std::endl; 
 	instructions_list = vector_parser(instructions_string);
+		// std::cout <<  "Number of instructions | " << instructions.size() << "|" << std::endl;
+	// for (int j = 0; j < instructions.size(); j++)
+	// {
+	// 	std::cout <<  "INSTRUCTION: |" << instructions[j][0]<< "|"  << std::endl;
+	// 	std::cout <<  "VALUE: |" << instructions[j][1] << "|"  << std::endl;
+	// }
+
+	//
+	//iterate through instructions
+	abstract_vm.call_instructions(instructions_list[0]);
 }	
 
 //TODO tasks
@@ -132,7 +142,7 @@ int main(int argc, char **argv)
 
 	// if argc is higher than 1, then check the files, if the
 	// files are correctly parsed, then execute the program
-	// read_from_stdin();
+	read_from_stdin(virtual_machine);
 	// if (argc >= 2)
 	// {
 	// 	//if the file has an exit instruction, exit the VM, if not

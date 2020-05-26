@@ -1,6 +1,7 @@
 
 #include "Operand_factory.hpp" 
 
+//THIS IS DONE
 Operand_factory::Operand_factory(/* args */)
 {
 }
@@ -16,9 +17,9 @@ Operand_factory::~Operand_factory()
 
 IOperand const * Operand_factory::createInt8(std::string const & value) const
 {
-	std::cout <<  "creating Int8 class" << std::endl;
+	// std::cout <<  "creating Int8 class" << std::endl;
 	int int_conv = std::stoi(value);
-	std::cout <<  "val is: " << int_conv << std::endl;
+	// std::cout <<  "val is: " << int_conv << std::endl;
 	char val = (char)int_conv;
 	return (new Int8(val));
 }

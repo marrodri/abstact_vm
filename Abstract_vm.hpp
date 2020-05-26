@@ -1,6 +1,7 @@
 #ifndef ABSTRACT_VM_HPP
 #define ABSTRACT_VM_HPP
 #include "Operand_factory.hpp"
+#include <regex>
 #include <stack>
 #include <string>
 #include <vector>
