@@ -100,19 +100,19 @@ void read_from_stdin(Abstract_vm &abstract_vm)
 	// std::cout <<  instructions_string << std::endl;
 	// std::cout <<  "=============================================" << std::endl; 
 	instructions_list = vector_parser(instructions_string);
-		// std::cout <<  "Number of instructions | " << instructions.size() << "|" << std::endl;
-	// for (int j = 0; j < instructions.size(); j++)
-	// {
-	// 	std::cout <<  "INSTRUCTION: |" << instructions[j][0]<< "|"  << std::endl;
-	// 	std::cout <<  "VALUE: |" << instructions[j][1] << "|"  << std::endl;
-	// }
+		std::cout <<  "Number of instructions | " << instructions_list.size() << "|" << std::endl;
+	for (int j = 0; j < instructions_list.size(); j++)
+	{
+		std::cout <<  "INSTRUCTION: |" << instructions_list[j][0]<< "|"  << std::endl;
+		// std::cout <<  "VALUE: |" << instructions_list[j][1] << "|"  << std::endl;
+	}
 
 	//
 	//iterate through instructions
-	for(int i = 0; i < instructions_list.size(); i++)
-	{
-		abstract_vm.call_instructions(instructions_list[i]);
-	}
+	// for(int i = 0; i < instructions_list.size(); i++)
+	// {
+	// 	abstract_vm.call_instructions(instructions_list[i]);
+	// }
 }	
 
 //TODO tasks
@@ -153,7 +153,9 @@ int main(int argc, char **argv)
 
 	// if argc is higher than 1, then check the files, if the
 	// files are correctly parsed, then execute the program
-	// read_from_stdin(virtual_machine);
+	
+	read_from_stdin(virtual_machine);
+	
 	// virtual_machine.dump();
 	// if (argc >= 2)
 	// {

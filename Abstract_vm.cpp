@@ -13,11 +13,71 @@ Abstract_vm::~Abstract_vm()
 {
 }
 
+void Abstract_vm::instructionsTypes_map_init(std::map<std::string, InstructionValue> &instr_map)
+{
+	instr_map["push"] = push_val;
+	instr_map["pop"] = pop_val;
+	instr_map["dump"] = dump_val;
+	instr_map["assert"] = assert_val;
+	instr_map["add\n"] = add_val;
+	instr_map["sub"] = sub_val;
+	instr_map["mul"] = mul_val;
+	instr_map["div"] = div_val;
+	instr_map["mod"] = mod_val;
+	instr_map["print"] = print_val;
+}
+
 void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 {
-	//TODO NOW!!!
-	//IMPLEMENT THE 
-	
+	//
+	//TASKS TODO!!!
+	//transform to lower case the whole instruction string, and separate to 2 strings
+	//one is the instruction, and the other is the value if required 
+	std::string first_instr = NULL;
+	std::string value = NULL;
+	int size = instruction.size();
+
+	instructionsTypes_map_init(instructionTypes_map);
+	std::transform(instruction[0].begin(), instruction[0].end(), instruction[0].begin(), ::tolower);
+	first_instr = instruction[0];
+	if (size == 2)
+		value = instruction[1];
+	std::cout <<  "instruction setted" << std::endl;
+	switch(instructionTypes_map[first_instr])
+	{
+		case push_val:
+			push_value(value);
+			break;
+		case pop_val:
+			break;
+		case dump_val:
+			dump();
+			break;
+		case assert_val:
+			assert(value);
+			break;
+		case add_val:
+			add();
+			break;
+		case sub_val:
+			sub();
+			break;
+		case mul_val:
+			mul();
+			break;
+		case div_val:
+			div();
+			break;
+		case mod_val:
+			mod();
+			break;
+		case print_val:
+			print();
+			break;
+		default:
+			std::cout <<  "THROW ERROR for call_instructions, instruction doesn't exist" << std::endl;
+			break;
+	}
 }
 
 void	Abstract_vm::operandTypes_map_init(std::map<std::string, eOperandType> &op_map)
@@ -32,8 +92,6 @@ void	Abstract_vm::operandTypes_map_init(std::map<std::string, eOperandType> &op_
 eOperandType Abstract_vm::getOperandType(std::string operand)
 {
 	operandTypes_map_init(operandTypes_map);
-
-
 	switch(operandTypes_map[operand])
 	{
 		case int8:
