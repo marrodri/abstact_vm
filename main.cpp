@@ -1,5 +1,6 @@
 #include "IOperand.hpp"
 #include "Abstract_vm.hpp"
+#include "parser.h"
 #include <string>
 #include <iostream>
 #include <vector>
@@ -96,18 +97,7 @@ void read_from_stdin(Abstract_vm &abstract_vm)
 			break;
 		instructions_string = new_line_concatonate(instructions_string, input);
 	}
-	// std::cout <<  "==============INSTRUCTIONS FROM STDIN==============" << std::endl;
-	// std::cout <<  instructions_string << std::endl;
-	// std::cout <<  "=============================================" << std::endl; 
 	instructions_list = vector_parser(instructions_string);
-		std::cout <<  "Number of instructions | " << instructions_list.size() << "|" << std::endl;
-	for (int j = 0; j < instructions_list.size(); j++)
-	{
-		std::cout <<  "INSTRUCTION: |" << instructions_list[j][0]<< "|"  << std::endl;
-		// std::cout <<  "VALUE: |" << instructions_list[j][1] << "|"  << std::endl;
-	}
-
-	//
 	//iterate through instructions
 	for(int i = 0; i < instructions_list.size(); i++)
 	{
@@ -115,25 +105,35 @@ void read_from_stdin(Abstract_vm &abstract_vm)
 	}
 }	
 
-//TODO tasks
-//move the parser functions to the abstract_vm function or to a new class
-//set precision
-//set the operators for each operand(start with sum of Int8 and Int16)
-//test the operators(if all works, then copy paste)
-//set the error handling class
+// IMPORTANT TODO tasks:
+// -finish  the pop, dump, assert, print and exit commands
+// -move the parser to a new file
+// -MAKE THE STDIN that run endless until an exit is founded;
+// -check that each instruction and value exist, if not return an error(it doesn't display the error yet)
+// 
 
-//here's where the program runs
+
+// need to double check:
+// -when checking a file or stdin, return an error if an exit is not founded;
+
+// FOR LAST AND IMPORTANT
+// -set the error handling class
+// -set the operators for each operand(start with sum of Int8, Int32 and float)
+// 	and test the operators(if all works, then copy paste)
+// -check for any leaks at the very end of the program 
+
+// here's where the program runs
 int main(int argc, char **argv)
 {
 	//this is like the struct app, it has all the instructions this class.
 	Abstract_vm virtual_machine;
+
 	// IOperand *test
 	Operand_factory op_builder;
 
 
 	const IOperand *test = op_builder.createOperand(int8,"48");
 	const IOperand *test2 = op_builder.createOperand(float_class,"3243");
-
 
 	// std::cout <<  "IOperand created with a val of |" << test->toString() << "|" << std::endl;
 	

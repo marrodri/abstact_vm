@@ -104,7 +104,7 @@ eOperandType Abstract_vm::getOperandType(std::string operand)
 			return int8;
 			break;
 		case int16:
-			return int16;
+			return int16; 	
 			break;
 		case int32:
 			return int32;
