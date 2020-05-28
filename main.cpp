@@ -109,10 +109,10 @@ void read_from_stdin(Abstract_vm &abstract_vm)
 
 	//
 	//iterate through instructions
-	// for(int i = 0; i < instructions_list.size(); i++)
-	// {
-	// 	abstract_vm.call_instructions(instructions_list[i]);
-	// }
+	for(int i = 0; i < instructions_list.size(); i++)
+	{
+		abstract_vm.call_instructions(instructions_list[i]);
+	}
 }	
 
 //TODO tasks

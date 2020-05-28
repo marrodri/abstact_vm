@@ -19,7 +19,7 @@ void Abstract_vm::instructionsTypes_map_init(std::map<std::string, InstructionVa
 	instr_map["pop"] = pop_val;
 	instr_map["dump"] = dump_val;
 	instr_map["assert"] = assert_val;
-	instr_map["add\n"] = add_val;
+	instr_map["add"] = add_val; //weirdly, if it's "add\n", when searching add, it sets the push val
 	instr_map["sub"] = sub_val;
 	instr_map["mul"] = mul_val;
 	instr_map["div"] = div_val;
@@ -31,18 +31,24 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 {
 	//
 	//TASKS TODO!!!
-	//transform to lower case the whole instruction string, and separate to 2 strings
-	//one is the instruction, and the other is the value if required 
-	std::string first_instr = NULL;
-	std::string value = NULL;
+	std::string first_instr = "";
+	std::string value = "";
 	int size = instruction.size();
 
+	std::cout <<  "INSIDE call_instructions,instructions are:" << std::endl;
+	for (int j = 0; j < instruction.size(); j++)
+	{
+		std::cout <<  "INSTRUCTION: |" << instruction[j]<< "|"  << std::endl;
+		// std::cout <<  "VALUE: |" << instructions_list[j][1] << "|"  << std::endl;
+	}
+
+	
 	instructionsTypes_map_init(instructionTypes_map);
 	std::transform(instruction[0].begin(), instruction[0].end(), instruction[0].begin(), ::tolower);
 	first_instr = instruction[0];
 	if (size == 2)
 		value = instruction[1];
-	std::cout <<  "instruction setted" << std::endl;
+	std::cout <<  "instruction setted: " << first_instr << std::endl;
 	switch(instructionTypes_map[first_instr])
 	{
 		case push_val:
