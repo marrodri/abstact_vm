@@ -123,6 +123,7 @@ eOperandType Abstract_vm::getOperandType(std::string operand)
 
 void Abstract_vm::push_value(std::string value)
 {
+	//this could be moved to the parser/lexer area
 	std::regex rgx_val("\\b(int8|int16|int32|float|double)(\\()(\\d*|\\d*.\\d*)(\\))");
 	std::transform(value.begin(),value.end(), value.begin(), ::tolower);
 	std::smatch matches;
@@ -152,15 +153,24 @@ const IOperand *Abstract_vm::pop()
 
 void Abstract_vm::dump()
 {
-	std::stack<const IOperand*> copy_stack = vm_heap;
 	//iterate through the stack to print the whole values
 	std::cout <<  "DUMPING THE WHOLE STACK TO THE OUTPUT TERMINAL" << std::endl;
+	std::stack<const IOperand*> copy_stack = vm_heap;
+	const IOperand *top_val = copy_stack.top();
+	
+	while (copy_stack.size() > 0)
+	{
+		top_val =  copy_stack.top();
+		std::cout <<  top_val->toString() << std::endl; 
+		copy_stack.pop();
+	}
 }
 
 void Abstract_vm::assert(std::string)
 {
 	const IOperand *top_val = vm_heap.top();
 	std::cout <<  "ASSERTING tHE TOP VALUE" << std::endl;
+	
 	//asserting the 
 }
 
