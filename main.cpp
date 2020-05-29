@@ -106,7 +106,7 @@ void read_from_stdin(Abstract_vm &abstract_vm)
 }	
 
 // IMPORTANT TODO tasks:
-// -finish  the pop, dump, assert, print and exit commands
+// -finish  the pop(DONE), dump(done), assert(done), print(done) and exit(not finished) commands
 // -move the parser to a new file
 // -MAKE THE STDIN that run endless until an exit is founded;
 // -check that each instruction and value exist, if not return an error(it doesn't display the error yet)
@@ -141,10 +141,8 @@ int main(int argc, char **argv)
 
 	virtual_machine.push_value("inT32(1231)");
 
-	const IOperand *popped = virtual_machine.pop();
+	virtual_machine.pop();
 
-	std::cout <<  "POPPED IOperand with a val of |" << popped->toString() << "|" << std::endl;
-	std::cout <<  "POPPED IOperand with a val of |" << popped->getType() << "|" << std::endl;
 
 	// const IOperand *sum_test = test + test2;
 	// test = stack.createInt8("3242");

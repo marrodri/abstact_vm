@@ -34,7 +34,7 @@ public:
 
 	//abtract VM main instructions
 	void push_value(std::string value);
-	const IOperand * pop();
+	void pop();
 	void dump();
 	void assert(std::string value);
 	void add();

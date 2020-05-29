@@ -123,7 +123,9 @@ eOperandType Abstract_vm::getOperandType(std::string operand)
 
 void Abstract_vm::push_value(std::string value)
 {
-	//this could be moved to the parser/lexer area
+	//this could be moved to the parser/lexer area, if it matches 
+	//then call the function with the value, if wrong throw a parsing error
+	//that the inputed value wrongly inputted, that the value is inexistent
 	std::regex rgx_val("\\b(int8|int16|int32|float|double)(\\()(\\d*|\\d*.\\d*)(\\))");
 	std::transform(value.begin(),value.end(), value.begin(), ::tolower);
 	std::smatch matches;
@@ -143,12 +145,12 @@ void Abstract_vm::push_value(std::string value)
 	}
 }
 
-const IOperand *Abstract_vm::pop()
+void Abstract_vm::pop()
 {
-	const IOperand *topval = vm_heap.top();
+	// const IOperand *topval = vm_heap.top();
 
 	vm_heap.pop();
-	return topval;
+	// return topval;
 }
 
 void Abstract_vm::dump()
@@ -179,37 +181,81 @@ void Abstract_vm::assert(std::string)
 //and the result is pushed back to the stack
 void Abstract_vm::add()
 {
+	const IOperand *first_val;
+	const IOperand *second_val;
+	
+	first_val = vm_heap.top();
+	vm_heap.pop();
+	second_val = vm_heap.top();
+	vm_heap.pop();
+	//MAKE THE ADDITION FOR BOTH CLASSES
 	std::cout <<  "ADDING+" << std::endl;
 }
 
 void Abstract_vm::sub()
 {
+	const IOperand *first_val;
+	const IOperand *second_val;
+	
+	first_val = vm_heap.top();
+	vm_heap.pop();
+	second_val = vm_heap.top();
+	vm_heap.pop();
 	std::cout <<  "SUBTRACTING-" << std::endl;
 }
 
 void Abstract_vm::mul()
 {
+	const IOperand *first_val;
+	const IOperand *second_val;
+	
+	first_val = vm_heap.top();
+	vm_heap.pop();
+	second_val = vm_heap.top();
+	vm_heap.pop();
 	std::cout <<  "MULTIPLYING*" << std::endl;
 }
 
 //there's an edge case to check with division
 void Abstract_vm::div()
 {
+	const IOperand *first_val;
+	const IOperand *second_val;
+	
+	first_val = vm_heap.top();
+	vm_heap.pop();
+	second_val = vm_heap.top();
+	vm_heap.pop();
+
 	std::cout <<  "DIVIDNG/" << std::endl;
 }
 
 //there's an edge case to check for mod too
 void Abstract_vm::mod()
 {
+	const IOperand *first_val;
+	const IOperand *second_val;
+	
+	first_val = vm_heap.top();
+	vm_heap.pop();
+	second_val = vm_heap.top();
+	vm_heap.pop();
+
 	std::cout <<  "MODULO%" << std::endl;
 }
 
 void Abstract_vm::print()
 {
 	const IOperand *top_val = vm_heap.top();
+	char char_value = NULL;
+	int dec_code = 0;
+
 	if (top_val->getType() == int8)
 	{
-		std::cout <<  "the val is int8, check if the the val is printable char" << std::endl;
+		// std::stoi();
+		std::cout <<  "the val is int8, printing val in ASCII" << std::endl;
+		char_value = std::stoi(top_val->toString());
+		std::cout <<  char_value << std::endl;
 	}
 	else
 	{
