@@ -79,9 +79,6 @@ void file_instruction_to_string(char *filename)
 	infile.open(filename);
 	while (std::getline(infile, instruction))
 		file_str = new_line_concatonate(file_str, instruction);
-	// std::cout <<  "==============INSTRUCTIONS FROM FILE==============" << std::endl;
-	// std::cout <<  file_str << std::endl;
-	// std::cout <<  "=============================================" << std::endl;
 	instructions_list = vector_parser(file_str);
 }
 
@@ -107,7 +104,11 @@ void read_from_stdin(Abstract_vm &abstract_vm)
 
 // IMPORTANT TODO tasks:
 // -finish  the pop(DONE), dump(done), assert(done), print(done) and exit(not finished) commands
-// -move the parser to a new file
+
+// for parser add a delete comment function, that checks every comment and delete it
+//before parsing
+// -move everything that parses/lexer the input to a new file(as a class)
+
 // -MAKE THE STDIN that run endless until an exit is founded;
 // -check that each instruction and value exist, if not return an error(it doesn't display the error yet)
 // 
