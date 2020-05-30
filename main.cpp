@@ -1,11 +1,11 @@
 #include "IOperand.hpp"
 #include "Abstract_vm.hpp"
-#include "parser.h"
-#include <string>
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <sstream>
+#include "Lexer.hpp"
+// #include <string>
+// #include <iostream>
+// #include <vector>
+// #include <fstream>
+// #include <sstream>
 
 // void command_checker(std::vector<std::vector<std::string>> instructions)
 // {
@@ -21,44 +21,44 @@
 // 	} while(0);
 // }
 
-std::string new_line_concatonate(std::string curr_str, std::string conca_str)
-{
-	if (curr_str == "\0")
-		curr_str = conca_str;
-	else
-	{			
-		curr_str += "\n";
-		curr_str += conca_str;
-	}
-	return (curr_str);
-}
+// std::string new_line_concatonate(std::string curr_str, std::string conca_str)
+// {
+// 	if (curr_str == "\0")
+// 		curr_str = conca_str;
+// 	else
+// 	{			
+// 		curr_str += "\n";
+// 		curr_str += conca_str;
+// 	}
+// 	return (curr_str);
+// }
 
 //for the parser, every instruction must be separated by a newline
 //if there's more than one instruction in one line, handle error
 
-std::vector<std::vector<std::string>> vector_parser(std::string input)
-{
-	std::string								instruction;
-	std::vector<std::vector<std::string>>	instructions;
-	std::stringstream						ss_input(input);
-	int										i = 0;
+// std::vector<std::vector<std::string>> vector_parser(std::string input)
+// {
+// 	std::string								instruction;
+// 	std::vector<std::vector<std::string>>	instructions;
+// 	std::stringstream						ss_input(input);
+// 	int										i = 0;
 
-	while (std::getline(ss_input, instruction, '\n'))
-	{
-		// std::cout <<  "current line is: |" << instruction << "|" << std::endl;	
-		std::stringstream ss(instruction);
-		if (instruction != "")
-		{
-			instructions.push_back(std::vector<std::string>());
-			do
-			{
-				std::string word;
-				ss >> word;
-				instructions[i].push_back(word);
-			} while (ss);
-			i++;
-		}
-	}
+// 	while (std::getline(ss_input, instruction, '\n'))
+// 	{
+// 		// std::cout <<  "current line is: |" << instruction << "|" << std::endl;	
+// 		std::stringstream ss(instruction);
+// 		if (instruction != "")
+// 		{
+// 			instructions.push_back(std::vector<std::string>());
+// 			do
+// 			{
+// 				std::string word;
+// 				ss >> word;
+// 				instructions[i].push_back(word);
+// 			} while (ss);
+// 			i++;
+// 		}
+// 	}
 	
 	// std::cout <<  "Number of instructions | " << instructions.size() << "|" << std::endl;
 	// for (int j = 0; j < instructions.size(); j++)
@@ -66,47 +66,47 @@ std::vector<std::vector<std::string>> vector_parser(std::string input)
 	// 	std::cout <<  "INSTRUCTION: |" << instructions[j][0]<< "|"  << std::endl;
 	// 	std::cout <<  "VALUE: |" << instructions[j][1] << "|"  << std::endl;
 	// }
-	return (instructions);
-}
+// 	return (instructions);
+// }
 
-void file_instruction_to_string(char *filename)
-{
-	std::ifstream							infile;
-	std::string								instruction = "\0";
-	std::string								file_str = "\0";
-	std::vector<std::vector<std::string>>	instructions_list;
+// void file_instruction_to_string(char *filename)
+// {
+// 	std::ifstream							infile;
+// 	std::string								instruction = "\0";
+// 	std::string								file_str = "\0";
+// 	std::vector<std::vector<std::string>>	instructions_list;
 
-	infile.open(filename);
-	while (std::getline(infile, instruction))
-		file_str = new_line_concatonate(file_str, instruction);
-	instructions_list = vector_parser(file_str);
-}
+// 	infile.open(filename);
+// 	while (std::getline(infile, instruction))
+// 		file_str = new_line_concatonate(file_str, instruction);
+// 	instructions_list = vector_parser(file_str);
+// }
 
-void read_from_stdin(Abstract_vm &abstract_vm)
-{
-	std::string input = "\0";
-	std::string instructions_string = "\0";
-	std::vector<std::vector<std::string>> instructions_list;
+// void read_from_stdin(Abstract_vm &abstract_vm)
+// {
+// 	std::string input = "\0";
+// 	std::string instructions_string = "\0";
+// 	std::vector<std::vector<std::string>> instructions_list;
 
-	while (std::getline(std::cin, input))
-	{
-		if(input == ";;")
-			break;
-		instructions_string = new_line_concatonate(instructions_string, input);
-	}
-	instructions_list = vector_parser(instructions_string);
-	//iterate through instructions
-	for(int i = 0; i < instructions_list.size(); i++)
-	{
-		abstract_vm.call_instructions(instructions_list[i]);
-	}
-}	
+// 	while (std::getline(std::cin, input))
+// 	{
+// 		if(input == ";;")
+// 			break;
+// 		instructions_string = new_line_concatonate(instructions_string, input);
+// 	}
+// 	instructions_list = vector_parser(instructions_string);
+// 	//iterate through instructions
+// 	for(int i = 0; i < instructions_list.size(); i++)
+// 	{
+// 		abstract_vm.call_instructions(instructions_list[i]);
+// 	}
+// }	
 
 // IMPORTANT TODO tasks:
 // -finish  the pop(DONE), dump(done), assert(done), print(done) and exit(not finished) commands
 
 // for parser add a delete comment function, that checks every comment and delete it
-//before parsing
+// before parsing
 // -move everything that parses/lexer the input to a new file(as a class)
 
 // -MAKE THE STDIN that run endless until an exit is founded;
@@ -128,10 +128,9 @@ int main(int argc, char **argv)
 {
 	//this is like the struct app, it has all the instructions this class.
 	Abstract_vm virtual_machine;
-
+	Lexer compiler;
 	// IOperand *test
 	Operand_factory op_builder;
-
 
 	const IOperand *test = op_builder.createOperand(int8,"48");
 	const IOperand *test2 = op_builder.createOperand(float_class,"3243");
@@ -153,7 +152,8 @@ int main(int argc, char **argv)
 	// if argc is higher than 1, then check the files, if the
 	// files are correctly parsed, then execute the program
 	
-	read_from_stdin(virtual_machine);
+	compiler.read_from_stdin(virtual_machine);
+	// read_from_stdin(virtual_machine);
 	
 	// virtual_machine.dump();
 	// if (argc >= 2)

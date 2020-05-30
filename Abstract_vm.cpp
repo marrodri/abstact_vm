@@ -29,27 +29,25 @@ void Abstract_vm::instructionsTypes_map_init(std::map<std::string, InstructionVa
 
 void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 {
-	//
-	//TASKS TODO!!!
 	std::string first_instr = "";
 	std::string value = "";
+	std::string op_value;
+	std::string num_value;
 	int size = instruction.size();
 
-	std::cout <<  "INSIDE call_instructions,instructions are:" << std::endl;
-	for (int j = 0; j < instruction.size(); j++)
-	{
-		std::cout <<  "INSTRUCTION: |" << instruction[j]<< "|"  << std::endl;
-		// std::cout <<  "VALUE: |" << instructions_list[j][1] << "|"  << std::endl;
-	}
-
-	
-	instructionsTypes_map_init(instructionTypes_map);
+	// std::cout <<  "INSIDE call_instructions,instructions are:" << std::endl;
+	// for (int j = 0; j < instruction.size(); j++)
+	// {
+	// 	std::cout <<  "INSTRUCTION: |" << instruction[j]<< "|"  << std::endl;
+	// 	// std::cout <<  "VALUE: |" << instructions_list[j][1] << "|"  << std::endl;
+	// }	
 	std::transform(instruction[0].begin(), instruction[0].end(), instruction[0].begin(), ::tolower);
 	first_instr = instruction[0];
 	if (size == 2)
 		value = instruction[1];
-	std::cout <<  "instruction setted: " << first_instr << std::endl;
-	switch(instructionTypes_map[first_instr])
+	// std::cout <<  "instruction setted: " << first_instr << std::endl;
+	instructionsTypes_map_init(instructionTypes_map);
+	switch (instructionTypes_map[first_instr])
 	{
 		case push_val:
 			push_value(value);
@@ -60,7 +58,7 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 			dump();
 			break;
 		case assert_val:
-			assert(value);
+			assert(op_value, num_value);
 			break;
 		case add_val:
 			add();
@@ -168,7 +166,8 @@ void Abstract_vm::dump()
 	}
 }
 
-void Abstract_vm::assert(std::string)
+//change to std::string operand_value, std::string value
+void Abstract_vm::assert(std::string op_value, std::string num_value)
 {
 	const IOperand *top_val = vm_heap.top();
 	std::cout <<  "ASSERTING tHE TOP VALUE" << std::endl;

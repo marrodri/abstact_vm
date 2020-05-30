@@ -36,7 +36,7 @@ public:
 	void push_value(std::string value);
 	void pop();
 	void dump();
-	void assert(std::string value);
+	void assert	(std::string op_value, std::string num_value);
 	void add();
 	void sub();
 	void mul();
