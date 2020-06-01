@@ -22,7 +22,7 @@ public:
 	std::vector<std::string> value_parser(std::string value);
 
 	void file_instruction_to_string(char *filename);
-	void read_from_stdin(Abstract_vm &abstract_vm);
+	std::vector<std::vector<std::string>> read_from_stdin();
 	
 	std::vector<std::vector<std::string>> vector_parser(std::string input);
 	void delete_comments(std::string &line);

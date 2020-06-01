@@ -27,6 +27,9 @@ std::string Lexer::new_line_concatonate(std::string curr_str, std::string conca_
 	return (curr_str);
 }
 
+//for the parser, every instruction must be separated by a newline
+//if there's more than one instruction in one line, handle error
+
 
 std::vector<std::vector<std::string>> Lexer::vector_parser(std::string input)
 {
@@ -98,7 +101,7 @@ std::vector<std::string> Lexer::value_parser(std::string value)
 	return (parsed_val);
 }
 
-void Lexer::read_from_stdin(Abstract_vm &abstract_vm)
+std::vector<std::vector<std::string>> Lexer::read_from_stdin()
 {
 	std::string input = "\0";
 	std::string instructions_string = "\0";
@@ -112,8 +115,9 @@ void Lexer::read_from_stdin(Abstract_vm &abstract_vm)
 	}
 	instructions_list = vector_parser(instructions_string);
 	//iterate through instructions
-	for(int i = 0; i < instructions_list.size(); i++)
-	{
-		abstract_vm.call_instructions(instructions_list[i]);
-	}
+	// for(int i = 0; i < instructions_list.size(); i++)
+	// {
+	// 	abstract_vm.call_instructions(instructions_list[i]);
+	// }
+	return instructions_list;
 }

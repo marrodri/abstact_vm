@@ -40,12 +40,14 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 	// {
 	// 	std::cout <<  "INSTRUCTION: |" << instruction[j]<< "|"  << std::endl;
 	// 	// std::cout <<  "VALUE: |" << instructions_list[j][1] << "|"  << std::endl;
-	// }	
+	// }
 	std::transform(instruction[0].begin(), instruction[0].end(), instruction[0].begin(), ::tolower);
 	first_instr = instruction[0];
 	if (size == 2)
 		value = instruction[1];
 	// std::cout <<  "instruction setted: " << first_instr << std::endl;
+	std::cout <<  "calling instruction" << std::endl;
+	std::cout <<  "first instr: " << first_instr << std::endl;
 	instructionsTypes_map_init(instructionTypes_map);
 	switch (instructionTypes_map[first_instr])
 	{
@@ -183,12 +185,20 @@ void Abstract_vm::add()
 	const IOperand *first_val;
 	const IOperand *second_val;
 	
-	first_val = vm_heap.top();
-	vm_heap.pop();
-	second_val = vm_heap.top();
-	vm_heap.pop();
-	//MAKE THE ADDITION FOR BOTH CLASSES
 	std::cout <<  "ADDING+" << std::endl;
+	//MAKE THE ADDITION FOR BOTH CLASSES
+	if(vm_heap.size() > 1)
+	{
+		std::cout <<  "stack has enugh values, adding++" << std::endl;
+		first_val = vm_heap.top();
+		vm_heap.pop();
+		second_val = vm_heap.top();
+		vm_heap.pop();
+	}
+	else
+	{
+		std::cout <<  "stack has less than 2 values, throw error" << std::endl;
+	}
 }
 
 void Abstract_vm::sub()
@@ -246,7 +256,7 @@ void Abstract_vm::mod()
 void Abstract_vm::print()
 {
 	const IOperand *top_val = vm_heap.top();
-	char char_value = NULL;
+	char char_value = '\0';
 	int dec_code = 0;
 
 	if (top_val->getType() == int8)
