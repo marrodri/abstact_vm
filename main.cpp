@@ -2,9 +2,21 @@
 #include "Abstract_vm.hpp"
 #include "Lexer.hpp"
 
+
+void option_checker(char **argv, int argc)
+{
+	//todo
+	//make a checker that checks an -n option or a -help option
+
+	//if an -n option is added, use it for ignoring the exit flag
+
+	//else if -help, display how to use the abstract_vm
+}
+
 // IMPORTANT TODO tasks:
+//
 //the push function from the stdin or file are not finished, the value is empty when reading it
-// -finish  the pop(DONE), dump(done), assert(done), print(done) and exit(not finished) commands
+// -finish  the pop(DONE), dump(done), assert(done), print(done) and exit(not finished) instructions
 
 
 // before parsing
@@ -42,14 +54,15 @@ int main(int argc, char **argv)
 	const IOperand *test2 = op_builder.createOperand(float_class,"3243");
 	// std::cout <<  "IOperand created with a val of |" << test->toString() << "|" << std::endl;
 	// std::cout <<  "IOperand created with a val of |" << test2->toString() << "|" << std::endl;
-	virtual_machine.push_value("inT32(1231)");
+	//
+	virtual_machine.push_value("int(1231)");
 	virtual_machine.pop();
 
 	// const IOperand *sum_test = test + test2;
 	// test = stack.createInt8("3242");
 	// std::cout <<  "test val is |" << test << "|" << std::endl;
 
-	
+
 	// if argc is higher than 1, then check the files, if the syntax of 
 	// each files, parse and execute the program, if not throw error, by input help
 	if (argc >= 2)
@@ -70,18 +83,17 @@ int main(int argc, char **argv)
 		// 		argc--;
 		// 	}
 			instructions_list = compiler.file_input_parser(argv[i]);
-			for(int i = 0; i < instructions_list.size(); i++)
+			for (int i = 0; i < instructions_list.size(); i++)
 			{
 				virtual_machine.call_instructions(instructions_list[i]);
 			}
 			i++;
-		}
-		
+		}	
 	}
 	else
 	{
 		instructions_list = compiler.stdin_parser();
-		for(int i = 0; i < instructions_list.size(); i++)
+		for (int i = 0; i < instructions_list.size(); i++)
 		{
 			virtual_machine.call_instructions(instructions_list[i]);
 		}

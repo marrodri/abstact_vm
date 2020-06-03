@@ -28,8 +28,9 @@ public:
 	t_double_vector_string file_input_parser(char *filename);
 	t_double_vector_string stdin_parser();
 	
-	t_double_vector_string vector_parser(std::string input);
+	t_double_vector_string set_instr_vector(std::string input);
 	void delete_comments(std::string &line);
+
 	std::string new_line_concatonate(std::string curr_str, std::string conca_str);
 };
 #endif

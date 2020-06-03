@@ -13,12 +13,6 @@ Lexer::~Lexer()
 {
 }
 
-
-void Lexer::delete_comments(std::string &line)
-{
-
-}
-
 void print_vector(t_double_vector_string instructions_list)
 {
 	//print  instructions and values
@@ -29,6 +23,14 @@ void print_vector(t_double_vector_string instructions_list)
 			std::cout <<  "value: " << instructions_list[i][1] << std::endl;
 	}
 
+}
+
+void Lexer::delete_comments(std::string &line)
+{
+	if(line.find(";"))
+	{
+		std::cout <<  "comment founded deleting comments" << std::endl;
+	}
 }
 
 std::string Lexer::new_line_concatonate(std::string curr_str, std::string conca_str)
@@ -43,14 +45,13 @@ std::string Lexer::new_line_concatonate(std::string curr_str, std::string conca_
 	return (curr_str);
 }
 
-std::vector<std::string> Lexer::value_parser(std::string value)
+std::vector<std::string> Lexer::value_parser(std::string value_str)
 {
 	std::vector<std::string> parsed_val;
 	std::regex rgx_val("\\b(int8|int16|int32|float|double)(\\()(\\d*|\\d*.\\d*)(\\))");
-	std::transform(value.begin(),value.end(), value.begin(), ::tolower);
 	std::smatch matches;
 
-	if (std::regex_match(value, matches, rgx_val))
+	if (std::regex_match(value_str, matches, rgx_val))
 	{
 		std::string op = matches.str(1);
 		std::string val = matches.str(3);
@@ -60,7 +61,7 @@ std::vector<std::string> Lexer::value_parser(std::string value)
 	else
 	{
 		//if regex doesn't pass we could return an error
-		std::cout <<  "Value " << value << " Is not properly formatted, throwing error" << std::endl;
+		std::cout <<  "Value " << value_str << " Is not properly formatted, throwing error" << std::endl;
 	}
 	return (parsed_val);
 }
@@ -69,16 +70,20 @@ std::vector<std::string> Lexer::instruction_parser(std::string instruction_str)
 {
 	std::vector<std::string> instruction;
 
-	// incomplete pattern for the instruction regex, it needs the value pattern;
-	// \b(push|pop|dump|assert|add|sub|mul|div|mod|print|exit) ([a-z]\(\d*\))
-	std::regex rgx_pat("");
-
+	//probably complete pattern
+	// \b(push|pop|dump|assert|add|sub|mul|div|mod|print|exit) ((.*)\((\d*|\d*.\d*)\))
+	std::regex rgx_pat("\\b(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)(?: .*)?");
+	std::smatch instruction_matches;
 	//delete the comments;
 	//transform the string to lowercase;
 	//if regex is a match continue here
 	if(0)
 	{
-
+		//use here the switch statements too, if the instruction is push or assert
+		//check if there is a second group for parsing, if not throw an error in the parser
+		
+		//if it's any other instruction and there's a value inputted, throw an error,
+		//if not continue as normal
 	}
 	else
 	{
@@ -92,7 +97,7 @@ std::vector<std::string> Lexer::instruction_parser(std::string instruction_str)
 
 //IMPORTANT: it needs to rechange some name variables to make it more
 // understandable, and some rework needs to be done for storing the value
-t_double_vector_string Lexer::vector_parser(std::string input)
+t_double_vector_string Lexer::set_instr_vector(std::string input)
 {
 	std::string								instruction;
 	t_double_vector_string	instructions;
@@ -129,21 +134,26 @@ t_double_vector_string Lexer::vector_parser(std::string input)
 t_double_vector_string Lexer::file_input_parser(char *filename)
 {
 	std::ifstream							infile;
-	std::string								instruction = "\0";
+	std::string								newline_file = "\0";
 	std::string								file_str = "\0";
-	t_double_vector_string	instructions_list;
+	t_double_vector_string					instructions_list;
 
 	infile.open(filename);
-	while (std::getline(infile, instruction))
-		file_str = new_line_concatonate(file_str, instruction);
+	while (std::getline(infile, newline_file))
+	{
+		//for lowercasing string
+		std::transform(newline_file.begin(),newline_file.end(), newline_file.begin(), ::tolower);
+
+		file_str = new_line_concatonate(file_str, newline_file);
+	}
 	
 	
 	// here the instruction is parsed, but the value is not parsed
 	// regex could be useful for checking if a instruction needs a value or not
 	//if wrongly inputed, throw a lexer/syntax error
-	instructions_list = vector_parser(file_str);
+	instructions_list = set_instr_vector(file_str);
 
-	return instructions_list;
+	return (instructions_list);
 }
 
 
@@ -151,21 +161,25 @@ t_double_vector_string Lexer::file_input_parser(char *filename)
 
 t_double_vector_string Lexer::stdin_parser()
 {
-	std::string input = "\0";
-	std::string instructions_string = "\0";
-	t_double_vector_string instructions_list;
+	std::string				newline_input = "\0";
+	std::string				full_stdin_string = "\0";
+	t_double_vector_string	instructions_list;
 
-	while (std::getline(std::cin, input))
+	while (std::getline(std::cin, newline_input))
 	{
-		if(input == ";;")
+		if(newline_input == ";;")
 			break;
-		instructions_string = new_line_concatonate(instructions_string, input);
+		
+		delete_comments(newline_input);
+		//for lowercasing string
+		std::transform(newline_input.begin(), newline_input.end(), newline_input.begin(), ::tolower);
+		full_stdin_string = new_line_concatonate(full_stdin_string, newline_input);
 	}
 
 	// here the instruction is parsed, but the value is not parsed
 	// regex could be useful for checking if a instruction needs a value or not
 	//if wrongly inputed, throw a lexer/syntax error
-	instructions_list = vector_parser(instructions_string);
+	instructions_list = set_instr_vector(full_stdin_string);
 
 	print_vector(instructions_list);
 	return (instructions_list);
