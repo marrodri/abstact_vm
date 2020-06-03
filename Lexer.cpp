@@ -14,7 +14,12 @@ Lexer::~Lexer()
 }
 
 
-void print_vector(std::vector<std::vector<std::string>>	instructions_list)
+void Lexer::delete_comments(std::string &line)
+{
+
+}
+
+void print_vector(t_double_vector_string instructions_list)
 {
 	//print  instructions and values
 	for(int i = 0; i < instructions_list.size(); i++)
@@ -60,16 +65,28 @@ std::vector<std::string> Lexer::value_parser(std::string value)
 	return (parsed_val);
 }
 
+std::vector<std::string> Lexer::instruction_parser(std::string instruction_str)
+{
+	std::vector<std::string> instruction;
+	std::regex rgx_pat("");
+
+	//delete the comments;
+	//transform the string to lowercase;
+
+
+
+} 
+
 
 //for the parser, every instruction must be separated by a newline
 //if there's more than one instruction in one line, handle error
 
 //IMPORTANT: it needs to rechange some name variables to make it more
 // understandable, and some rework needs to be done for storing the value
-std::vector<std::vector<std::string>> Lexer::vector_parser(std::string input)
+t_double_vector_string Lexer::vector_parser(std::string input)
 {
 	std::string								instruction;
-	std::vector<std::vector<std::string>>	instructions;
+	t_double_vector_string	instructions;
 	std::stringstream						ss_input(input);
 	int										i = 0;
 
@@ -99,12 +116,13 @@ std::vector<std::vector<std::string>> Lexer::vector_parser(std::string input)
 	return (instructions);
 }
 
-std::vector<std::vector<std::string>> Lexer::file_instruction_to_string(char *filename)
+// file_input_parser
+t_double_vector_string Lexer::file_input_parser(char *filename)
 {
 	std::ifstream							infile;
 	std::string								instruction = "\0";
 	std::string								file_str = "\0";
-	std::vector<std::vector<std::string>>	instructions_list;
+	t_double_vector_string	instructions_list;
 
 	infile.open(filename);
 	while (std::getline(infile, instruction))
@@ -119,11 +137,14 @@ std::vector<std::vector<std::string>> Lexer::file_instruction_to_string(char *fi
 	return instructions_list;
 }
 
-std::vector<std::vector<std::string>> Lexer::read_from_stdin()
+
+//stdin_parser
+
+t_double_vector_string Lexer::stdin_parser()
 {
 	std::string input = "\0";
 	std::string instructions_string = "\0";
-	std::vector<std::vector<std::string>> instructions_list;
+	t_double_vector_string instructions_list;
 
 	while (std::getline(std::cin, input))
 	{

@@ -29,43 +29,37 @@
 // here's where the program runs
 int main(int argc, char **argv)
 {
-	//this is like the struct app, it has all the instructions this class.
-	Abstract_vm virtual_machine;
-	Lexer compiler;
-	// IOperand *test
-	std::vector<std::vector<std::string>> instructions_list;
-
-
+	//this is the class that has the main instructions for any operations asked.
+	Abstract_vm				virtual_machine;
+	//this is the parser, any proper input it will be parsed, 
+	//if not it will be thrown an error
+	Lexer					compiler;
+	t_double_vector_string	instructions_list;
+	int						i = 1;
 
 	Operand_factory op_builder;
-
 	const IOperand *test = op_builder.createOperand(int8,"48");
 	const IOperand *test2 = op_builder.createOperand(float_class,"3243");
-
 	// std::cout <<  "IOperand created with a val of |" << test->toString() << "|" << std::endl;
-	
 	// std::cout <<  "IOperand created with a val of |" << test2->toString() << "|" << std::endl;
-
 	virtual_machine.push_value("inT32(1231)");
-
 	virtual_machine.pop();
+
 	// const IOperand *sum_test = test + test2;
 	// test = stack.createInt8("3242");
+	// std::cout <<  "test val is |" << test << "|" << std::endl;
 
-	// std::cout <<  "test val is |" << test- << "|" << std::endl;
-
-	
 	
 	// if argc is higher than 1, then check the files, if the syntax of 
 	// each files, parse and execute the program, if not throw error, by input help
-	if(argc >= 2)
+	if (argc >= 2)
 	{
 		//if the file has an exit instruction, exit the VM, if not
 		//the VM is still active
 		// //if argc is 1; the program runs, and each execution is started
 		// // by finding the ";;" as the beggining and end of line
-		// while (argc)
-		// {
+		while (i < argc)
+		{
 		// 	if (0)
 		// 	{
 
@@ -75,12 +69,18 @@ int main(int argc, char **argv)
 		// 	{
 		// 		argc--;
 		// 	}
-		// }
+			instructions_list = compiler.file_input_parser(argv[i]);
+			for(int i = 0; i < instructions_list.size(); i++)
+			{
+				virtual_machine.call_instructions(instructions_list[i]);
+			}
+			i++;
+		}
 		
 	}
 	else
 	{
-		instructions_list = compiler.read_from_stdin();
+		instructions_list = compiler.stdin_parser();
 		for(int i = 0; i < instructions_list.size(); i++)
 		{
 			virtual_machine.call_instructions(instructions_list[i]);

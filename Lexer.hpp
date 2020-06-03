@@ -8,6 +8,7 @@
 #include <sstream>
 #include <iostream>
 
+typedef std::vector<std::vector<std::string>> t_double_vector_string;
 
 class Lexer
 {
@@ -20,14 +21,15 @@ public:
 
 	// Lexer & operator=(Lexer const & rhs);
 	std::vector<std::string> value_parser(std::string value);
+	//empty needed to check every instruction allowed
+	std::vector<std::string> instruction_parser(std::string instruction);
 
 	
-	std::vector<std::vector<std::string>> file_instruction_to_string(char *filename);
-	std::vector<std::vector<std::string>> read_from_stdin();
+	t_double_vector_string file_input_parser(char *filename);
+	t_double_vector_string stdin_parser();
 	
-	std::vector<std::vector<std::string>> vector_parser(std::string input);
+	t_double_vector_string vector_parser(std::string input);
 	void delete_comments(std::string &line);
 	std::string new_line_concatonate(std::string curr_str, std::string conca_str);
-
 };
 #endif
