@@ -68,14 +68,23 @@ std::vector<std::string> Lexer::value_parser(std::string value)
 std::vector<std::string> Lexer::instruction_parser(std::string instruction_str)
 {
 	std::vector<std::string> instruction;
+
+	// incomplete pattern for the instruction regex, it needs the value pattern;
+	// \b(push|pop|dump|assert|add|sub|mul|div|mod|print|exit) ([a-z]\(\d*\))
 	std::regex rgx_pat("");
 
 	//delete the comments;
 	//transform the string to lowercase;
+	//if regex is a match continue here
+	if(0)
+	{
 
-
-
-} 
+	}
+	else
+	{
+		std::cout <<  "INstruction is not correctly inputed, throw error" << std::endl;
+	}
+}
 
 
 //for the parser, every instruction must be separated by a newline
