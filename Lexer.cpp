@@ -60,6 +60,10 @@ std::string Lexer::new_line_concatonate(std::string curr_str, std::string conca_
 
 std::vector<std::string> Lexer::value_parser(std::string value_str)
 {
+
+	// if it matches parse the value, if wrong throw a parsing error
+	// that the inputed value wrongly inputted, that the value is inexistent
+	// or the syntax is wrong
 	std::vector<std::string> parsed_val;
 	std::regex rgx_val("\\b(int8|int16|int32|float|double)(\\()(\\d*|\\d*.\\d*)(\\))");
 	std::smatch matches;
@@ -84,7 +88,6 @@ std::vector<std::string> Lexer::instruction_parser(std::string instruction_str)
 	std::vector<std::string> instruction;
 
 	//probably complete pattern
-	// \b(push|pop|dump|assert|add|sub|mul|div|mod|print|exit) ((.*)\((\d*|\d*.\d*)\))
 	std::regex rgx_pat("\\b(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)(?: .*)?");
 	std::smatch instruction_matches;
 	//delete the comments;
@@ -100,17 +103,15 @@ std::vector<std::string> Lexer::instruction_parser(std::string instruction_str)
 	}
 	else
 	{
-		std::cout <<  "INstruction is not correctly inputed, throw error" << std::endl;
+		std::cout <<  "INstruction is not correctly inputed or instruction doesnt exist,\\
+		 throw error" << std::endl;
 	}
 	return (instruction);
 }
 
 
-//for the parser, every instruction must be separated by a newline
-//if there's more than one instruction in one line, handle error
-
-//IMPORTANT: it needs to rechange some name variables to make it more
-// understandable, and some rework needs to be done for storing the value
+//CHECKPOINT IMPORTANT TO CONTINUE HERE, 
+// implement the instruction_parser and value_parser on this function
 t_double_vector_string Lexer::set_instr_vector(std::string input)
 {
 	std::string				instruction_line;

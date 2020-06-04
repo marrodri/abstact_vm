@@ -33,7 +33,7 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 	std::string value = "";
 	std::string op_value;
 	std::string num_value;
-	int size = instruction.size();
+	// instruction.size();
 
 	// std::cout <<  "INSIDE call_instructions,instructions are:" << std::endl;
 	// for (int j = 0; j < instruction.size(); j++)
@@ -43,16 +43,19 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 	// }
 	std::transform(instruction[0].begin(), instruction[0].end(), instruction[0].begin(), ::tolower);
 	first_instr = instruction[0];
-	if (size == 2)
+	if (instruction.size() > 1)
 		value = instruction[1];
 	// std::cout <<  "instruction setted: " << first_instr << std::endl;
-	std::cout <<  "calling instruction" << std::endl;
-	std::cout <<  "first instr: " << first_instr << std::endl;
+	std::cout <<  "==calling instruction==" << std::endl;
+	std::cout <<  "instr: |" << first_instr << "|" << std::endl;
+	std::cout <<  "op: |" << first_instr << "|" << std::endl;
+	std::cout <<  "val: |" << first_instr << "|" << std::endl;
+	std::cout <<  "====================" << std::endl;
 	instructionsTypes_map_init(instructionTypes_map);
 	switch (instructionTypes_map[first_instr])
 	{
 		case push_val:
-			push_value(value);
+			push_value(op_value, num_value);
 			break;
 		case pop_val:
 			pop();
@@ -122,28 +125,12 @@ eOperandType Abstract_vm::getOperandType(std::string operand)
 	}
 }
 
-void Abstract_vm::push_value(std::string value)
+void Abstract_vm::push_value(std::string op_value, std::string num_value)
 {
-	//this could be moved to the parser/lexer area, if it matches 
-	//then call the function with the value, if wrong throw a parsing error
-	//that the inputed value wrongly inputted, that the value is inexistent
-	std::regex rgx_val("\\b(int8|int16|int32|float|double)(\\()(\\d*|\\d*.\\d*)(\\))");
-	std::transform(value.begin(),value.end(), value.begin(), ::tolower);
-	std::smatch matches;
+	eOperandType op_type = getOperandType(op_value);
+	const IOperand* new_operand = opFactory.createOperand(op_type, num_value);
 
-	if (std::regex_match(value, matches, rgx_val))
-	{
-		std::string op = matches.str(1);
-		std::string val = matches.str(3);
-		eOperandType op_type = getOperandType(op);
-		const IOperand* new_operand = opFactory.createOperand(op_type, val);
-		this->vm_heap.push(new_operand);
-	}
-	else
-	{
-		//if regex doesn't pass we could return an error
-		std::cout <<  "Value " << value << " Is not properly formatted, throwing error" << std::endl;
-	}
+	this->vm_heap.push(new_operand);
 }
 
 void Abstract_vm::pop()

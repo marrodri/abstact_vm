@@ -13,15 +13,16 @@ void option_checker(char **argv, int argc)
 	//else if -help, display how to use the abstract_vm
 }
 
-// IMPORTANT TODO tasks:
-//
-//the push function from the stdin or file are not finished, the value is empty when reading it
+// checkpoint for come back:
+//	continue on the lexer class the set_instr_vector function. 
+// -check that each instruction and value exist, if not return an error(it doesn't display the error yet)
+
+// tasks:
+// the push function from the stdin or file are not finished, the value is empty when reading it
 // -finish  the pop(DONE), dump(done), assert(done), print(done) and exit(not finished) instructions
 
 
 // before parsing
-// for parser add a delete comment function, that checks every comment and delete it
-// -check that each instruction and value exist, if not return an error(it doesn't display the error yet)
 
 
 // need to double check:
@@ -56,7 +57,7 @@ int main(int argc, char **argv)
 	// std::cout <<  "IOperand created with a val of |" << test2->toString() << "|" << std::endl;
 	//
 	// virtual_machine.push_value("int(1231)");
-	virtual_machine.pop();
+	// virtual_machine.pop();
 
 	// const IOperand *sum_test = test + test2;
 	// test = stack.createInt8("3242");

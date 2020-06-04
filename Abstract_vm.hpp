@@ -33,7 +33,7 @@ public:
 
 
 	//abtract VM main instructions
-	void push_value(std::string value);
+	void push_value(std::string op_value, std::string num_value);
 	void pop();
 	void dump();
 	void assert	(std::string op_value, std::string num_value);
