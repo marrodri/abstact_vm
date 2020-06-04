@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 	// std::cout <<  "IOperand created with a val of |" << test->toString() << "|" << std::endl;
 	// std::cout <<  "IOperand created with a val of |" << test2->toString() << "|" << std::endl;
 	//
-	virtual_machine.push_value("int(1231)");
+	// virtual_machine.push_value("int(1231)");
 	virtual_machine.pop();
 
 	// const IOperand *sum_test = test + test2;

@@ -55,6 +55,7 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 			push_value(value);
 			break;
 		case pop_val:
+			pop();
 			break;
 		case dump_val:
 			dump();
@@ -148,8 +149,13 @@ void Abstract_vm::push_value(std::string value)
 void Abstract_vm::pop()
 {
 	// const IOperand *topval = vm_heap.top();
-
-	vm_heap.pop();
+	if(!vm_heap.empty())
+		vm_heap.pop();
+	else
+	{
+		std::cout <<  "stack is empty, cannot pop anymore, ERROR" << std::endl;
+	}
+	
 	// return topval;
 }
 
@@ -187,9 +193,10 @@ void Abstract_vm::add()
 	
 	std::cout <<  "ADDING+" << std::endl;
 	//MAKE THE ADDITION FOR BOTH CLASSES
-	if(vm_heap.size() > 1)
+	if(!vm_heap.empty())
 	{
 		std::cout <<  "stack has enugh values, adding++" << std::endl;
+		std::cout <<  "vm_heap size is " << vm_heap.size() << std::endl;
 		first_val = vm_heap.top();
 		vm_heap.pop();
 		second_val = vm_heap.top();
