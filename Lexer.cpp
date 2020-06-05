@@ -90,9 +90,9 @@ std::vector<std::string> Lexer::instruction_parser(std::string instr_str)
 	std::vector<std::string> new_value;
 	
 	//new_pattern
-	// ((?:\s+)?)(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?:\s+)?)(.*)
+	// ((?:\s+)?)(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?:\s+) ?)(.*)
 	//probably complete pattern
-	std::regex rgx_pat("(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?: .*)?)");
+	std::regex rgx_pat("(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?:\\s+) ?)(.*)");
 	std::smatch instr_match;
 
 	if (std::regex_match(instr_str, instr_match, rgx_pat))
@@ -106,10 +106,7 @@ std::vector<std::string> Lexer::instruction_parser(std::string instr_str)
 				//use here the switch statements too, if the instruction is push or assert
 				//check if there is a second group for parsing, if not throw an error in the parser
 				//if it's any other instruction and there's a value inputted, throw an error,
-				std::cout <<  "++parsing value++" << std::endl;
-				std::cout <<  "match 1 |" << instr_match.str(1) << "|" << std::endl;
-				std::cout <<  "match 2 |" << instr_match.str(2) << "|" << std::endl;
-				new_value = value_parser(instr_match.str(2));
+				new_value = value_parser(instr_match.str(3));
 				new_instruction.insert(new_instruction.end(), new_value.begin(), new_value.end());
 				break;
 			default:
@@ -135,7 +132,7 @@ t_double_vector_string Lexer::set_instr_vector(std::string input)
 
 	while (std::getline(ss_input, instruction_line, '\n'))
 	{
-		std::cout <<  "current line is: |" << instruction_line << "|" << std::endl;	
+		// std::cout <<  "current line is: |" << instruction_line << "|" << std::endl;	
 		if (instruction_line != "")
 		{
 			new_double_vector_instr.push_back(std::vector<std::string>());
@@ -181,7 +178,7 @@ t_double_vector_string Lexer::stdin_parser()
 
 	while (std::getline(std::cin, newline_input))
 	{
-		if(newline_input == ";;")
+		if (newline_input == ";;")
 			break;
 		std::cout <<  "line inputed: " << newline_input << std::endl;
 		delete_comments(newline_input);

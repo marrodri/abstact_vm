@@ -30,9 +30,8 @@ void Abstract_vm::instructionsTypes_map_init(std::map<std::string, InstructionVa
 void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 {
 	std::string first_instr = "";
-	std::string value = "";
-	std::string op_value;
-	std::string num_value;
+	std::string op_value = "";
+	std::string num_value = "";
 	// instruction.size();
 
 	// std::cout <<  "INSIDE call_instructions,instructions are:" << std::endl;
@@ -41,15 +40,19 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 	// 	std::cout <<  "INSTRUCTION: |" << instruction[j]<< "|"  << std::endl;
 	// 	// std::cout <<  "VALUE: |" << instructions_list[j][1] << "|"  << std::endl;
 	// }
-	std::transform(instruction[0].begin(), instruction[0].end(), instruction[0].begin(), ::tolower);
+	// std::transform(instruction[0].begin(), instruction[0].end(), instruction[0].begin(), ::tolower);
 	first_instr = instruction[0];
 	if (instruction.size() > 1)
-		value = instruction[1];
+	{
+		op_value = instruction[1];
+		num_value = instruction[2];
+
+	}
 	// std::cout <<  "instruction setted: " << first_instr << std::endl;
 	std::cout <<  "==calling instruction==" << std::endl;
 	std::cout <<  "instr: |" << first_instr << "|" << std::endl;
-	std::cout <<  "op: |" << first_instr << "|" << std::endl;
-	std::cout <<  "val: |" << first_instr << "|" << std::endl;
+	std::cout <<  "op: |" << op_value << "|" << std::endl;
+	std::cout <<  "val: |" << num_value << "|" << std::endl;
 	std::cout <<  "====================" << std::endl;
 	instructionsTypes_map_init(instructionTypes_map);
 	switch (instructionTypes_map[first_instr])
