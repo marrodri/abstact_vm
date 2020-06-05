@@ -14,19 +14,21 @@ void option_checker(char **argv, int argc)
 }
 
 // checkpoint for come back:
-//	continue on the lexer class the set_instr_vector function. 
-// -check that each instruction and value exist, if not return an error(it doesn't display the error yet)
+
+// 
 // -set the error handling class
 
 
 // tasks:
-// -finish  the pop(DONE), dump(done), assert(done), print(done) and exit(not finished) instructions
+// call the init_map functions from the main, and make the maps accessible to everywhere;
+// -finish  the assert, print, exit and all the operators instructions
 
 // need to double check:
 // -when checking a file or stdin, return an error if an exit is not founded;
 
 // FOR LAST AND IMPORTANT
 // -set the operators for each operand(start with sum of Int8, Int32 and float)
+// -check that each instruction and value exist, if not return an error(it doesn't display the error yet)
 // 	and test the operators(if all works, then copy paste)
 // -check for any leaks at the very end of the program 
 

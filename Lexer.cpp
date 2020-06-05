@@ -21,8 +21,10 @@ void print_vector(t_double_vector_string instructions_list)
 	{
 		std::cout <<  "instruction: " << instructions_list[i][0] << std::endl;
 		if (instructions_list[i].size() > 1)
+		{
 			std::cout <<  "op: " << instructions_list[i][1] << std::endl;
 			std::cout <<  "value: " << instructions_list[i][2] << std::endl;
+		}
 	}
 	std::cout <<  "=========================================" << std::endl;
 
@@ -91,7 +93,13 @@ std::vector<std::string> Lexer::instruction_parser(std::string instr_str)
 	
 	//new_pattern
 	// ((?:\s+)?)(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?:\s+) ?)(.*)
-	//probably complete pattern
+
+	//useful pattern, 
+	// but change it to the upper one that its more complete,
+	//  than the current one, it's still buggy, it wo
+	//bug: wont accept instruction without spaces eg. 
+	// doesnt work	|dump| 
+	// it works 	|dump | 
 	std::regex rgx_pat("(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?:\\s+) ?)(.*)");
 	std::smatch instr_match;
 
@@ -192,6 +200,6 @@ t_double_vector_string Lexer::stdin_parser()
 	// regex could be useful for checking if a instruction needs a value or not
 	//if wrongly inputed, throw a lexer/syntax error
 	instructions_list = set_instr_vector(full_stdin_string);
-	print_vector(instructions_list);
+	// print_vector(instructions_list);
 	return (instructions_list);
 }

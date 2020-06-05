@@ -102,40 +102,20 @@ void	Abstract_vm::operandTypes_map_init(std::map<std::string, eOperandType> &op_
 	op_map["double"] = double_class;
 }
 
-eOperandType Abstract_vm::getOperandType(std::string operand)
-{
-	operandTypes_map_init(operandTypes_map);
-	switch(operandTypes_map[operand])
-	{
-		case int8:
-			return int8;
-			break;
-		case int16:
-			return int16; 	
-			break;
-		case int32:
-			return int32;
-			break;
-		case float_class:
-			return float_class;
-			break;
-		case double_class:
-			return double_class;
-			break;
-		default:
-			std::cout <<  "throw error" << std::endl;
-			break;
-	}
-}
-
+//done
 void Abstract_vm::push_value(std::string op_value, std::string num_value)
 {
-	eOperandType op_type = getOperandType(op_value);
+	//this one could be in main, because its going to be used everywhere the
+	// operandTypes_mao
+	operandTypes_map_init(operandTypes_map);
+	// eOperandType op_type = getOperandType(op_value);
+	eOperandType op_type = operandTypes_map[op_value];
 	const IOperand* new_operand = opFactory.createOperand(op_type, num_value);
 
 	this->vm_heap.push(new_operand);
 }
 
+//done
 void Abstract_vm::pop()
 {
 	// const IOperand *topval = vm_heap.top();
@@ -149,6 +129,7 @@ void Abstract_vm::pop()
 	// return topval;
 }
 
+//done
 void Abstract_vm::dump()
 {
 	//iterate through the stack to print the whole values
@@ -164,7 +145,7 @@ void Abstract_vm::dump()
 	}
 }
 
-//change to std::string operand_value, std::string value
+
 void Abstract_vm::assert(std::string op_value, std::string num_value)
 {
 	const IOperand *top_val = vm_heap.top();

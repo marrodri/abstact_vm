@@ -43,9 +43,6 @@ public:
 	void div();
 	void mod();
 	void print();
-
-	//helping functions
-	eOperandType getOperandType(std::string operand);
 	
 	//this function could be used to call the instructions methods that can be private;
 	void call_instructions(std::vector<std::string> instruction);
