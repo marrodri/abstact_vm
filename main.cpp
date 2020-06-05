@@ -16,20 +16,16 @@ void option_checker(char **argv, int argc)
 // checkpoint for come back:
 //	continue on the lexer class the set_instr_vector function. 
 // -check that each instruction and value exist, if not return an error(it doesn't display the error yet)
+// -set the error handling class
+
 
 // tasks:
-// the push function from the stdin or file are not finished, the value is empty when reading it
 // -finish  the pop(DONE), dump(done), assert(done), print(done) and exit(not finished) instructions
-
-
-// before parsing
-
 
 // need to double check:
 // -when checking a file or stdin, return an error if an exit is not founded;
 
 // FOR LAST AND IMPORTANT
-// -set the error handling class
 // -set the operators for each operand(start with sum of Int8, Int32 and float)
 // 	and test the operators(if all works, then copy paste)
 // -check for any leaks at the very end of the program 

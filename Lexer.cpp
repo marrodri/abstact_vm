@@ -21,7 +21,8 @@ void print_vector(t_double_vector_string instructions_list)
 	{
 		std::cout <<  "instruction: " << instructions_list[i][0] << std::endl;
 		if (instructions_list[i].size() > 1)
-			std::cout <<  "value: " << instructions_list[i][1] << std::endl;
+			std::cout <<  "op: " << instructions_list[i][1] << std::endl;
+			std::cout <<  "value: " << instructions_list[i][2] << std::endl;
 	}
 	std::cout <<  "=========================================" << std::endl;
 
@@ -78,71 +79,72 @@ std::vector<std::string> Lexer::value_parser(std::string value_str)
 	else
 	{
 		//if regex doesn't pass we could return an error
-		std::cout <<  "Value " << value_str << " Is not properly formatted, throwing error" << std::endl;
+		std::cout <<  "Value " << value_str << " Is not properly formatted or operand doesn't exist, throwing error" << std::endl;
 	}
 	return (parsed_val);
 }
 
-std::vector<std::string> Lexer::instruction_parser(std::string instruction_str)
+std::vector<std::string> Lexer::instruction_parser(std::string instr_str)
 {
-	std::vector<std::string> instruction;
-
+	std::vector<std::string> new_instruction;
+	std::vector<std::string> new_value;
+	
+	//new_pattern
+	// ((?:\s+)?)(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?:\s+)?)(.*)
 	//probably complete pattern
-	std::regex rgx_pat("\\b(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)(?: .*)?");
-	std::smatch instruction_matches;
-	//delete the comments;
-	//transform the string to lowercase;
-	//if regex is a match continue here
-	if(0)
+	std::regex rgx_pat("(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?: .*)?)");
+	std::smatch instr_match;
+
+	if (std::regex_match(instr_str, instr_match, rgx_pat))
 	{
-		//use here the switch statements too, if the instruction is push or assert
-		//check if there is a second group for parsing, if not throw an error in the parser
-		
-		//if it's any other instruction and there's a value inputted, throw an error,
-		//if not continue as normal
+		// instructionTypes_map[instr_match.str(1)]
+		new_instruction.push_back(instr_match.str(1));
+		switch(push_val)
+		{
+			case push_val:
+			case assert_val:
+				//use here the switch statements too, if the instruction is push or assert
+				//check if there is a second group for parsing, if not throw an error in the parser
+				//if it's any other instruction and there's a value inputted, throw an error,
+				std::cout <<  "++parsing value++" << std::endl;
+				std::cout <<  "match 1 |" << instr_match.str(1) << "|" << std::endl;
+				std::cout <<  "match 2 |" << instr_match.str(2) << "|" << std::endl;
+				new_value = value_parser(instr_match.str(2));
+				new_instruction.insert(new_instruction.end(), new_value.begin(), new_value.end());
+				break;
+			default:
+				//if not continue as normal without adding the value to the vector
+				std::cout <<  "no value required continue" << std::endl;
+				break;
+		}
 	}
 	else
 	{
-		std::cout <<  "INstruction is not correctly inputed or instruction doesnt exist,\\
-		 throw error" << std::endl;
+		std::cout <<  "INstruction is not correctly inputed or instruction doesnt exist, throw error" << std::endl;
 	}
-	return (instruction);
+	return (new_instruction);
 }
 
-
-//CHECKPOINT IMPORTANT TO CONTINUE HERE, 
-// implement the instruction_parser and value_parser on this function
 t_double_vector_string Lexer::set_instr_vector(std::string input)
 {
-	std::string				instruction_line;
-	t_double_vector_string	new_vector_instr;
-	std::stringstream		ss_input(input);
-	int						i = 0;
+	std::string					instruction_line;
+	t_double_vector_string		new_double_vector_instr;
+	std::vector<std::string>	new_instr;
+	std::stringstream			ss_input(input);
+	int							i = 0;
 
 	while (std::getline(ss_input, instruction_line, '\n'))
 	{
-		// std::cout <<  "current line is: |" << instruction << "|" << std::endl;	
-		std::stringstream ss(instruction_line);
+		std::cout <<  "current line is: |" << instruction_line << "|" << std::endl;	
 		if (instruction_line != "")
 		{
-			new_vector_instr.push_back(std::vector<std::string>());
-			do
-			{
-				std::string word;
-				ss >> word;
-				new_vector_instr[i].push_back(word);
-			} while (ss);
+			new_double_vector_instr.push_back(std::vector<std::string>());
+			new_instr = instruction_parser(instruction_line);
+			new_double_vector_instr[i] = new_instr;
 			i++;
 		}
 	}
-	
-	// std::cout <<  "Number of instructions | " << instructions.size() << "|" << std::endl;
-	// for (int j = 0; j < instructions.size(); j++)
-	// {
-	// 	std::cout <<  "INSTRUCTION: |" << instructions[j][0]<< "|"  << std::endl;
-	// 	std::cout <<  "VALUE: |" << instructions[j][1] << "|"  << std::endl;
-	// }
-	return (new_vector_instr);
+	return (new_double_vector_instr);
 }
 
 // file_input_parser
