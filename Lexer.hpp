@@ -30,7 +30,7 @@ public:
 	
 	t_double_vector_string set_instr_vector(std::string input);
 	void delete_comments(std::string &line);
-
+	void trim_whitespace_string(std::string &line);
 	std::string new_line_concatonate(std::string curr_str, std::string conca_str);
 };
 #endif

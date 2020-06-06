@@ -20,8 +20,7 @@ void option_checker(char **argv, int argc)
 
 
 // tasks:
-// call the init_map functions from the main, and make the maps accessible to everywhere;
-// -finish  the assert, print, exit and all the operators instructions
+// -finish the assert, print, exit and all the operators instructions
 
 // need to double check:
 // -when checking a file or stdin, return an error if an exit is not founded;
@@ -42,13 +41,14 @@ int main(int argc, char **argv)
 {
 	//this is the class that has the main instructions for any operations asked.
 	Abstract_vm				virtual_machine;
+	Operand_factory			op_builder;
+	t_double_vector_string	instructions_list;
 	//this is the parser, any proper input it will be parsed, 
 	//if not it will be thrown an error
 	Lexer					compiler;
-	t_double_vector_string	instructions_list;
 	int						i = 1;
 
-	Operand_factory op_builder;
+
 	const IOperand *test = op_builder.createOperand(int8,"48");
 	const IOperand *test2 = op_builder.createOperand(float_class,"3243");
 	// std::cout <<  "IOperand created with a val of |" << test->toString() << "|" << std::endl;
@@ -61,6 +61,8 @@ int main(int argc, char **argv)
 	// test = stack.createInt8("3242");
 	// std::cout <<  "test val is |" << test << "|" << std::endl;
 
+	virtual_machine.instructionsTypes_map_init();
+	virtual_machine.operandTypes_map_init();
 
 	// if argc is higher than 1, then check the files, if the syntax of 
 	// each files, parse and execute the program, if not throw error, by input help

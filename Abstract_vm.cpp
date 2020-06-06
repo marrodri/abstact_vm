@@ -13,18 +13,28 @@ Abstract_vm::~Abstract_vm()
 {
 }
 
-void Abstract_vm::instructionsTypes_map_init(std::map<std::string, InstructionValue> &instr_map)
+void Abstract_vm::instructionsTypes_map_init()
 {
-	instr_map["push"] = push_val;
-	instr_map["pop"] = pop_val;
-	instr_map["dump"] = dump_val;
-	instr_map["assert"] = assert_val;
-	instr_map["add"] = add_val; //weirdly, if it's "add\n", when searching add, it sets the push val
-	instr_map["sub"] = sub_val;
-	instr_map["mul"] = mul_val;
-	instr_map["div"] = div_val;
-	instr_map["mod"] = mod_val;
-	instr_map["print"] = print_val;
+	this->instructionTypes_map["push"] = push_val;
+	this->instructionTypes_map["pop"] = pop_val;
+	this->instructionTypes_map["dump"] = dump_val;
+	this->instructionTypes_map["assert"] = assert_val;
+	this->instructionTypes_map["add"] = add_val; //weirdly, if it's "add\n", when searching add, it sets the push val
+	this->instructionTypes_map["sub"] = sub_val;
+	this->instructionTypes_map["mul"] = mul_val;
+	this->instructionTypes_map["div"] = div_val;
+	this->instructionTypes_map["mod"] = mod_val;
+	this->instructionTypes_map["print"] = print_val;
+}
+
+void	Abstract_vm::operandTypes_map_init()
+{
+	// this->operandTypes_map
+	this->operandTypes_map["int8"] = int8;
+	this->operandTypes_map["int16"] = int16;
+	this->operandTypes_map["int32"] = int32;
+	this->operandTypes_map["float"] = float_class;
+	this->operandTypes_map["double"] = double_class;
 }
 
 void Abstract_vm::call_instructions(std::vector<std::string> instruction)
@@ -32,7 +42,6 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 	std::string first_instr = "";
 	std::string op_value = "";
 	std::string num_value = "";
-	// instruction.size();
 
 	// std::cout <<  "INSIDE call_instructions,instructions are:" << std::endl;
 	// for (int j = 0; j < instruction.size(); j++)
@@ -54,7 +63,7 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 	std::cout <<  "op: |" << op_value << "|" << std::endl;
 	std::cout <<  "val: |" << num_value << "|" << std::endl;
 	std::cout <<  "====================" << std::endl;
-	instructionsTypes_map_init(instructionTypes_map);
+	// instructionsTypes_map_init(instructionTypes_map);
 	switch (instructionTypes_map[first_instr])
 	{
 		case push_val:
@@ -86,29 +95,13 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 			break;
 		case print_val:
 			print();
-			break;
-		default:
-			std::cout <<  "THROW ERROR for call_instructions, instruction doesn't exist" << std::endl;
-			break;
+			break;		
 	}
-}
-
-void	Abstract_vm::operandTypes_map_init(std::map<std::string, eOperandType> &op_map)
-{
-	op_map["int8"] = int8;
-	op_map["int16"] = int16;
-	op_map["int32"] = int32;
-	op_map["float"] = float_class;
-	op_map["double"] = double_class;
 }
 
 //done
 void Abstract_vm::push_value(std::string op_value, std::string num_value)
 {
-	//this one could be in main, because its going to be used everywhere the
-	// operandTypes_mao
-	operandTypes_map_init(operandTypes_map);
-	// eOperandType op_type = getOperandType(op_value);
 	eOperandType op_type = operandTypes_map[op_value];
 	const IOperand* new_operand = opFactory.createOperand(op_type, num_value);
 
@@ -148,8 +141,16 @@ void Abstract_vm::dump()
 
 void Abstract_vm::assert(std::string op_value, std::string num_value)
 {
-	const IOperand *top_val = vm_heap.top();
 	std::cout <<  "ASSERTING tHE TOP VALUE" << std::endl;
+	if(vm_heap.size() > 0)
+	{
+
+		const IOperand *top_val = vm_heap.top();
+	}
+	else
+	{
+		std::cout <<  "stack is empty, cannot assert error" << std::endl;
+	}
 	
 	//asserting the 
 }

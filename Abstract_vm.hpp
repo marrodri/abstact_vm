@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-enum InstructionValue	{ push_val, pop_val, 
+enum eInstructionValue	{ push_val, pop_val, 
 						dump_val, assert_val, add_val,
 						sub_val, mul_val, div_val, mod_val,
 						print_val };
@@ -21,9 +21,7 @@ private:
 	//of the stack
 	std::stack<const IOperand*> vm_heap;
 	std::map<std::string, eOperandType> operandTypes_map;
-	std::map<std::string, InstructionValue> instructionTypes_map;
-	void operandTypes_map_init(std::map<std::string, eOperandType> &op_map);
-	void instructionsTypes_map_init(std::map<std::string, InstructionValue> &instr_map);
+	std::map<std::string, eInstructionValue> instructionTypes_map;
 
 public:
 	Abstract_vm();
@@ -44,8 +42,12 @@ public:
 	void mod();
 	void print();
 	
+	void operandTypes_map_init();
+	void instructionsTypes_map_init();
 	//this function could be used to call the instructions methods that can be private;
 	void call_instructions(std::vector<std::string> instruction);
+
+	std::map<std::string, eInstructionValue> get_instr_map();
 	//exit(this one could be in another place)
 };
 #endif

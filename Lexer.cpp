@@ -49,6 +49,11 @@ void Lexer::delete_comments(std::string &line)
 	}
 }
 
+void Lexer::trim_whitespace_string(std::string &line)
+{
+
+}
+
 std::string Lexer::new_line_concatonate(std::string curr_str, std::string conca_str)
 {
 	if (curr_str == "\0")
@@ -90,38 +95,37 @@ std::vector<std::string> Lexer::instruction_parser(std::string instr_str)
 {
 	std::vector<std::string> new_instruction;
 	std::vector<std::string> new_value;
-	
-	//new_pattern
-	// ((?:\s+)?)(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?:\s+) ?)(.*)
+	std::vector<std::string> unparsed_matches;
 
+	// updated pattern(prob)	
+	// (push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?:\s+)?)((?:.*)?)
+	
 	//useful pattern, 
 	// but change it to the upper one that its more complete,
 	//  than the current one, it's still buggy, it wo
 	//bug: wont accept instruction without spaces eg. 
 	// doesnt work	|dump| 
 	// it works 	|dump | 
-	std::regex rgx_pat("(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?:\\s+) ?)(.*)");
+	std::regex rgx_pat("(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?:\\s+)?)(.*)");
 	std::smatch instr_match;
 
 	if (std::regex_match(instr_str, instr_match, rgx_pat))
 	{
 		// instructionTypes_map[instr_match.str(1)]
 		new_instruction.push_back(instr_match.str(1));
-		switch(push_val)
+		if (instr_match.str(1) == "push" || instr_match.str(1) == "assert")
 		{
-			case push_val:
-			case assert_val:
-				//use here the switch statements too, if the instruction is push or assert
+				//if the instruction is push or assert
 				//check if there is a second group for parsing, if not throw an error in the parser
-				//if it's any other instruction and there's a value inputted, throw an error,
 				new_value = value_parser(instr_match.str(3));
 				new_instruction.insert(new_instruction.end(), new_value.begin(), new_value.end());
-				break;
-			default:
-				//if not continue as normal without adding the value to the vector
-				std::cout <<  "no value required continue" << std::endl;
-				break;
 		}
+		//a way to check that a value is added and is not required!!
+		else if(0)
+		{
+			//if it's any other instruction and there's a value inputted, throw an error,
+		}
+		//if not continue as normal without adding the value to the vector
 	}
 	else
 	{
@@ -165,6 +169,7 @@ t_double_vector_string Lexer::file_input_parser(char *filename)
 	{
 		//for lowercasing string
 		std::transform(newline_file.begin(),newline_file.end(), newline_file.begin(), ::tolower);
+		//trim any unecessary whitespace at the beginning and end of the string
 
 		file_str = new_line_concatonate(file_str, newline_file);
 	}
