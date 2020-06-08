@@ -49,8 +49,10 @@ void Lexer::delete_comments(std::string &line)
 	}
 }
 
+//CHECKPOINT continue here
 void Lexer::trim_whitespace_string(std::string &line)
 {
+	const std::string WHITESPACE = " \t\r\v\f";
 
 }
 
@@ -195,9 +197,10 @@ t_double_vector_string Lexer::stdin_parser()
 			break;
 		std::cout <<  "line inputed: " << newline_input << std::endl;
 		delete_comments(newline_input);
-		//for lowercasing string
 		std::transform(newline_input.begin(), newline_input.end(), newline_input.begin(), ::tolower);
-		std::cout <<  "line transform: " << newline_input << std::endl;
+
+		//trim any unecesary whitespace here
+
 		full_stdin_string = new_line_concatonate(full_stdin_string, newline_input);
 	}
 

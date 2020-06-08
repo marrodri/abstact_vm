@@ -25,7 +25,13 @@ eOperandType Int32::getType(void) const
 	return (int32);
 }
 
-IOperand const *Int32::operator+(IOperand const & rhs) const{return NULL;}
+IOperand const *Int32::operator+(IOperand const & rhs) const
+{
+	std::cout <<  "returning sum int value" << std::endl;
+	double first_val = std::stod(this->toString());
+	double sec_val = std::stod(rhs.toString());
+	return (new Int32((int) first_val + sec_val));
+}
 IOperand const *Int32::operator-(IOperand const & rhs) const{return NULL;}
 IOperand const *Int32::operator*(IOperand const & rhs) const{return NULL;}
 IOperand const *Int32::operator/(IOperand const & rhs) const{return NULL;}

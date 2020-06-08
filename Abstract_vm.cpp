@@ -163,16 +163,18 @@ void Abstract_vm::add()
 	const IOperand *first_val;
 	const IOperand *second_val;
 	
-	std::cout <<  "ADDING+" << std::endl;
 	//MAKE THE ADDITION FOR BOTH CLASSES
-	if(!vm_heap.empty())
+	//change this if to try
+	if (vm_heap.size() >= 2)
 	{
-		std::cout <<  "stack has enugh values, adding++" << std::endl;
-		std::cout <<  "vm_heap size is " << vm_heap.size() << std::endl;
 		first_val = vm_heap.top();
 		vm_heap.pop();
 		second_val = vm_heap.top();
 		vm_heap.pop();
+		if (first_val->getPrecision() >= second_val->getPrecision())
+			vm_heap.push(*first_val + *second_val);
+		else
+			vm_heap.push(*second_val + *first_val);
 	}
 	else
 	{
@@ -185,11 +187,21 @@ void Abstract_vm::sub()
 	const IOperand *first_val;
 	const IOperand *second_val;
 	
-	first_val = vm_heap.top();
-	vm_heap.pop();
-	second_val = vm_heap.top();
-	vm_heap.pop();
-	std::cout <<  "SUBTRACTING-" << std::endl;
+	if (vm_heap.size() >= 2)
+	{
+		first_val = vm_heap.top();
+		vm_heap.pop();
+		second_val = vm_heap.top();
+		vm_heap.pop();
+		if(first_val->getPrecision() >= second_val->getPrecision())
+			vm_heap.push(*first_val - *second_val);
+		else
+			vm_heap.push(*second_val - *first_val);
+	}
+	else
+	{
+		std::cout <<  "stack has less than 2 values, throw error" << std::endl;
+	}
 }
 
 void Abstract_vm::mul()

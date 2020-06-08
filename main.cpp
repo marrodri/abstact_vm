@@ -15,7 +15,7 @@ void option_checker(char **argv, int argc)
 
 // checkpoint for come back:
 
-// 
+// finish the trim function on the Lexer class
 // -set the error handling class
 
 
@@ -50,12 +50,17 @@ int main(int argc, char **argv)
 
 
 	const IOperand *test = op_builder.createOperand(int8,"48");
-	const IOperand *test2 = op_builder.createOperand(float_class,"3243");
+	const IOperand *test5 = op_builder.createOperand(int16,"48");
+	// const IOperand *test2 = op_builder.createOperand(float_class,"3243");
 	// std::cout <<  "IOperand created with a val of |" << test->toString() << "|" << std::endl;
 	// std::cout <<  "IOperand created with a val of |" << test2->toString() << "|" << std::endl;
 	//
 	// virtual_machine.push_value("int(1231)");
 	// virtual_machine.pop();
+							// int16op(int8op)
+							// test5(test)
+	const IOperand *sum_total = *test5 + *test;
+	const IOperand *sum_total2 = *test + *test5;
 
 	// const IOperand *sum_test = test + test2;
 	// test = stack.createInt8("3242");

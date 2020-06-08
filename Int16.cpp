@@ -27,25 +27,16 @@ eOperandType Int16::getType(void) const
 
 IOperand const *Int16::operator+(IOperand const & rhs) const
 {
-	if( rhs.getPrecision() == this->getPrecision())
-	{
-		std::cout <<  "Both have the same prec, sum normal + 16int" << std::endl;
-	}
-	if( rhs.getPrecision() > this->getPrecision())
-	{
-		std::cout <<  "the rhs has a better prec, return the rhs + 16int" << std::endl;
-	}
-	if( rhs.getPrecision() < this->getPrecision())
-	{
-		std::cout <<  "the rhs has a worser prec, return this class + 16int" << std::endl;
-	}
-	return this;
+	std::cout <<  "setting sum short value" << std::endl;
+	double first_val = std::stod(this->toString());
+	double sec_val = std::stod(rhs.toString());
+	return (new Int16((short) first_val + sec_val));
 }
 
-IOperand const *Int16::operator-(IOperand const & rhs) const{}
-IOperand const *Int16::operator*(IOperand const & rhs) const{}
-IOperand const *Int16::operator/(IOperand const & rhs) const{}
-IOperand const *Int16::operator%(IOperand const & rhs) const{}
+IOperand const *Int16::operator-(IOperand const & rhs) const{return NULL;}
+IOperand const *Int16::operator*(IOperand const & rhs) const{return NULL;}
+IOperand const *Int16::operator/(IOperand const & rhs) const{return NULL;}
+IOperand const *Int16::operator%(IOperand const & rhs) const{return NULL;}
 
 std::string const &Int16::toString(void) const
 {

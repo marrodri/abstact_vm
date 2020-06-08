@@ -28,9 +28,10 @@ eOperandType Float::getType(void) const
 
 IOperand const *Float::operator+(IOperand const & rhs) const
 {
-	std::cout <<  "Both have the same prec, sum normal + 8i	nt" << std::endl;
-
-	return this;
+	std::cout <<  "setting sum float value" << std::endl;
+	double first_val = std::stod(this->toString());
+	double sec_val = std::stod(rhs.toString());
+	return (new Float((float) first_val + sec_val));
 }
 
 IOperand const *Float::operator-(IOperand const & rhs) const{}
