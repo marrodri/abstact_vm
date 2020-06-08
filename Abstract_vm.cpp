@@ -178,7 +178,7 @@ void Abstract_vm::sub()
 {
 	const IOperand *first_val;
 	const IOperand *second_val;
-	
+
 	if (vm_heap.size() >= 2)
 	{
 		first_val = vm_heap.top();
@@ -215,6 +215,9 @@ void Abstract_vm::mul()
 //there's an edge case to check with division
 void Abstract_vm::div()
 {
+	const IOperand *first_val;
+	const IOperand *second_val;
+
 	if (vm_heap.size() >= 2)
 	{
 		first_val = vm_heap.top();
@@ -232,6 +235,9 @@ void Abstract_vm::div()
 //there's an edge case to check for mod too
 void Abstract_vm::mod()
 {
+	const IOperand *first_val;
+	const IOperand *second_val;
+
 	if (vm_heap.size() >= 2)
 	{
 		first_val = vm_heap.top();

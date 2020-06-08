@@ -14,7 +14,7 @@ void option_checker(char **argv, int argc)
 }
 
 // checkpoint for come back:
-
+// -set the mod and div operators with the exceptions to all operands
 // finish the trim function on the Lexer class
 // -set the error handling class
 
@@ -26,7 +26,6 @@ void option_checker(char **argv, int argc)
 // -when checking a file or stdin, return an error if an exit is not founded;
 
 // FOR LAST AND IMPORTANT
-// -set the operators for each operand(start with sum of Int8, Int32 and float)
 // -check that each instruction and value exist, if not return an error(it doesn't display the error yet)
 // 	and test the operators(if all works, then copy paste)
 // -check for any leaks at the very end of the program 
@@ -51,24 +50,26 @@ int main(int argc, char **argv)
 
 	const IOperand *test = op_builder.createOperand(int8,"48");
 	const IOperand *test5 = op_builder.createOperand(int16,"48");
+	const IOperand *test6 = op_builder.createOperand(float_class,"48.544");
 	// const IOperand *test2 = op_builder.createOperand(float_class,"3243");
 	// std::cout <<  "IOperand created with a val of |" << test->toString() << "|" << std::endl;
 	// std::cout <<  "IOperand created with a val of |" << test2->toString() << "|" << std::endl;
 	//
 	// virtual_machine.push_value("int(1231)");
 	// virtual_machine.pop();
+
 							// int16op(int8op)
 							// test5(test)
-	const IOperand *sum_total = *test5 + *test;
-	const IOperand *sum_total2 = *test + *test5;
-
-
-
+	// const IOperand *sum_total = *test5 + *test;
+	// const IOperand *sum_total2 = *test + *test5;
+	// const IOperand *sub_total3 = *test - *test6;
 	// std::cout <<  "test type is " << test->getType() << std::endl;
-	std::cout <<  "sum_total value is " << sum_total->toString() << std::endl;
-	std::cout <<  "sum_total type is " << sum_total->getType() << std::endl;
-	std::cout <<  "sum_total2 value is " << sum_total2->toString() << std::endl;
-	std::cout <<  "sum_total2 type is " << sum_total2->getType() << std::endl;
+	// std::cout <<  "sum_total value is " << sum_total->toString() << std::endl;
+	// std::cout <<  "sum_total type is " << sum_total->getType() << std::endl;
+	// std::cout <<  "sum_total2 value is " << sum_total2->toString() << std::endl;
+	// std::cout <<  "sum_total2 type is " << sum_total2->getType() << std::endl;
+	// std::cout <<  "sub_total3 value is " << sub_total3->toString() << std::endl;
+	// std::cout <<  "sub_total3 type is " << sub_total3->getType() << std::endl;
 	// const IOperand *sum_test = test + test2;
 	// test = stack.createInt8("3242");
 	// std::cout <<  "test val is |" << test << "|" << std::endl;
