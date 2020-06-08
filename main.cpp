@@ -15,21 +15,17 @@ void option_checker(char **argv, int argc)
 
 // checkpoint for come back:
 // -set the mod and div operators with the exceptions to all operands
-// finish the trim function on the Lexer class
 // -set the error handling class
-
 
 // tasks:
 // -finish the assert, print, exit and all the operators instructions
+//  implement the exception when the exit command is not founded after the ;; input;
 
-// need to double check:
-// -when checking a file or stdin, return an error if an exit is not founded;
 
 // FOR LAST AND IMPORTANT
 // -check that each instruction and value exist, if not return an error(it doesn't display the error yet)
 // 	and test the operators(if all works, then copy paste)
 // -check for any leaks at the very end of the program 
-
 
 //personal bonus
 // -add a n option MAKE THE STDIN that run endless until an exit is founded;
