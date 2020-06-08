@@ -111,21 +111,17 @@ void Abstract_vm::push_value(std::string op_value, std::string num_value)
 //done
 void Abstract_vm::pop()
 {
-	// const IOperand *topval = vm_heap.top();
-	if(!vm_heap.empty())
+	if (!vm_heap.empty())
 		vm_heap.pop();
 	else
 	{
 		std::cout <<  "stack is empty, cannot pop anymore, ERROR" << std::endl;
 	}
-	
-	// return topval;
 }
 
 //done
 void Abstract_vm::dump()
 {
-	//iterate through the stack to print the whole values
 	std::cout <<  "DUMPING THE WHOLE STACK TO THE OUTPUT TERMINAL" << std::endl;
 	std::stack<const IOperand*> copy_stack = vm_heap;
 	const IOperand *top_val = copy_stack.top();
@@ -156,8 +152,7 @@ void Abstract_vm::assert(std::string op_value, std::string num_value)
 }
 
 //add
-//pops the top 2 values, then it makes the sum of those popped values,
-//and the result is pushed back to the stack
+//it still buggy, it needs to change 
 void Abstract_vm::add()
 {
 	const IOperand *first_val;
@@ -171,10 +166,7 @@ void Abstract_vm::add()
 		vm_heap.pop();
 		second_val = vm_heap.top();
 		vm_heap.pop();
-		if (first_val->getPrecision() >= second_val->getPrecision())
-			vm_heap.push(*first_val + *second_val);
-		else
-			vm_heap.push(*second_val + *first_val);
+		vm_heap.push(*first_val + *second_val);
 	}
 	else
 	{
@@ -193,10 +185,7 @@ void Abstract_vm::sub()
 		vm_heap.pop();
 		second_val = vm_heap.top();
 		vm_heap.pop();
-		if(first_val->getPrecision() >= second_val->getPrecision())
-			vm_heap.push(*first_val - *second_val);
-		else
-			vm_heap.push(*second_val - *first_val);
+		vm_heap.push(*first_val - *second_val);
 	}
 	else
 	{
@@ -209,39 +198,52 @@ void Abstract_vm::mul()
 	const IOperand *first_val;
 	const IOperand *second_val;
 	
-	first_val = vm_heap.top();
-	vm_heap.pop();
-	second_val = vm_heap.top();
-	vm_heap.pop();
-	std::cout <<  "MULTIPLYING*" << std::endl;
+	if (vm_heap.size() >= 2)
+	{
+		first_val = vm_heap.top();
+		vm_heap.pop();
+		second_val = vm_heap.top();
+		vm_heap.pop();
+		vm_heap.push(*first_val * *second_val);
+	}
+	else
+	{
+		std::cout <<  "stack has less than 2 values, throw error" << std::endl;
+	}
 }
 
 //there's an edge case to check with division
 void Abstract_vm::div()
 {
-	const IOperand *first_val;
-	const IOperand *second_val;
-	
-	first_val = vm_heap.top();
-	vm_heap.pop();
-	second_val = vm_heap.top();
-	vm_heap.pop();
-
-	std::cout <<  "DIVIDNG/" << std::endl;
+	if (vm_heap.size() >= 2)
+	{
+		first_val = vm_heap.top();
+		vm_heap.pop();
+		second_val = vm_heap.top();
+		vm_heap.pop();
+		vm_heap.push(*first_val / *second_val);
+	}
+	else
+	{
+		std::cout <<  "stack has less than 2 values, throw error" << std::endl;
+	}
 }
 
 //there's an edge case to check for mod too
 void Abstract_vm::mod()
 {
-	const IOperand *first_val;
-	const IOperand *second_val;
-	
-	first_val = vm_heap.top();
-	vm_heap.pop();
-	second_val = vm_heap.top();
-	vm_heap.pop();
-
-	std::cout <<  "MODULO%" << std::endl;
+	if (vm_heap.size() >= 2)
+	{
+		first_val = vm_heap.top();
+		vm_heap.pop();
+		second_val = vm_heap.top();
+		vm_heap.pop();
+		vm_heap.push(*first_val % *second_val);
+	}
+	else
+	{
+		std::cout <<  "stack has less than 2 values, throw error" << std::endl;
+	}
 }
 
 void Abstract_vm::print()

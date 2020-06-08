@@ -1,6 +1,8 @@
 
 
+
 #include "Int8.hpp" 
+#include "Operand_factory.hpp"
 
 Int8::Int8(char value)
 {
@@ -24,15 +26,53 @@ eOperandType Int8::getType(void) const
 IOperand const *Int8::operator+(IOperand const & rhs) const
 {
 	std::cout <<  "returning sum char value" << std::endl;
+	Operand_factory factory;
 	double first_val = std::stod(this->toString());
 	double sec_val = std::stod(rhs.toString());
-	return (new Int8((char) first_val + sec_val));
+	std::string val_string = std::to_string(first_val + sec_val);
+
+	if(this->getPrecision() >= rhs.getPrecision())
+		return factory.createOperand(this->getType(), val_string);
+	else
+		return factory.createOperand(rhs.getType(), val_string);
 }
 
-IOperand const *Int8::operator-(IOperand const & rhs) const{}
-IOperand const *Int8::operator*(IOperand const & rhs) const{}
-IOperand const *Int8::operator/(IOperand const & rhs) const{}
-IOperand const *Int8::operator%(IOperand const & rhs) const{}
+IOperand const *Int8::operator-(IOperand const & rhs) const
+{
+	Operand_factory factory;
+	double first_val = std::stod(this->toString());
+	double sec_val = std::stod(rhs.toString());
+	std::string val_string = std::to_string(first_val - sec_val);
+
+	if(this->getPrecision() >= rhs.getPrecision())
+		return factory.createOperand(this->getType(), val_string);
+	else
+		return factory.createOperand(rhs.getType(), val_string);
+}
+
+IOperand const *Int8::operator*(IOperand const & rhs) const
+{
+	Operand_factory factory;
+	double first_val = std::stod(this->toString());
+	double sec_val = std::stod(rhs.toString());
+	std::string val_string = std::to_string(first_val * sec_val);
+
+	if(this->getPrecision() >= rhs.getPrecision())
+		return factory.createOperand(this->getType(), val_string);
+	else
+		return factory.createOperand(rhs.getType(), val_string);
+}
+
+IOperand const *Int8::operator/(IOperand const & rhs) const
+{
+	return NULL;
+}
+
+IOperand const *Int8::operator%(IOperand const & rhs) const
+{
+	return NULL;
+}
+
 
 std::string const &Int8::toString(void) const 
 {

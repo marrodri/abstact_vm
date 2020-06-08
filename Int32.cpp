@@ -1,6 +1,6 @@
 
 #include "Int32.hpp" 
-
+#include "Operand_factory.hpp"
 Int32::Int32(int value)
 {
 	this->int32_val = value;
@@ -28,14 +28,58 @@ eOperandType Int32::getType(void) const
 IOperand const *Int32::operator+(IOperand const & rhs) const
 {
 	std::cout <<  "returning sum int value" << std::endl;
+	Operand_factory factory;
 	double first_val = std::stod(this->toString());
 	double sec_val = std::stod(rhs.toString());
-	return (new Int32((int) first_val + sec_val));
+	std::string val_string = std::to_string(first_val + sec_val);
+
+	if(this->getPrecision() >= rhs.getPrecision())
+	{
+
+		return factory.createOperand(this->getType(), val_string);
+	}
+	else
+	{
+		return factory.createOperand(rhs.getType(), val_string);
+	}
 }
-IOperand const *Int32::operator-(IOperand const & rhs) const{return NULL;}
-IOperand const *Int32::operator*(IOperand const & rhs) const{return NULL;}
-IOperand const *Int32::operator/(IOperand const & rhs) const{return NULL;}
-IOperand const *Int32::operator%(IOperand const & rhs) const{return NULL;}
+
+IOperand const *Int32::operator-(IOperand const & rhs) const
+{
+	Operand_factory factory;
+	double first_val = std::stod(this->toString());
+	double sec_val = std::stod(rhs.toString());
+	std::string val_string = std::to_string(first_val - sec_val);
+
+	if(this->getPrecision() >= rhs.getPrecision())
+		return factory.createOperand(this->getType(), val_string);
+	else
+		return factory.createOperand(rhs.getType(), val_string);
+}
+
+IOperand const *Int32::operator*(IOperand const & rhs) const
+{
+	Operand_factory factory;
+	double first_val = std::stod(this->toString());
+	double sec_val = std::stod(rhs.toString());
+	std::string val_string = std::to_string(first_val * sec_val);
+
+	if(this->getPrecision() >= rhs.getPrecision())
+		return factory.createOperand(this->getType(), val_string);
+	else
+		return factory.createOperand(rhs.getType(), val_string);
+}
+
+IOperand const *Int32::operator/(IOperand const & rhs) const
+{
+	return NULL;
+}
+
+IOperand const *Int32::operator%(IOperand const & rhs) const
+{
+	return NULL;
+}
+
 
 std::string const &Int32::toString(void) const 
 {

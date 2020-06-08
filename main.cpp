@@ -62,6 +62,13 @@ int main(int argc, char **argv)
 	const IOperand *sum_total = *test5 + *test;
 	const IOperand *sum_total2 = *test + *test5;
 
+
+
+	// std::cout <<  "test type is " << test->getType() << std::endl;
+	std::cout <<  "sum_total value is " << sum_total->toString() << std::endl;
+	std::cout <<  "sum_total type is " << sum_total->getType() << std::endl;
+	std::cout <<  "sum_total2 value is " << sum_total2->toString() << std::endl;
+	std::cout <<  "sum_total2 type is " << sum_total2->getType() << std::endl;
 	// const IOperand *sum_test = test + test2;
 	// test = stack.createInt8("3242");
 	// std::cout <<  "test val is |" << test << "|" << std::endl;

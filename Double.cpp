@@ -1,5 +1,6 @@
 
 #include "Double.hpp" 
+#include "Operand_factory.hpp"
 
 Double::Double(double value)
 {
@@ -27,16 +28,55 @@ eOperandType Double::getType(void) const
 
 IOperand const *Double::operator+(IOperand const & rhs) const
 {
-	std::cout <<  "setting sum short value" << std::endl;
+	Operand_factory factory;
 	double first_val = std::stod(this->toString());
 	double sec_val = std::stod(rhs.toString());
-	return (new Double(first_val + sec_val));
+	std::string val_string = std::to_string(first_val + sec_val);
+
+	if (this->getPrecision() >= rhs.getPrecision())
+		return factory.createOperand(this->getType(), val_string);
+	else
+		return factory.createOperand(rhs.getType(), val_string);
 }
 
-IOperand const *Double::operator-(IOperand const & rhs) const{}
-IOperand const *Double::operator*(IOperand const & rhs) const{}
-IOperand const *Double::operator/(IOperand const & rhs) const{}
-IOperand const *Double::operator%(IOperand const & rhs) const{}
+IOperand const *Double::operator-(IOperand const & rhs) const
+{
+	Operand_factory factory;
+	double first_val = std::stod(this->toString());
+	double sec_val = std::stod(rhs.toString());
+	std::string val_string = std::to_string(first_val - sec_val);
+
+	if (this->getPrecision() >= rhs.getPrecision())
+		return factory.createOperand(this->getType(), val_string);
+	else
+		return factory.createOperand(rhs.getType(), val_string);
+}
+
+IOperand const *Double::operator*(IOperand const & rhs) const
+{
+	Operand_factory factory;
+	double first_val = std::stod(this->toString());
+	double sec_val = std::stod(rhs.toString());
+	std::string val_string = std::to_string(first_val * sec_val);
+
+	if (this->getPrecision() >= rhs.getPrecision())
+		return factory.createOperand(this->getType(), val_string);
+	else
+		return factory.createOperand(rhs.getType(), val_string);
+}
+
+//here set the exception when div is wih 0
+IOperand const *Double::operator/(IOperand const & rhs) const
+{
+	return NULL;
+}
+
+//here set the exception when mod is wih 0
+IOperand const *Double::operator%(IOperand const & rhs) const
+{
+	return NULL;
+}
+
 
 std::string const &Double::toString(void) const
 {

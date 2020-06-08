@@ -1,6 +1,10 @@
 
 #include "Operand_factory.hpp" 
-
+// #include "Int8.hpp"
+// #include "Int16.hpp"
+// #include "Int32.hpp"
+// #include "Float.hpp"
+// #include "Double.hpp"
 //THIS IS DONE
 Operand_factory::Operand_factory(/* args */)
 {
