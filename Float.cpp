@@ -2,7 +2,7 @@
 #include "Float.hpp" 
 #include "Operand_factory.hpp"
 
-Float::Float(float value)
+Float::Float(double value)
 {
 	//here set the overflow and underflow exceptions
 	this->float_val = value;

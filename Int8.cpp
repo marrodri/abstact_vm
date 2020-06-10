@@ -4,7 +4,7 @@
 #include "Int8.hpp" 
 #include "Operand_factory.hpp"
 
-Int8::Int8(char value)
+Int8::Int8(double value)
 {
 	// this->int8_val = value;
 	this->int8_val = (int)value;

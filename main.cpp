@@ -15,6 +15,7 @@ void option_checker(char **argv, int argc)
 
 // checkpoint for come back:
 // -set the mod and div operators with the exceptions to all operands
+// update the regex pattern in the instruction_parser function and error management for input
 // -set the error handling class
 
 // tasks:
@@ -44,9 +45,9 @@ int main(int argc, char **argv)
 	int						i = 1;
 
 
-	const IOperand *test = op_builder.createOperand(int8,"48");
-	const IOperand *test5 = op_builder.createOperand(int16,"48");
-	const IOperand *test6 = op_builder.createOperand(float_class,"48.544");
+	const IOperand *test = op_builder.createOperand(int32,"312312312348");
+	// const IOperand *test5 = op_builder.createOperand(int16,"48");
+	// const IOperand *test6 = op_builder.createOperand(float_class,"48.544");
 	// const IOperand *test2 = op_builder.createOperand(float_class,"3243");
 	// std::cout <<  "IOperand created with a val of |" << test->toString() << "|" << std::endl;
 	// std::cout <<  "IOperand created with a val of |" << test2->toString() << "|" << std::endl;

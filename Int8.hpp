@@ -12,7 +12,7 @@ private:
 	//create attribute members here
 public:
 	Int8();
-	Int8(char value);
+	Int8(double value);
  
 	// IOperand const * createInt8(std::string const & value) const;
 

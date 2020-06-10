@@ -111,8 +111,8 @@ std::vector<std::string> Lexer::instruction_parser(std::string instr_str)
 	// but change it to the upper one that its more complete,
 	//  than the current one, it's still buggy, it wo
 	//bug: wont accept instruction without spaces eg. 
-	// doesnt work	|dump| 
-	// it works 	|dump | 
+	// it works 	|dump| 
+	// but it works too	|dumpteswt| 
 	std::regex rgx_pat("(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?:\\s+)?)(.*)");
 	std::smatch instr_match;
 
@@ -177,7 +177,7 @@ t_double_vector_string Lexer::file_input_parser(char *filename)
 		//for lowercasing string
 		std::transform(newline_file.begin(),newline_file.end(), newline_file.begin(), ::tolower);
 		//trim any unecessary whitespace at the beginning and end of the string
-		trim_whitespace_string(newline_input);
+		trim_whitespace_string(newline_file);
 		file_str = new_line_concatonate(file_str, newline_file);
 	}
 	
@@ -200,13 +200,13 @@ t_double_vector_string Lexer::stdin_parser()
 	{
 		if (newline_input == ";;")
 			break;
-		std::cout <<  "line inputed: " << newline_input << std::endl;
+		// std::cout <<  "line inputed: " << newline_input << std::endl;
 		delete_comments(newline_input);
 		std::transform(newline_input.begin(), newline_input.end(), newline_input.begin(), ::tolower);
 
 		//trim any unecesary whitespace here
 		trim_whitespace_string(newline_input);
-		std::cout <<  "line after changes |" << newline_input << "|" << std::endl;
+		// std::cout <<  "line after changes |" << newline_input << "|" << std::endl;
 		full_stdin_string = new_line_concatonate(full_stdin_string, newline_input);
 	}
 

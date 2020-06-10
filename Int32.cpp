@@ -1,7 +1,7 @@
 
 #include "Int32.hpp" 
 #include "Operand_factory.hpp"
-Int32::Int32(int value)
+Int32::Int32(double value)
 {
 	this->int32_val = value;
 	this->instance = std::to_string(this->int32_val);

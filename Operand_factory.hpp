@@ -6,6 +6,7 @@
 #include "Int32.hpp"
 #include "Float.hpp"
 #include "Double.hpp"
+#include <limits.h>
 class Operand_factory
 {
 private:

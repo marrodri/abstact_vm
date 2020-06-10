@@ -10,7 +10,7 @@ private:
 	std::string instance;
 public:
 	Double();
-	Double(double val);
+	Double(long double val);
 	Double(Double const & src);
 	~Double();
 

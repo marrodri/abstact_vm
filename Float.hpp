@@ -9,7 +9,7 @@ private:
 	std::string instance;
 public:
 	Float();
-	Float(float value);
+	Float(double value);
 	Float(Float const & src);
 	~Float();
 

@@ -2,7 +2,7 @@
 #include "Double.hpp" 
 #include "Operand_factory.hpp"
 
-Double::Double(double value)
+Double::Double(long double value)
 {
 	this->double_val = value;
 	this->instance = std::to_string(this->double_val);

@@ -1,7 +1,9 @@
 
 #include "Int16.hpp" 
 #include "Operand_factory.hpp"
-Int16::Int16(short value)
+
+//short
+Int16::Int16(double value)
 {
 	this->int16_val = value;
 	this->instance = std::to_string(this->int16_val);

@@ -10,7 +10,7 @@ private:
 	std::string instance;
 public:
 	Int16();
-	Int16(short value);
+	Int16(double value);
 	Int16(Int16 const & src);
 	~Int16();
 

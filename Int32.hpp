@@ -9,7 +9,7 @@ private:
 	std::string instance;
 public:
 	Int32();
-	Int32(int value);
+	Int32(double value);
 	Int32(Int32 const & src);
 	~Int32();
 
