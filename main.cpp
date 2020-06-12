@@ -103,10 +103,20 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		instructions_list = compiler.stdin_parser();
-		for (int i = 0; i < instructions_list.size(); i++)
+		//here we can use try
+		while (virtual_machine.get_exit() == false)
 		{
-			virtual_machine.call_instructions(instructions_list[i]);
+
+			instructions_list = compiler.stdin_parser();
+			for (int i = 0; i < instructions_list.size(); i++)
+			{
+				virtual_machine.call_instructions(instructions_list[i]);
+			}
+			if (virtual_machine.get_exit() == false)
+				std::cout <<  "throw error because there's no exit here" << std::endl;
+			//then catch if an error is thrown!!
+
+			// and do an infinite loop, 
 		}
 	}
 	return (0);

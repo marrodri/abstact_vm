@@ -25,6 +25,7 @@ void Abstract_vm::instructionsTypes_map_init()
 	this->instructionTypes_map["div"] = div_val;
 	this->instructionTypes_map["mod"] = mod_val;
 	this->instructionTypes_map["print"] = print_val;
+	this->instructionTypes_map["exit"] = exit_val;
 }
 
 void	Abstract_vm::operandTypes_map_init()
@@ -95,7 +96,10 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 			break;
 		case print_val:
 			print();
-			break;		
+			break;
+		case exit_val:
+			exit();
+			break;	
 	}
 }
 
@@ -269,4 +273,14 @@ void Abstract_vm::print()
 	{
 		std::cout <<  "THROW ERROR HERE BECAUSE IS NOT INT8" << std::endl;
 	}
+}
+
+void Abstract_vm::exit()
+{
+	this->exit_bool = true;
+}
+
+bool Abstract_vm::get_exit()
+{
+	return (this->exit_bool);
 }

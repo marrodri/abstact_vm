@@ -10,7 +10,7 @@
 enum eInstructionValue	{ push_val, pop_val, 
 						dump_val, assert_val, add_val,
 						sub_val, mul_val, div_val, mod_val,
-						print_val };
+						print_val, exit_val };
 
 class Abstract_vm
 {
@@ -22,6 +22,7 @@ private:
 	std::stack<const IOperand*> vm_heap;
 	std::map<std::string, eOperandType> operandTypes_map;
 	std::map<std::string, eInstructionValue> instructionTypes_map;
+	bool exit_bool = false;
 
 public:
 	Abstract_vm();
@@ -41,12 +42,13 @@ public:
 	void div();
 	void mod();
 	void print();
+	void exit();
 	
 	void operandTypes_map_init();
 	void instructionsTypes_map_init();
 	//this function could be used to call the instructions methods that can be private;
 	void call_instructions(std::vector<std::string> instruction);
-
+	bool get_exit();
 	std::map<std::string, eInstructionValue> get_instr_map();
 	//exit(this one could be in another place)
 };
