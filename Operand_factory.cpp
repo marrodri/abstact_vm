@@ -39,7 +39,7 @@ IOperand const * Operand_factory::createInt32(std::string const & value) const
 	double val = std::stod(value);
 	if(val > INT_MAX)
 	{
-		throw std::invalid_argument("OVERFLOW of int32");
+		throw std::overflow_error("OVERFLOW of int32");
 	}
 	else if(val < INT_MIN)
 	{

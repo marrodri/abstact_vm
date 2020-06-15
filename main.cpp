@@ -1,7 +1,8 @@
 #include "IOperand.hpp"
 #include "Abstract_vm.hpp"
 #include "Lexer.hpp"
-
+#include "Op_exceptions.hpp"
+#include "Op_exceptions.hpp"
 
 void option_checker(char **argv, int argc)
 {
@@ -19,7 +20,7 @@ void option_checker(char **argv, int argc)
 // -set the error handling class
 
 // tasks:
-// -finish the assert, print, exit and all the operators instructions
+// -finish the assert, and the rest of operators overload (/ %) 
 //  implement the exception when the exit command is not founded after the ;; input;
 
 
@@ -45,7 +46,7 @@ int main(int argc, char **argv)
 	int						i = 1;
 
 
-	const IOperand *test = op_builder.createOperand(int32,"312312312348");
+	// const IOperand *test = op_builder.createOperand(int32,"312312312348");
 	// const IOperand *test5 = op_builder.createOperand(int16,"48");
 	// const IOperand *test6 = op_builder.createOperand(float_class,"48.544");
 	// const IOperand *test2 = op_builder.createOperand(float_class,"3243");
@@ -106,16 +107,23 @@ int main(int argc, char **argv)
 		//here we can use try
 		while (virtual_machine.get_exit() == false)
 		{
-
-			instructions_list = compiler.stdin_parser();
-			for (int i = 0; i < instructions_list.size(); i++)
+			try
 			{
-				virtual_machine.call_instructions(instructions_list[i]);
+				instructions_list = compiler.stdin_parser();
+				for (int i = 0; i < instructions_list.size(); i++)
+				{
+					virtual_machine.call_instructions(instructions_list[i]);
+				}
+				if (virtual_machine.get_exit() == false)
+				{
+					std::cout <<  "throw error because there's no exit here" << std::endl;
+				}
 			}
-			if (virtual_machine.get_exit() == false)
-				std::cout <<  "throw error because there's no exit here" << std::endl;
 			//then catch if an error is thrown!!
-
+			catch(std::exception &e)
+			{
+				std::cout <<  "CATCHING ERROR: " << e.what() << std::endl;
+			}
 			// and do an infinite loop, 
 		}
 	}
