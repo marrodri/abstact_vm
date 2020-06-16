@@ -37,18 +37,7 @@ IOperand const * Operand_factory::createInt16(std::string const & value) const
 IOperand const * Operand_factory::createInt32(std::string const & value) const
 {
 	double val = std::stod(value);
-	if(val > INT_MAX)
-	{
-		throw std::overflow_error("OVERFLOW of int32");
-	}
-	else if(val < INT_MIN)
-	{
-		throw std::invalid_argument("underflow of int32");
-	}
-	else
-	{
-		return (new Int32(val));
-	}
+	return (new Int32(val));
 }
 
 IOperand const * Operand_factory::createFloat(std::string const & value) const
@@ -59,7 +48,7 @@ IOperand const * Operand_factory::createFloat(std::string const & value) const
 
 IOperand const * Operand_factory::createDouble(std::string const & value) const
 {
-	double val = std::stod(value);
+	long double val = std::stold(value);
 	return (new Double(val));
 }
 

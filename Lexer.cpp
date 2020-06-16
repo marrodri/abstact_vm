@@ -94,6 +94,7 @@ std::vector<std::string> Lexer::value_parser(std::string value_str)
 	{
 		//if regex doesn't pass we could return an error
 		std::cout <<  "Value " << value_str << " Is not properly formatted or operand doesn't exist, throwing error" << std::endl;
+		throw std::invalid_argument();
 	}
 	return (parsed_val);
 }
@@ -130,13 +131,14 @@ std::vector<std::string> Lexer::instruction_parser(std::string instr_str)
 		//a way to check that a value is added and is not required!!
 		else if(0)
 		{
+			throw std::invalid_argument("This instruction doesn't need a value");
 			//if it's any other instruction and there's a value inputted, throw an error,
 		}
 		//if not continue as normal without adding the value to the vector
 	}
 	else
 	{
-		std::cout <<  "INstruction is not correctly inputed or instruction doesnt exist, throw error" << std::endl;
+		throw std::invalid_argument("Instruction inputed is not lexically correct");
 	}
 	return (new_instruction);
 }

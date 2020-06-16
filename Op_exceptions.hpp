@@ -22,5 +22,5 @@ public:
 	void div_by_zero();
 	void mod_by_zero();
 
-};
+} op_error;
 #endif

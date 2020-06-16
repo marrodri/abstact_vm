@@ -4,8 +4,19 @@
 
 Double::Double(long double value)
 {
-	this->double_val = value;
-	this->instance = std::to_string(this->double_val);
+	if (value > DBL_MAX)
+	{
+		throw std::overflow_error("OVERFLOW of double");
+	}
+	else if (value < DBL_MIN)
+	{
+		throw std::invalid_argument("underflow of double");
+	}
+	else
+	{
+		this->double_val = value;
+		this->instance = std::to_string(this->double_val);
+	}
 }
 
 Double::Double(Double const & src)

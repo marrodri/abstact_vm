@@ -23,5 +23,5 @@ public:
 
 	// -an assert instruction is not true
 	void wrong_assert();
-};
+} vm_error;
 #endif

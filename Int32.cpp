@@ -3,8 +3,19 @@
 #include "Operand_factory.hpp"
 Int32::Int32(double value)
 {
-	this->int32_val = value;
-	this->instance = std::to_string(this->int32_val);
+	if(value > INT_MAX)
+	{
+		throw std::overflow_error("OVERFLOW of int32");
+	}
+	else if(value < INT_MIN)
+	{
+		throw std::invalid_argument("underflow of int32");
+	}
+	else
+	{
+		this->int32_val = value;
+		this->instance = std::to_string(this->int32_val);
+	}
 }
 
 Int32::Int32(Int32 const & src)

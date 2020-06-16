@@ -7,9 +7,20 @@
 Int8::Int8(double value)
 {
 	// this->int8_val = value;
-	this->int8_val = (int)value;
-	int inst = value;
-	this->instance = std::to_string(inst);	
+
+	if(value > CHAR_MAX)
+	{
+		throw std::overflow_error("OVERFLOW of int8");
+	}
+	else if(value < CHAR_MIN)
+	{
+		throw std::invalid_argument("underflow of int8");
+	}
+	else
+	{
+		this->int8_val = (char)value;
+		this->instance = std::to_string((int)this->int8_val);	
+	}
 }
 
 void Int8::setValue(char value){}

@@ -2,7 +2,7 @@
 #define DOUBLE_HPP
 
 #include "IOperand.hpp"
-
+#include <float.h>
 class Double : public IOperand
 {
 private:

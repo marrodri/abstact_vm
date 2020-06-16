@@ -5,8 +5,19 @@
 Float::Float(double value)
 {
 	//here set the overflow and underflow exceptions
-	this->float_val = value;
-	this->instance = std::to_string(this->float_val);
+	if (value > FLT_MAX)
+	{
+		throw std::overflow_error("OVERFLOW of float");
+	}
+	else if (value < FLT_MIN)
+	{
+		throw std::invalid_argument("underflow of float");
+	}
+	else
+	{
+		this->float_val = value;
+		this->instance = std::to_string(this->float_val);
+	}
 
 }
 

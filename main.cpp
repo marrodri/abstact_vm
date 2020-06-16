@@ -3,7 +3,7 @@
 #include "Lexer.hpp"
 #include "Op_exceptions.hpp"
 #include "Op_exceptions.hpp"
-
+#include "VM_exceptions.hpp"
 void option_checker(char **argv, int argc)
 {
 	//todo
@@ -116,11 +116,11 @@ int main(int argc, char **argv)
 				}
 				if (virtual_machine.get_exit() == false)
 				{
-					std::cout <<  "throw error because there's no exit here" << std::endl;
+					throw std::invalid_argument("Exit instruction has not been found!");
 				}
 			}
 			//then catch if an error is thrown!!
-			catch(std::exception &e)
+			catch (std::exception &e)
 			{
 				std::cout <<  "CATCHING ERROR: " << e.what() << std::endl;
 			}

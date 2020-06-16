@@ -5,8 +5,19 @@
 //short
 Int16::Int16(double value)
 {
-	this->int16_val = value;
-	this->instance = std::to_string(this->int16_val);
+	if(value > SHRT_MAX)
+	{
+		throw std::overflow_error("OVERFLOW of int16");
+	}
+	else if(value < SHRT_MIN)
+	{
+		throw std::invalid_argument("underflow of int16");
+	}
+	else
+	{
+		this->int16_val = value;
+		this->instance = std::to_string(this->int16_val);
+	}
 }
 
 Int16::Int16(Int16 const & src)
