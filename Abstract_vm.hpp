@@ -24,13 +24,6 @@ private:
 	std::map<std::string, eInstructionValue> instructionTypes_map;
 	bool exit_bool = false;
 
-public:
-	Abstract_vm();
-	Abstract_vm(Abstract_vm const & src);
-	~Abstract_vm();
-	Operand_factory opFactory;
-
-
 	//abtract VM main instructions
 	void push_value(std::string op_value, std::string num_value);
 	void pop();
@@ -43,13 +36,17 @@ public:
 	void mod();
 	void print();
 	void exit();
-	
+
+public:
+	Abstract_vm();
+	Abstract_vm(Abstract_vm const & src);
+	~Abstract_vm();
+	Operand_factory opFactory;	
 	void operandTypes_map_init();
 	void instructionsTypes_map_init();
 	//this function could be used to call the instructions methods that can be private;
 	void call_instructions(std::vector<std::string> instruction);
 	bool get_exit();
 	std::map<std::string, eInstructionValue> get_instr_map();
-	//exit(this one could be in another place)
 };
 #endif

@@ -6,8 +6,6 @@
 class VM_exceptions : public std::exception
 {	
 public:
-	//TODO
-
 	// -lexical and/or syntatic errors
 	void lexical_error();
 	// -unknown instructions

@@ -93,8 +93,8 @@ std::vector<std::string> Lexer::value_parser(std::string value_str)
 	else
 	{
 		//if regex doesn't pass we could return an error
-		std::cout <<  "Value " << value_str << " Is not properly formatted or operand doesn't exist, throwing error" << std::endl;
-		throw std::invalid_argument();
+		// std::cout <<  "Value " << value_str << " Is not properly formatted or operand doesn't exist, throwing error" << std::endl;
+		throw std::invalid_argument("Type value doesn't exist, please input a type value that exists");
 	}
 	return (parsed_val);
 }
@@ -182,8 +182,7 @@ t_double_vector_string Lexer::file_input_parser(char *filename)
 		trim_whitespace_string(newline_file);
 		file_str = new_line_concatonate(file_str, newline_file);
 	}
-	
-	
+
 	// here the instruction is parsed, but the value is not parsed
 	// regex could be useful for checking if a instruction needs a value or not
 	//if wrongly inputed, throw a lexer/syntax error

@@ -2,8 +2,8 @@
 #include "Abstract_vm.hpp"
 #include "Lexer.hpp"
 #include "Op_exceptions.hpp"
-#include "Op_exceptions.hpp"
 #include "VM_exceptions.hpp"
+
 void option_checker(char **argv, int argc)
 {
 	//todo
