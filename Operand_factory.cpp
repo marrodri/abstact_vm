@@ -5,7 +5,8 @@
 // #include "Int32.hpp"
 // #include "Float.hpp"
 // #include "Double.hpp"
-//THIS IS DONE
+
+//try to make it witout its constructor's so we can use this class globally
 Operand_factory::Operand_factory(/* args */)
 {
 }
@@ -19,6 +20,7 @@ Operand_factory::~Operand_factory()
 }
 
 
+//THIS IS DONE
 IOperand const * Operand_factory::createInt8(std::string const & value) const
 {
 	// std::cout <<  "creating Int8 class" << std::endl;
