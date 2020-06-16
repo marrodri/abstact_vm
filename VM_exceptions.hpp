@@ -4,22 +4,14 @@
 #include <exception>
 
 class VM_exceptions : public std::exception
-{	
+{
+private:
+	std::string _msg;
 public:
-	// -lexical and/or syntatic errors
-	void lexical_error();
-	// -unknown instructions
-	void unknown_instruction();
-	// -pop on an empty stack
-	void empty_stack();
+	VM_exceptions(const std::string & msg);
+	VM_exceptions(VM_exceptions const & src);
+	~VM_exceptions();
 
-	// -when using arithmetic when the stack has less than 2 values
-	void not_enough_operands();
-
-	// -the program doesn't have an exit instruction
-	void no_exit();
-
-	// -an assert instruction is not true
-	void wrong_assert();
-} vm_error;
+	virtual const char *what() const noexcept override;
+};
 #endif

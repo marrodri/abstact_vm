@@ -1,9 +1,8 @@
 #include "IOperand.hpp"
 #include "Abstract_vm.hpp"
 #include "Lexer.hpp"
-#include "Op_exceptions.hpp"
 #include "VM_exceptions.hpp"
-
+#include "Op_exceptions.hpp"
 void option_checker(char **argv, int argc)
 {
 	//todo
@@ -36,12 +35,8 @@ void option_checker(char **argv, int argc)
 // here's where the program runs
 int main(int argc, char **argv)
 {
-	//this is the class that has the main instructions for any operations asked.
 	Abstract_vm				virtual_machine;
-	Operand_factory			op_builder;
 	t_double_vector_string	instructions_list;
-	//this is the parser, any proper input it will be parsed, 
-	//if not it will be thrown an error
 	Lexer					compiler;
 	int						i = 1;
 
@@ -104,7 +99,6 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		//here we can use try
 		while (virtual_machine.get_exit() == false)
 		{
 			try
@@ -120,11 +114,16 @@ int main(int argc, char **argv)
 				}
 			}
 			//then catch if an error is thrown!!
-			catch (std::exception &e)
+			catch (VM_exceptions &e)
 			{
-				std::cout <<  "CATCHING ERROR: " << e.what() << std::endl;
+				std::cout <<  "VM ERROR: " << e.what() << std::endl;
+				std::cout << e.what() << std::endl;
 			}
-			// and do an infinite loop, 
+			catch (Op_exceptions &e)
+			{
+				std::cout <<  "OPERAND VALUE ERROR: " << std::endl;
+				std::cout << e.what() << std::endl;
+			}
 		}
 	}
 	return (0);

@@ -1,18 +1,22 @@
 
 #include "Op_exceptions.hpp" 
 
-// Op_exceptions::Op_exceptions(/* args */)
-// {
-// }
+Op_exceptions::Op_exceptions(const std::string & msg)
+{
+	this->_msg = msg;
+}
 
-// Op_exceptions::Op_exceptions(Op_exceptions const & src)
-// {
-// }
-
-// Op_exceptions::~Op_exceptions()
-// {
-// }
-
-Op_exceptions & Op_exceptions::operator=(Op_exceptions const & rhs)
+Op_exceptions::Op_exceptions(Op_exceptions const & src)
 {
 }
+
+Op_exceptions::~Op_exceptions()
+{
+}
+
+const char *Op_exceptions::what() const 
+{
+	return this->_msg.c_str();
+}
+
+

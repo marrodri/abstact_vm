@@ -5,11 +5,13 @@
 
 class Op_exceptions : public std::exception
 {	
+private:
+	std::string _msg;
 public:
-	void overflow();
-	void underflow();
-	void div_by_zero();
-	void mod_by_zero();
+	Op_exceptions(const std::string & msg);
+	Op_exceptions(Op_exceptions const & src);
+	~Op_exceptions();
 
-} op_error;
+	virtual const char *what() const noexcept override;
+};
 #endif

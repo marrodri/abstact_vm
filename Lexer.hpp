@@ -3,6 +3,7 @@
 #define LEXER_HPP
 
 #include "Abstract_vm.hpp"
+#include "VM_exceptions.hpp"
 #include <vector>
 #include <fstream>
 #include <sstream>

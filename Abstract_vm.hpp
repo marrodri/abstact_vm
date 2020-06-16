@@ -1,6 +1,7 @@
 #ifndef ABSTRACT_VM_HPP
 #define ABSTRACT_VM_HPP
 #include "Operand_factory.hpp"
+#include "VM_exceptions.hpp"
 #include <regex>
 #include <stack>
 #include <map>
