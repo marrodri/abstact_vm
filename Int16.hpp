@@ -1,7 +1,7 @@
 #ifndef INT16_HPP
 #define INT16_HPP
-
 #include "IOperand.hpp"
+#include "Op_exceptions.hpp"
 
 class Int16 : public IOperand
 {

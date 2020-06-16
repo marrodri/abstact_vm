@@ -1,8 +1,9 @@
 #ifndef DOUBLE_HPP
 #define DOUBLE_HPP
-
+#include "Op_exceptions.hpp"
 #include "IOperand.hpp"
 #include <float.h>
+
 class Double : public IOperand
 {
 private:

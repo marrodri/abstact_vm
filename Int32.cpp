@@ -5,11 +5,11 @@ Int32::Int32(double value)
 {
 	if(value > INT_MAX)
 	{
-		throw std::overflow_error("OVERFLOW of int32");
+		throw Op_exceptions("overflow with the int32 operand");
 	}
 	else if(value < INT_MIN)
 	{
-		throw std::invalid_argument("underflow of int32");
+		throw Op_exceptions("underflow with the int32 operand");
 	}
 	else
 	{
@@ -45,14 +45,9 @@ IOperand const *Int32::operator+(IOperand const & rhs) const
 	std::string val_string = std::to_string(first_val + sec_val);
 
 	if(this->getPrecision() >= rhs.getPrecision())
-	{
-
 		return factory.createOperand(this->getType(), val_string);
-	}
 	else
-	{
 		return factory.createOperand(rhs.getType(), val_string);
-	}
 }
 
 IOperand const *Int32::operator-(IOperand const & rhs) const

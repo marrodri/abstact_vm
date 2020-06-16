@@ -2,6 +2,7 @@
 #define INT8_HPP
 
 #include "IOperand.hpp"
+#include "Op_exceptions.hpp"
 #include <string>
 #include <iostream>
 class Int8 : public IOperand

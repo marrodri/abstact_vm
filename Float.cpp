@@ -4,21 +4,19 @@
 
 Float::Float(double value)
 {
-	//here set the overflow and underflow exceptions
 	if (value > FLT_MAX)
 	{
-		throw std::overflow_error("OVERFLOW of float");
+		throw Op_exceptions("overflow with the float operand");
 	}
 	else if (value < FLT_MIN)
 	{
-		throw std::invalid_argument("underflow of float");
+		throw Op_exceptions("underflow with the float operand");
 	}
 	else
 	{
 		this->float_val = value;
 		this->instance = std::to_string(this->float_val);
 	}
-
 }
 
 Float::Float(Float const & src)

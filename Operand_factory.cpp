@@ -1,10 +1,5 @@
 
 #include "Operand_factory.hpp" 
-// #include "Int8.hpp"
-// #include "Int16.hpp"
-// #include "Int32.hpp"
-// #include "Float.hpp"
-// #include "Double.hpp"
 
 //try to make it witout its constructor's so we can use this class globally
 Operand_factory::Operand_factory(/* args */)
@@ -19,20 +14,15 @@ Operand_factory::~Operand_factory()
 {
 }
 
-
-//THIS IS DONE
 IOperand const * Operand_factory::createInt8(std::string const & value) const
 {
-	// std::cout <<  "creating Int8 class" << std::endl;
-	int int_conv = std::stoi(value);
-	// std::cout <<  "val is: " << int_conv << std::endl;
-	char val = (char)int_conv;
+	double val = std::stod(value);
 	return (new Int8(val));
 }
 
 IOperand const * Operand_factory::createInt16(std::string const & value) const
 {
-	short val = std::stoi(value);
+	double val = std::stod(value);
 	return (new Int16(val));
 }
 
@@ -44,7 +34,7 @@ IOperand const * Operand_factory::createInt32(std::string const & value) const
 
 IOperand const * Operand_factory::createFloat(std::string const & value) const
 {
-	float val = std::stod(value);
+	long double val = std::stold(value);
 	return (new Float(val));
 }
 

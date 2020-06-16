@@ -2,7 +2,8 @@
 NAME = abstract_vm
 
 SRC = main.cpp Double.cpp Float.cpp Int8.cpp Int16.cpp\
-		Int32.cpp Abstract_vm.cpp Operand_factory.cpp Lexer.cpp
+		Int32.cpp Abstract_vm.cpp Operand_factory.cpp Lexer.cpp\
+		Op_exceptions.cpp VM_exceptions.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

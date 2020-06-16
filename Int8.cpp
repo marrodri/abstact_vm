@@ -6,15 +6,13 @@
 
 Int8::Int8(double value)
 {
-	// this->int8_val = value;
-
 	if(value > CHAR_MAX)
 	{
-		throw std::overflow_error("OVERFLOW of int8");
+		throw Op_exceptions("overflow with the int8 operand");
 	}
 	else if(value < CHAR_MIN)
 	{
-		throw std::invalid_argument("underflow of int8");
+		throw Op_exceptions("underflow with the int8 operand");
 	}
 	else
 	{

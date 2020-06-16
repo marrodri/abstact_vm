@@ -14,7 +14,7 @@ Op_exceptions::~Op_exceptions()
 {
 }
 
-const char *Op_exceptions::what() const 
+const char *Op_exceptions::what() const noexcept
 {
 	return this->_msg.c_str();
 }

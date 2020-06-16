@@ -1,5 +1,6 @@
 #ifndef INT32_HPP
 #define INT32_HPP
+#include "Op_exceptions.hpp"
 #include "IOperand.hpp"
 
 class Int32 : public IOperand

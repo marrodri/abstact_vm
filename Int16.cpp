@@ -2,16 +2,15 @@
 #include "Int16.hpp" 
 #include "Operand_factory.hpp"
 
-//short
 Int16::Int16(double value)
 {
 	if(value > SHRT_MAX)
 	{
-		throw std::overflow_error("OVERFLOW of int16");
+		throw Op_exceptions("overflow with the int16 operand");
 	}
 	else if(value < SHRT_MIN)
 	{
-		throw std::invalid_argument("underflow of int16");
+		throw Op_exceptions("underflow with the int16 operand");
 	}
 	else
 	{

@@ -1,8 +1,9 @@
 #ifndef FLOAT_HPP
 #define FLOAT_HPP
-
 #include "IOperand.hpp"
+#include "Op_exceptions.hpp"
 #include <float.h>
+
 class Float : public IOperand
 {
 private:

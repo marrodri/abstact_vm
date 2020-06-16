@@ -3,14 +3,14 @@
 #include "Operand_factory.hpp"
 
 Double::Double(long double value)
-{
+{	
 	if (value > DBL_MAX)
 	{
-		throw std::overflow_error("OVERFLOW of double");
+		throw Op_exceptions("overflow with the double operand");
 	}
 	else if (value < DBL_MIN)
 	{
-		throw std::invalid_argument("underflow of double");
+		throw Op_exceptions("underflow with the double operand");
 	}
 	else
 	{
