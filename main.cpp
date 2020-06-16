@@ -110,7 +110,7 @@ int main(int argc, char **argv)
 				}
 				if (virtual_machine.get_exit() == false)
 				{
-					throw std::invalid_argument("Exit instruction has not been found!");
+					throw VM_exceptions("Exit instruction has not been found.");
 				}
 			}
 			//then catch if an error is thrown!!
@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 			}
 			catch (Op_exceptions &e)
 			{
-				std::cout <<  "OPERAND VALUE ERROR: " << std::endl;
+				std::cout <<  "OPERAND ERROR: " << std::endl;
 				std::cout << e.what() << std::endl;
 			}
 		}

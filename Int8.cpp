@@ -1,6 +1,4 @@
 
-
-
 #include "Int8.hpp" 
 #include "Operand_factory.hpp"
 
@@ -81,7 +79,6 @@ IOperand const *Int8::operator%(IOperand const & rhs) const
 {
 	return NULL;
 }
-
 
 std::string const &Int8::toString(void) const 
 {

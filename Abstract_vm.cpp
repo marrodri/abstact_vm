@@ -19,7 +19,7 @@ void Abstract_vm::instructionsTypes_map_init()
 	this->instructionTypes_map["pop"] = pop_val;
 	this->instructionTypes_map["dump"] = dump_val;
 	this->instructionTypes_map["assert"] = assert_val;
-	this->instructionTypes_map["add"] = add_val; //weirdly, if it's "add\n", when searching add, it sets the push val
+	this->instructionTypes_map["add"] = add_val;
 	this->instructionTypes_map["sub"] = sub_val;
 	this->instructionTypes_map["mul"] = mul_val;
 	this->instructionTypes_map["div"] = div_val;
@@ -44,13 +44,6 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 	std::string op_value = "";
 	std::string num_value = "";
 
-	// std::cout <<  "INSIDE call_instructions,instructions are:" << std::endl;
-	// for (int j = 0; j < instruction.size(); j++)
-	// {
-	// 	std::cout <<  "INSTRUCTION: |" << instruction[j]<< "|"  << std::endl;
-	// 	// std::cout <<  "VALUE: |" << instructions_list[j][1] << "|"  << std::endl;
-	// }
-	// std::transform(instruction[0].begin(), instruction[0].end(), instruction[0].begin(), ::tolower);
 	first_instr = instruction[0];
 	if (instruction.size() > 1)
 	{
@@ -59,11 +52,11 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 
 	}
 	// std::cout <<  "instruction setted: " << first_instr << std::endl;
-	std::cout <<  "==calling instruction==" << std::endl;
-	std::cout <<  "instr: |" << first_instr << "|" << std::endl;
-	std::cout <<  "op: |" << op_value << "|" << std::endl;
-	std::cout <<  "val: |" << num_value << "|" << std::endl;
-	std::cout <<  "====================" << std::endl;
+	// std::cout <<  "==calling instruction==" << std::endl;
+	// std::cout <<  "instr: |" << first_instr << "|" << std::endl;
+	// std::cout <<  "op: |" << op_value << "|" << std::endl;
+	// std::cout <<  "val: |" << num_value << "|" << std::endl;
+	// std::cout <<  "====================" << std::endl;
 	// instructionsTypes_map_init(instructionTypes_map);
 	switch (instructionTypes_map[first_instr])
 	{
@@ -103,7 +96,6 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 	}
 }
 
-//done
 void Abstract_vm::push_value(std::string op_value, std::string num_value)
 {
 	eOperandType op_type = operandTypes_map[op_value];
@@ -112,58 +104,54 @@ void Abstract_vm::push_value(std::string op_value, std::string num_value)
 	this->vm_heap.push(new_operand);
 }
 
-//done
 void Abstract_vm::pop()
 {
 	if (!vm_heap.empty())
 		vm_heap.pop();
 	else
 	{
-		std::cout <<  "stack is empty, cannot pop anymore, ERROR" << std::endl;
+		throw VM_exceptions("stack is empty, cannot pop anymore");
 	}
 }
 
-//done
 void Abstract_vm::dump()
 {
-	std::cout <<  "DUMPING THE WHOLE STACK TO THE OUTPUT TERMINAL" << std::endl;
-	std::stack<const IOperand*> copy_stack = vm_heap;
-	const IOperand *top_val = copy_stack.top();
-	
-	while (copy_stack.size() > 0)
+	if(vm_heap.empty())
 	{
-		top_val =  copy_stack.top();
-		std::cout <<  top_val->toString() << std::endl; 
-		copy_stack.pop();
+		throw VM_exceptions("stack is empty, cannot dump to the terminal");
+	}
+	else
+	{
+		std::stack<const IOperand*> copy_stack = vm_heap;
+		const IOperand *top_val = copy_stack.top();
+		while (copy_stack.size() > 0)
+		{
+			top_val =  copy_stack.top();
+			std::cout <<  top_val->toString() << std::endl; 
+			copy_stack.pop();
+		}
 	}
 }
 
-
+//not finished!!
 void Abstract_vm::assert(std::string op_value, std::string num_value)
 {
 	std::cout <<  "ASSERTING tHE TOP VALUE" << std::endl;
 	if(vm_heap.size() > 0)
 	{
-
 		const IOperand *top_val = vm_heap.top();
 	}
 	else
 	{
-		std::cout <<  "stack is empty, cannot assert error" << std::endl;
-	}
-	
-	//asserting the 
+		throw VM_exceptions("stack is empty, can't assert");
+	}	
 }
 
-//add
-//it still buggy, it needs to change 
 void Abstract_vm::add()
 {
 	const IOperand *first_val;
 	const IOperand *second_val;
 	
-	//MAKE THE ADDITION FOR BOTH CLASSES
-	//change this if to try
 	if (vm_heap.size() >= 2)
 	{
 		first_val = vm_heap.top();
@@ -174,7 +162,7 @@ void Abstract_vm::add()
 	}
 	else
 	{
-		std::cout <<  "stack has less than 2 values, throw error" << std::endl;
+		throw VM_exceptions("stack has less than 2 values, can't add");
 	}
 }
 
@@ -193,7 +181,7 @@ void Abstract_vm::sub()
 	}
 	else
 	{
-		std::cout <<  "stack has less than 2 values, throw error" << std::endl;
+		throw VM_exceptions("stack has less than 2 values, can't sub");
 	}
 }
 
@@ -212,11 +200,11 @@ void Abstract_vm::mul()
 	}
 	else
 	{
-		std::cout <<  "stack has less than 2 values, throw error" << std::endl;
+		throw VM_exceptions("stack has less than 2 values, can't mul");
 	}
 }
 
-//there's an edge case to check with division
+//there's an edge case to check with division, UNFINISHED
 void Abstract_vm::div()
 {
 	const IOperand *first_val;
@@ -232,11 +220,11 @@ void Abstract_vm::div()
 	}
 	else
 	{
-		std::cout <<  "stack has less than 2 values, throw error" << std::endl;
+		throw VM_exceptions("stack has less than 2 values, can't div");
 	}
 }
 
-//there's an edge case to check for mod too
+//there's an edge case to check for mod too, UNFINISHED
 void Abstract_vm::mod()
 {
 	const IOperand *first_val;
@@ -252,7 +240,7 @@ void Abstract_vm::mod()
 	}
 	else
 	{
-		std::cout <<  "stack has less than 2 values, throw error" << std::endl;
+		throw VM_exceptions("stack has less than 2 values, can't mod");
 	}
 }
 
@@ -262,16 +250,18 @@ void Abstract_vm::print()
 	char char_value = '\0';
 	int dec_code = 0;
 
-	if (top_val->getType() == int8)
+	if(vm_heap.empty())
 	{
-		// std::stoi();
-		std::cout <<  "the val is int8, printing val in ASCII" << std::endl;
-		char_value = std::stoi(top_val->toString());
-		std::cout <<  char_value << std::endl;
+		throw VM_exceptions("stack is empty, cannot get the top value");
+	}
+	else if(top_val->getType() != int8)
+	{
+		throw VM_exceptions("top stack value is not an int8 type, cannot print to ASCII character");
 	}
 	else
 	{
-		std::cout <<  "THROW ERROR HERE BECAUSE IS NOT INT8" << std::endl;
+		char_value = std::stoi(top_val->toString());
+		std::cout <<  char_value << std::endl;
 	}
 }
 
