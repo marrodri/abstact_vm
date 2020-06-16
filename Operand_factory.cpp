@@ -1,7 +1,6 @@
 
 #include "Operand_factory.hpp" 
 
-//try to make it witout its constructor's so we can use this class globally
 Operand_factory::Operand_factory(/* args */)
 {
 }

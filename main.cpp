@@ -16,11 +16,9 @@ void option_checker(char **argv, int argc)
 // checkpoint for come back:
 // -set the mod and div operators with the exceptions to all operands
 // update the regex pattern in the instruction_parser function and error management for input
-// -set the error handling class
 
 // tasks:
-// -finish the assert, and the rest of operators overload (/ %) 
-//  implement the exception when the exit command is not founded after the ;; input;
+// -finish the rest of operators overload (/ %) 
 
 
 // FOR LAST AND IMPORTANT
@@ -39,7 +37,6 @@ int main(int argc, char **argv)
 	t_double_vector_string	instructions_list;
 	Lexer					compiler;
 	int						i = 1;
-
 
 	// const IOperand *test = op_builder.createOperand(int32,"312312312348");
 	// const IOperand *test5 = op_builder.createOperand(int16,"48");
@@ -113,16 +110,13 @@ int main(int argc, char **argv)
 					throw VM_exceptions("Exit instruction has not been found.");
 				}
 			}
-			//then catch if an error is thrown!!
 			catch (VM_exceptions &e)
 			{
 				std::cout <<  "VM ERROR: " << e.what() << std::endl;
-				std::cout << e.what() << std::endl;
 			}
 			catch (Op_exceptions &e)
 			{
-				std::cout <<  "OPERAND ERROR: " << std::endl;
-				std::cout << e.what() << std::endl;
+				std::cout <<  "OPERAND ERROR: " << e.what() << std::endl;
 			}
 		}
 	}

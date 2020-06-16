@@ -7,6 +7,7 @@
 #include "Float.hpp"
 #include "Double.hpp"
 #include <limits.h>
+#include <cmath>
 class Operand_factory
 {
 private:

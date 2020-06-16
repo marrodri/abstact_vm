@@ -30,7 +30,6 @@ void Abstract_vm::instructionsTypes_map_init()
 
 void	Abstract_vm::operandTypes_map_init()
 {
-	// this->operandTypes_map
 	this->operandTypes_map["int8"] = int8;
 	this->operandTypes_map["int16"] = int16;
 	this->operandTypes_map["int32"] = int32;
@@ -57,7 +56,6 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 	// std::cout <<  "op: |" << op_value << "|" << std::endl;
 	// std::cout <<  "val: |" << num_value << "|" << std::endl;
 	// std::cout <<  "====================" << std::endl;
-	// instructionsTypes_map_init(instructionTypes_map);
 	switch (instructionTypes_map[first_instr])
 	{
 		case push_val:
@@ -133,13 +131,21 @@ void Abstract_vm::dump()
 	}
 }
 
-//not finished!!
+//seems to work, need to test more!!
 void Abstract_vm::assert(std::string op_value, std::string num_value)
 {
-	std::cout <<  "ASSERTING tHE TOP VALUE" << std::endl;
-	if(vm_heap.size() > 0)
+	if (vm_heap.size() > 0)
 	{
 		const IOperand *top_val = vm_heap.top();
+		eOperandType op_type = operandTypes_map[op_value];
+		if ((top_val->getType() == op_type) && (top_val->toString() == num_value)) 
+		{
+			;
+		}
+		else
+		{
+			throw VM_exceptions("Asserted value is incorrect");
+		}
 	}
 	else
 	{
@@ -204,7 +210,7 @@ void Abstract_vm::mul()
 	}
 }
 
-//there's an edge case to check with division, UNFINISHED
+//edge case div added, TEST!!
 void Abstract_vm::div()
 {
 	const IOperand *first_val;
@@ -224,7 +230,7 @@ void Abstract_vm::div()
 	}
 }
 
-//there's an edge case to check for mod too, UNFINISHED
+//edge case mod added, TEST!!
 void Abstract_vm::mod()
 {
 	const IOperand *first_val;

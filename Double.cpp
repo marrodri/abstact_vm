@@ -79,13 +79,36 @@ IOperand const *Double::operator*(IOperand const & rhs) const
 //here set the exception when div is wih 0
 IOperand const *Double::operator/(IOperand const & rhs) const
 {
-	return NULL;
+	Operand_factory factory;
+	double first_val = std::stod(this->toString());
+	double sec_val = std::stod(rhs.toString());
+	std::string val_string = "";
+
+	if(first_val == 0 || sec_val == 0)
+		throw Op_exceptions("There is a division 0, cannot continue with the operation");
+	val_string = std::to_string(first_val / sec_val);
+	if (this->getPrecision() >= rhs.getPrecision())
+		return factory.createOperand(this->getType(), val_string);
+	else
+		return factory.createOperand(rhs.getType(), val_string);
 }
 
 //here set the exception when mod is wih 0
 IOperand const *Double::operator%(IOperand const & rhs) const
 {
-	return NULL;
+	Operand_factory factory;
+	double first_val = std::stod(this->toString());
+	double sec_val = std::stod(rhs.toString());
+	double remainder = 0;
+	std::string val_string = "";
+
+	if(first_val == 0 || sec_val == 0)
+		throw Op_exceptions("There is a modulo by 0, cannot continue with the operation");
+	val_string = std::to_string(std::fmod(first_val, sec_val));
+	if (this->getPrecision() >= rhs.getPrecision())
+		return factory.createOperand(this->getType(), val_string);
+	else
+		return factory.createOperand(rhs.getType(), val_string);
 }
 
 
