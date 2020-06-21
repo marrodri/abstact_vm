@@ -15,7 +15,6 @@ Lexer::~Lexer()
 
 void print_vector(t_double_vector_string instructions_list)
 {
-	//print  instructions and values
 	std::cout <<  "========printing double vector========" << std::endl;
 	for(int i = 0; i < instructions_list.size(); i++)
 	{
@@ -27,7 +26,6 @@ void print_vector(t_double_vector_string instructions_list)
 		}
 	}
 	std::cout <<  "=========================================" << std::endl;
-
 }
 
 void Lexer::delete_comments(std::string &line)
@@ -72,7 +70,7 @@ std::string Lexer::new_line_concatonate(std::string curr_str, std::string conca_
 	return (curr_str);
 }
 
-std::vector<std::string> Lexer::value_parser(std::string value_str)
+std::vector<std::string> Lexer::value_lexer(std::string value_str)
 {
 
 	// if it matches parse the value, if wrong throw a parsing error
@@ -98,7 +96,7 @@ std::vector<std::string> Lexer::value_parser(std::string value_str)
 	return (parsed_val);
 }
 
-std::vector<std::string> Lexer::instruction_parser(std::string instr_str)
+std::vector<std::string> Lexer::instruction_lexer(std::string instr_str)
 {
 	std::vector<std::string> new_instruction;
 	std::vector<std::string> new_value;
@@ -124,7 +122,7 @@ std::vector<std::string> Lexer::instruction_parser(std::string instr_str)
 		{
 				//if the instruction is push or assert
 				//check if there is a second group for parsing, if not throw an error in the parser
-				new_value = value_parser(instr_match.str(3));
+				new_value = value_lexer(instr_match.str(3));
 				new_instruction.insert(new_instruction.end(), new_value.begin(), new_value.end());
 		}
 		//a way to check that a value is added and is not required!!
@@ -156,7 +154,7 @@ t_double_vector_string Lexer::set_instr_vector(std::string input)
 		if (instruction_line != "")
 		{
 			new_double_vector_instr.push_back(std::vector<std::string>());
-			new_instr = instruction_parser(instruction_line);
+			new_instr = instruction_lexer(instruction_line);
 			new_double_vector_instr[i] = new_instr;
 			i++;
 		}
@@ -165,7 +163,7 @@ t_double_vector_string Lexer::set_instr_vector(std::string input)
 }
 
 // file_input_parser
-t_double_vector_string Lexer::file_input_parser(char *filename)
+t_double_vector_string Lexer::get_file_input(char *filename)
 {
 	std::ifstream							infile;
 	std::string								newline_file = "\0";
@@ -190,7 +188,7 @@ t_double_vector_string Lexer::file_input_parser(char *filename)
 }
 
 //stdin_parser
-t_double_vector_string Lexer::stdin_parser()
+t_double_vector_string Lexer::get_stdin()
 {
 	std::string				newline_input = "\0";
 	std::string				full_stdin_string = "\0";

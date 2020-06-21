@@ -14,8 +14,9 @@ void option_checker(char **argv, int argc)
 }
 
 // checkpoint for come back:
-// -test mod and div operators with the exceptions 
+// -test mod and div operators with the exceptions (almost done)
 // update the regex pattern in the instruction_parser function and error management for input
+// error management if a file can't be readed
 
 // FOR LAST AND IMPORTANT
 // -check that each instruction and value exist, if not return an error(it doesn't display the error yet)
@@ -56,21 +57,21 @@ int main(int argc, char **argv)
 		// 	{
 		// 		argc--;
 		// 	}
-			instructions_list = compiler.file_input_parser(argv[i]);
+			instructions_list = compiler.get_file_input(argv[i]);
 			for (int i = 0; i < instructions_list.size(); i++)
 			{
 				virtual_machine.call_instructions(instructions_list[i]);
 			}
 			i++;
-		}	
+		}
 	}
 	else
 	{
-		while (virtual_machine.get_exit() == false)
-		{
+		// while (virtual_machine.get_exit() == false)
+		// {
 			try
 			{
-				instructions_list = compiler.stdin_parser();
+				instructions_list = compiler.get_stdin();
 				for (int i = 0; i < instructions_list.size(); i++)
 				{
 					virtual_machine.call_instructions(instructions_list[i]);
@@ -88,7 +89,7 @@ int main(int argc, char **argv)
 			{
 				std::cout <<  "OPERAND ERROR: " << e.what() << std::endl;
 			}
-		}
+		// }
 	}
 	return (0);
 }

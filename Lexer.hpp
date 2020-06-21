@@ -20,14 +20,13 @@ public:
 	Lexer(Lexer const & src);
 	~Lexer();
 
-	// Lexer & operator=(Lexer const & rhs);
-	std::vector<std::string> value_parser(std::string value);
+	std::vector<std::string> value_lexer(std::string value);
 	//empty needed to check every instruction allowed
-	std::vector<std::string> instruction_parser(std::string instruction);
+	std::vector<std::string> instruction_lexer(std::string instruction);
 
 	
-	t_double_vector_string file_input_parser(char *filename);
-	t_double_vector_string stdin_parser();
+	t_double_vector_string get_file_input(char *filename);
+	t_double_vector_string get_stdin();
 	
 	t_double_vector_string set_instr_vector(std::string input);
 	void delete_comments(std::string &line);
