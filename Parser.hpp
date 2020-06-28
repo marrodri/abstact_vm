@@ -14,7 +14,7 @@ private:
 		double				num_value;
 		struct instr_list	*next;
 	};
-
+	std::vector<std::string> instr;
 public:
 	Parser();
 	Parser(Parser const & src);
@@ -23,11 +23,12 @@ public:
 	Parser & operator=(Parser const & rhs);
 
 
-	void read_instr();
-	void execute_instr();
-	std::string get_next_token();
-	void instruction_check();	
-	void value_check();	
+	std::string parse_instr(std::string instr_str);
+	std::vector<std::string> parse_val(std::string value_str);
+	// void execute_instr();
+	// std::string get_next_token();
+	// void instruction_check();	
+	// void value_check();	
 
 	//get function
 	//set function

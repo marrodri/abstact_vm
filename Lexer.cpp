@@ -13,20 +13,20 @@ Lexer::~Lexer()
 {
 }
 
-void print_vector(t_double_vector_string instructions_list)
-{
-	std::cout <<  "========printing double vector========" << std::endl;
-	for(int i = 0; i < instructions_list.size(); i++)
-	{
-		std::cout <<  "instruction: " << instructions_list[i][0] << std::endl;
-		if (instructions_list[i].size() > 1)
-		{
-			std::cout <<  "op: " << instructions_list[i][1] << std::endl;
-			std::cout <<  "value: " << instructions_list[i][2] << std::endl;
-		}
-	}
-	std::cout <<  "=========================================" << std::endl;
-}
+// void print_vector(t_double_vector_string instructions_list)
+// {
+// 	std::cout <<  "========printing double vector========" << std::endl;
+// 	for(int i = 0; i < instructions_list.size(); i++)
+// 	{
+// 		std::cout <<  "instruction: " << instructions_list[i][0] << std::endl;
+// 		if (instructions_list[i].size() > 1)
+// 		{
+// 			std::cout <<  "op: " << instructions_list[i][1] << std::endl;
+// 			std::cout <<  "value: " << instructions_list[i][2] << std::endl;
+// 		}
+// 	}
+// 	std::cout <<  "=========================================" << std::endl;
+// }
 
 void Lexer::delete_comments(std::string &line)
 {
@@ -58,17 +58,17 @@ void Lexer::trim_whitespace_string(std::string &line)
 	line = line.substr(first_pos, range);	
 }
 
-std::string Lexer::new_line_concatonate(std::string curr_str, std::string conca_str)
-{
-	if (curr_str == "\0")
-		curr_str = conca_str;
-	else
-	{			
-		curr_str += "\n";
-		curr_str += conca_str;
-	}
-	return (curr_str);
-}
+// std::string Lexer::new_line_concatonate(std::string curr_str, std::string conca_str)
+// {
+// 	if (curr_str == "\0")
+// 		curr_str = conca_str;
+// 	else
+// 	{			
+// 		curr_str += "\n";
+// 		curr_str += conca_str;
+// 	}
+// 	return (curr_str);
+// }
 
 std::vector<std::string> Lexer::value_lexer(std::string value_str)
 {
@@ -163,13 +163,15 @@ t_double_vector_string Lexer::set_instr_vector(std::string input)
 }
 
 // file_input_parser
-t_double_vector_string Lexer::get_file_input(char *filename)
+//for lexer get 1 or 2 commands per line; if 3 or more, throw an error that is syntax
+//is incorrect
+std::vector<std::string> Lexer::get_file_input(char *filename)
 {
 	std::ifstream							infile;
 	std::string								newline_file = "\0";
 	std::string								file_str = "\0";
 	t_double_vector_string					instructions_list;
-
+	std::vector<std::string>				new_instr_list;
 	infile.open(filename);
 	while (std::getline(infile, newline_file))
 	{
@@ -177,22 +179,25 @@ t_double_vector_string Lexer::get_file_input(char *filename)
 		std::transform(newline_file.begin(),newline_file.end(), newline_file.begin(), ::tolower);
 		//trim any unecessary whitespace at the beginning and end of the string
 		trim_whitespace_string(newline_file);
-		file_str = new_line_concatonate(file_str, newline_file);
+		// file_str = new_line_concatonate(file_str, newline_file);
 	}
 
 	// here the instruction is parsed, but the value is not parsed
 	// regex could be useful for checking if a instruction needs a value or not
 	//if wrongly inputed, throw a lexer/syntax error
-	instructions_list = set_instr_vector(file_str);
-	return (instructions_list);
+	// instructions_list = set_instr_vector(file_str);
+	return (new_instr_list);
 }
 
 //stdin_parser
-t_double_vector_string Lexer::get_stdin()
+//for lexer get 1 or 2 commands per line; if 3 or more, throw an error that is syntax
+//is incorrect
+std::vector<std::string> Lexer::get_stdin()
 {
 	std::string				newline_input = "\0";
 	std::string				full_stdin_string = "\0";
 	t_double_vector_string	instructions_list;
+	std::vector<std::string>				new_instr_list;
 
 	while (std::getline(std::cin, newline_input))
 	{
@@ -211,7 +216,7 @@ t_double_vector_string Lexer::get_stdin()
 	// here the instruction is parsed, but the value is not parsed
 	// regex could be useful for checking if a instruction needs a value or not
 	//if wrongly inputed, throw a lexer/syntax error
-	instructions_list = set_instr_vector(full_stdin_string);
+	// instructions_list = set_instr_vector(full_stdin_string);
 	// print_vector(instructions_list);
-	return (instructions_list);
+	return (new_instr_list);
 }

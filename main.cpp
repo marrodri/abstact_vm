@@ -3,15 +3,6 @@
 #include "Lexer.hpp"
 #include "VM_exceptions.hpp"
 #include "Op_exceptions.hpp"
-void option_checker(char **argv, int argc)
-{
-	//todo
-	//make a checker that checks an -n option or a -help option
-
-	//if an -n option is added, use it for ignoring the exit flag
-
-	//else if -help, display how to use the abstract_vm
-}
 
 // checkpoint for come back:
 // -test mod and div operators with the exceptions (almost done)
@@ -23,16 +14,13 @@ void option_checker(char **argv, int argc)
 // 	and test the operators(if all works, then copy paste)
 // -check for any leaks at the very end of the program 
 
-//personal bonus
-// -add a n option MAKE THE STDIN that run endless until an exit is founded;
-// -add a "help" option that displays how to use the vm_program;
 
 // here's where the program runs
 int main(int argc, char **argv)
 {
 	Abstract_vm				virtual_machine;
 	t_double_vector_string	instructions_list;
-	Lexer					compiler;
+	Lexer					lexer;
 	int						i = 1;
 
 	virtual_machine.instructionsTypes_map_init();
@@ -57,7 +45,7 @@ int main(int argc, char **argv)
 		// 	{
 		// 		argc--;
 		// 	}
-			instructions_list = compiler.get_file_input(argv[i]);
+			instructions_list = lexer.get_file_input(argv[i]);
 			for (int i = 0; i < instructions_list.size(); i++)
 			{
 				virtual_machine.call_instructions(instructions_list[i]);
@@ -71,7 +59,7 @@ int main(int argc, char **argv)
 		// {
 			try
 			{
-				instructions_list = compiler.get_stdin();
+				instructions_list = lexer.get_stdin();
 				for (int i = 0; i < instructions_list.size(); i++)
 				{
 					virtual_machine.call_instructions(instructions_list[i]);

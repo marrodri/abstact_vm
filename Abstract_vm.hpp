@@ -20,6 +20,7 @@ private:
 	//for every new Operand created return a 
 	//pointer of the class to the new space
 	//of the stack
+	std::vector<std::string> instr;
 	std::stack<const IOperand*> vm_heap;
 	std::map<std::string, eOperandType> operandTypes_map;
 	std::map<std::string, eInstructionValue> instructionTypes_map;

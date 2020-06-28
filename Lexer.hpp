@@ -25,8 +25,8 @@ public:
 	std::vector<std::string> instruction_lexer(std::string instruction);
 
 	
-	t_double_vector_string get_file_input(char *filename);
-	t_double_vector_string get_stdin();
+	std::vector<std::string> get_file_input(char *filename);
+	std::vector<std::string> get_stdin();
 	
 	t_double_vector_string set_instr_vector(std::string input);
 	void delete_comments(std::string &line);
