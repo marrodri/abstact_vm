@@ -173,12 +173,15 @@ t_double_vector_string Lexer::file_input_parser(char *filename)
 	t_double_vector_string					instructions_list;
 
 	infile.open(filename);
+
+	if(infile.fail())
+	{
+		throw VM_exceptions("inputed filename doesn't exist, Exiting.");
+	}
 	while (std::getline(infile, newline_file))
 	{
 		delete_comments(newline_file);
-		//for lowercasing string
 		std::transform(newline_file.begin(),newline_file.end(), newline_file.begin(), ::tolower);
-		//trim any unecessary whitespace at the beginning and end of the string
 		trim_whitespace_string(newline_file);
 		file_str = new_line_concatonate(file_str, newline_file);
 	}
@@ -201,20 +204,12 @@ t_double_vector_string Lexer::stdin_parser()
 	{
 		if (newline_input == ";;")
 			break;
-		// std::cout <<  "line inputed: " << newline_input << std::endl;
 		delete_comments(newline_input);
 		std::transform(newline_input.begin(), newline_input.end(), newline_input.begin(), ::tolower);
-
-		//trim any unecesary whitespace here
 		trim_whitespace_string(newline_input);
-		// std::cout <<  "line after changes |" << newline_input << "|" << std::endl;
 		full_stdin_string = new_line_concatonate(full_stdin_string, newline_input);
 	}
 
-	// here the instruction is parsed, but the value is not parsed
-	// regex could be useful for checking if a instruction needs a value or not
-	//if wrongly inputed, throw a lexer/syntax error
 	instructions_list = set_instr_vector(full_stdin_string);
-	// print_vector(instructions_list);
 	return (instructions_list);
 }

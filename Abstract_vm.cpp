@@ -276,4 +276,3 @@ void Abstract_vm::exit()
 {
 	this->exit_bool = true;
 }
-
