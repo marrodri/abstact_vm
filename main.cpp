@@ -3,28 +3,16 @@
 #include "Lexer.hpp"
 #include "VM_exceptions.hpp"
 #include "Op_exceptions.hpp"
-void option_checker(char **argv, int argc)
-{
-	//todo
-	//make a checker that checks an -n option or a -help option
-
-	//if an -n option is added, use it for ignoring the exit flag
-
-	//else if -help, display how to use the abstract_vm
-}
 
 // checkpoint for come back:
-// -test mod and div operators with the exceptions 
 // update the regex pattern in the instruction_parser function and error management for input
+// -test mod and div operators with the exceptions almost done
 
 // FOR LAST AND IMPORTANT
 // -check that each instruction and value exist, if not return an error(it doesn't display the error yet)
 // 	and test the operators(if all works, then copy paste)
 // -check for any leaks at the very end of the program 
 
-//personal bonus
-// -add a n option MAKE THE STDIN that run endless until an exit is founded;
-// -add a "help" option that displays how to use the vm_program;
 
 // here's where the program runs
 int main(int argc, char **argv)
@@ -47,38 +35,13 @@ int main(int argc, char **argv)
 		// // by finding the ";;" as the beggining and end of line
 		while (i < argc)
 		{
-		// 	if (0)
-		// 	{
-
-		// 	}
-		// 	//for each exit command, get the argc to 0;
-		// 	if (0)
-		// 	{
-		// 		argc--;
-		// 	}
-			instructions_list = compiler.file_input_parser(argv[i]);
-			for (int i = 0; i < instructions_list.size(); i++)
-			{
-				virtual_machine.call_instructions(instructions_list[i]);
-			}
-			i++;
-		}	
-	}
-	else
-	{
-		while (virtual_machine.get_exit() == false)
-		{
 			try
-			{
-				instructions_list = compiler.stdin_parser();
+			{	
+				instructions_list = compiler.file_input_parser(argv[i]);
 				for (int i = 0; i < instructions_list.size(); i++)
-				{
 					virtual_machine.call_instructions(instructions_list[i]);
-				}
 				if (virtual_machine.get_exit() == false)
-				{
 					throw VM_exceptions("Exit instruction has not been found.");
-				}
 			}
 			catch (VM_exceptions &e)
 			{
@@ -88,6 +51,26 @@ int main(int argc, char **argv)
 			{
 				std::cout <<  "OPERAND ERROR: " << e.what() << std::endl;
 			}
+			i++;
+		}	
+	}
+	else
+	{
+		try
+		{
+			instructions_list = compiler.stdin_parser();
+			for (int i = 0; i < instructions_list.size(); i++)
+				virtual_machine.call_instructions(instructions_list[i]);
+			if (virtual_machine.get_exit() == false)
+				throw VM_exceptions("Exit instruction has not been found.");
+		}
+		catch (VM_exceptions &e)
+		{
+			std::cout <<  "VM ERROR: " << e.what() << std::endl;
+		}
+		catch (Op_exceptions &e)
+		{
+			std::cout <<  "OPERAND ERROR: " << e.what() << std::endl;
 		}
 	}
 	return (0);

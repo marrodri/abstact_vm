@@ -175,6 +175,7 @@ t_double_vector_string Lexer::file_input_parser(char *filename)
 	infile.open(filename);
 	while (std::getline(infile, newline_file))
 	{
+		delete_comments(newline_file);
 		//for lowercasing string
 		std::transform(newline_file.begin(),newline_file.end(), newline_file.begin(), ::tolower);
 		//trim any unecessary whitespace at the beginning and end of the string

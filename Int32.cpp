@@ -100,7 +100,7 @@ IOperand const *Int32::operator%(IOperand const & rhs) const
 	double remainder = 0;
 	std::string val_string = "";
 
-	if(first_val == 0 || sec_val == 0)
+	if (first_val == 0 || sec_val == 0)
 		throw Op_exceptions("There is a modulo by 0, cannot continue with the operation");
 	val_string = std::to_string(std::fmod(first_val, sec_val));
 	if (this->getPrecision() >= rhs.getPrecision())
