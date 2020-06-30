@@ -37,7 +37,7 @@ void	Abstract_vm::operandTypes_map_init()
 	this->operandTypes_map["double"] = double_class;
 }
 
-void Abstract_vm::call_instructions(std::vector<std::string> instruction)
+void Abstract_vm::call_instruction(std::vector<std::string> instruction)
 {
 	std::string first_instr = "";
 	std::string op_value = "";
@@ -48,14 +48,7 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 	{
 		op_value = instruction[1];
 		num_value = instruction[2];
-
 	}
-	// std::cout <<  "instruction setted: " << first_instr << std::endl;
-	// std::cout <<  "==calling instruction==" << std::endl;
-	// std::cout <<  "instr: |" << first_instr << "|" << std::endl;
-	// std::cout <<  "op: |" << op_value << "|" << std::endl;
-	// std::cout <<  "val: |" << num_value << "|" << std::endl;
-	// std::cout <<  "====================" << std::endl;
 	switch (instructionTypes_map[first_instr])
 	{
 		case push_val:
@@ -92,6 +85,14 @@ void Abstract_vm::call_instructions(std::vector<std::string> instruction)
 			exit();
 			break;	
 	}
+}
+
+void Abstract_vm::run_instructions(t_double_vector_string instructions)
+{
+	for (int i = 0; i < instructions.size(); i++)
+		call_instruction(instructions[i]);
+	if (this->exit_bool == false)
+		throw VM_exceptions("Exit instruction has not been found.");
 }
 
 void Abstract_vm::push_value(std::string op_value, std::string num_value)
@@ -131,7 +132,7 @@ void Abstract_vm::dump()
 	}
 }
 
-//seems to work, need to test more!!
+// Doesnt work properly with float or double. There's a bug with precission;
 void Abstract_vm::assert(std::string op_value, std::string num_value)
 {
 	if (vm_heap.size() > 0)
@@ -276,7 +277,3 @@ void Abstract_vm::exit()
 	this->exit_bool = true;
 }
 
-bool Abstract_vm::get_exit()
-{
-	return (this->exit_bool);
-}

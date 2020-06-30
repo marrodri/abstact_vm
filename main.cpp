@@ -24,54 +24,30 @@ int main(int argc, char **argv)
 
 	virtual_machine.instructionsTypes_map_init();
 	virtual_machine.operandTypes_map_init();
-
-	// if argc is higher than 1, then check the files, if the syntax of 
-	// each files, parse and execute the program, if not throw error, by input help
-	if (argc >= 2)
+	try
 	{
-		//if the file has an exit instruction, exit the VM, if not
-		//the VM is still active
-		// //if argc is 1; the program runs, and each execution is started
-		// // by finding the ";;" as the beggining and end of line
-		while (i < argc)
+		if (argc >= 2)
 		{
-			try
-			{	
+			while (i < argc)
+			{
 				instructions_list = compiler.file_input_parser(argv[i]);
-				for (int i = 0; i < instructions_list.size(); i++)
-					virtual_machine.call_instructions(instructions_list[i]);
-				if (virtual_machine.get_exit() == false)
-					throw VM_exceptions("Exit instruction has not been found.");
+				virtual_machine.run_instructions(instructions_list);
+				i++;
 			}
-			catch (VM_exceptions &e)
-			{
-				std::cout <<  "VM ERROR: " << e.what() << std::endl;
-			}
-			catch (Op_exceptions &e)
-			{
-				std::cout <<  "OPERAND ERROR: " << e.what() << std::endl;
-			}
-			i++;
-		}	
-	}
-	else
-	{
-		try
+		}
+		else
 		{
 			instructions_list = compiler.stdin_parser();
-			for (int i = 0; i < instructions_list.size(); i++)
-				virtual_machine.call_instructions(instructions_list[i]);
-			if (virtual_machine.get_exit() == false)
-				throw VM_exceptions("Exit instruction has not been found.");
+			virtual_machine.run_instructions(instructions_list);
 		}
-		catch (VM_exceptions &e)
-		{
-			std::cout <<  "VM ERROR: " << e.what() << std::endl;
-		}
-		catch (Op_exceptions &e)
-		{
-			std::cout <<  "OPERAND ERROR: " << e.what() << std::endl;
-		}
+	}
+	catch (VM_exceptions &e)
+	{
+		std::cout <<  "VM ERROR: " << e.what() << std::endl;
+	}
+	catch (Op_exceptions &e)
+	{
+		std::cout <<  "OPERAND ERROR: " << e.what() << std::endl;
 	}
 	return (0);
 }

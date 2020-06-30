@@ -9,7 +9,6 @@
 #include <sstream>
 #include <iostream>
 
-typedef std::vector<std::vector<std::string>> t_double_vector_string;
 
 class Lexer
 {

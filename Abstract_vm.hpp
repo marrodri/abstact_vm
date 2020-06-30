@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+typedef std::vector<std::vector<std::string>> t_double_vector_string;
+
 enum eInstructionValue	{ push_val, pop_val, 
 						dump_val, assert_val, add_val,
 						sub_val, mul_val, div_val, mod_val,
@@ -16,10 +18,13 @@ enum eInstructionValue	{ push_val, pop_val,
 class Abstract_vm
 {
 private:
-	// initialize an array here that runs as a stack
-	//for every new Operand created return a 
-	//pointer of the class to the new space
-	//of the stack
+	/*
+	** initialize an array here that runs as a stack
+	** for every new Operand created return a 
+	** pointer of the class to the new space
+	** of the stack
+	*/
+
 	std::stack<const IOperand*> vm_heap;
 	std::map<std::string, eOperandType> operandTypes_map;
 	std::map<std::string, eInstructionValue> instructionTypes_map;
@@ -45,9 +50,8 @@ public:
 	Operand_factory opFactory;	
 	void operandTypes_map_init();
 	void instructionsTypes_map_init();
-	//this function could be used to call the instructions methods that can be private;
-	void call_instructions(std::vector<std::string> instruction);
-	bool get_exit();
+	void run_instructions(t_double_vector_string instructions);
+	void call_instruction(std::vector<std::string> instruction);
 	std::map<std::string, eInstructionValue> get_instr_map();
 };
 #endif
