@@ -45,5 +45,6 @@ int main(int argc, char **argv)
 	{
 		std::cout <<  "OPERAND ERROR: " << e.what() << std::endl;
 	}
+	virtual_machine.clear_stack();
 	return (0);
 }

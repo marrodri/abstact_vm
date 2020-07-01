@@ -53,5 +53,6 @@ public:
 	void run_instructions(t_double_vector_string instructions);
 	void call_instruction(std::vector<std::string> instruction);
 	std::map<std::string, eInstructionValue> get_instr_map();
+	void clear_stack();
 };
 #endif

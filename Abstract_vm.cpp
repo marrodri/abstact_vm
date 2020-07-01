@@ -162,7 +162,7 @@ void Abstract_vm::add()
 {
 	const IOperand *first_val;
 	const IOperand *second_val;
-	
+
 	if (vm_heap.size() >= 2)
 	{
 		first_val = vm_heap.top();
@@ -170,6 +170,8 @@ void Abstract_vm::add()
 		second_val = vm_heap.top();
 		vm_heap.pop();
 		vm_heap.push(*first_val + *second_val);
+		delete first_val;
+		delete second_val;
 	}
 	else
 	{
@@ -189,6 +191,8 @@ void Abstract_vm::sub()
 		second_val = vm_heap.top();
 		vm_heap.pop();
 		vm_heap.push(*first_val - *second_val);
+		delete first_val;
+		delete second_val;
 	}
 	else
 	{
@@ -208,6 +212,8 @@ void Abstract_vm::mul()
 		second_val = vm_heap.top();
 		vm_heap.pop();
 		vm_heap.push(*first_val * *second_val);
+		delete first_val;
+		delete second_val;
 	}
 	else
 	{
@@ -228,6 +234,8 @@ void Abstract_vm::div()
 		second_val = vm_heap.top();
 		vm_heap.pop();
 		vm_heap.push(*first_val / *second_val);
+		delete first_val;
+		delete second_val;
 	}
 	else
 	{
@@ -248,6 +256,8 @@ void Abstract_vm::mod()
 		second_val = vm_heap.top();
 		vm_heap.pop();
 		vm_heap.push(*first_val % *second_val);
+		delete first_val;
+		delete second_val;
 	}
 	else
 	{
@@ -279,4 +289,12 @@ void Abstract_vm::print()
 void Abstract_vm::exit()
 {
 	this->exit_bool = true;
+}
+
+void Abstract_vm::clear_stack()
+{
+	while(!vm_heap.empty())
+	{
+		pop();
+	}
 }
