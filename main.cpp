@@ -7,12 +7,8 @@
 // checkpoint for come back:
 // update the regex pattern in the instruction_parser function and error management for input
 // -test mod and div operators with the exceptions almost done
-
-// FOR LAST AND IMPORTANT
-// -check that each instruction and value exist, if not return an error(it doesn't display the error yet)
-// 	and test the operators(if all works, then copy paste)
-// -check for any leaks at the very end of the program 
-
+// fix the assert function, and probably the double and float precision when creating
+// for the last clear any leaks!!! 
 
 // here's where the program runs
 int main(int argc, char **argv)

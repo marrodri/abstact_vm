@@ -106,7 +106,11 @@ void Abstract_vm::push_value(std::string op_value, std::string num_value)
 void Abstract_vm::pop()
 {
 	if (!vm_heap.empty())
+	{
+		const IOperand *tmp_top = vm_heap.top();
+		delete tmp_top;	
 		vm_heap.pop();
+	}
 	else
 	{
 		throw VM_exceptions("stack is empty, cannot pop anymore");
