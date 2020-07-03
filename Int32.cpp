@@ -86,7 +86,7 @@ IOperand const *Int32::operator/(IOperand const & rhs) const
 	{
 		delete this;
 		delete &rhs;
-		throw Op_exceptions("There is a division 0, cannot continue with the operation");
+		throw Op_exceptions("There is a division by 0, cannot continue with the operation");
 	}
 	val_string = std::to_string(first_val / sec_val);
 	if (this->getPrecision() >= rhs.getPrecision())
