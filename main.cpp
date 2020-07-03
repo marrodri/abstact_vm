@@ -6,7 +6,7 @@
 
 // checkpoint for come back:
 // update the regex pattern in the instruction_parser function and error management for input
-// -test mod and div operators with the exceptions almost done
+// fix the double output
 // fix the assert function, and probably the double and float precision when creating
 // for the last clear any leaks!!! 
 

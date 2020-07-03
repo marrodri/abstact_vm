@@ -1,6 +1,6 @@
 
 #include "Abstract_vm.hpp" 
-
+#include <iomanip>
 Abstract_vm::Abstract_vm(/* args */)
 {
 }
@@ -141,9 +141,22 @@ void Abstract_vm::assert(std::string op_value, std::string num_value)
 {
 	if (vm_heap.size() > 0)
 	{
-		const IOperand *top_val = vm_heap.top();
+		std::string top_num_val = vm_heap.top()->toString();
+		eOperandType top_type = vm_heap.top()->getType(); 
 		eOperandType op_type = operandTypes_map[op_value];
-		if ((top_val->getType() == op_type) && (top_val->toString() == num_value)) 
+		if(op_value == "double" || op_value == "float")
+		{
+			std::stringstream ss;
+			double prec_val = std::stod(top_num_val);
+			int dot_pos = num_value.find_last_of(".");
+			if(dot_pos == num_value.npos)
+				dot_pos = 0;
+			ss << std::fixed << std::setprecision(dot_pos) << prec_val;
+			top_num_val = ss.str();
+		}
+		// std::cout <<  "top_num_val:" << top_num_val << std::endl;
+		// std::cout <<  "num_value:" << num_value << std::endl;
+		if ((top_type == operandTypes_map[op_value]) && (top_num_val == num_value)) 
 		{
 			;
 		}
