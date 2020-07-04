@@ -136,7 +136,7 @@ void Abstract_vm::dump()
 	}
 }
 
-// Doesnt work properly with float or double. There's a bug with precission;
+// done, probably;
 void Abstract_vm::assert(std::string op_value, std::string num_value)
 {
 	if (vm_heap.size() > 0)
@@ -154,12 +154,8 @@ void Abstract_vm::assert(std::string op_value, std::string num_value)
 			ss << std::fixed << std::setprecision(dot_pos) << prec_val;
 			top_num_val = ss.str();
 		}
-		// std::cout <<  "top_num_val:" << top_num_val << std::endl;
-		// std::cout <<  "num_value:" << num_value << std::endl;
 		if ((top_type == operandTypes_map[op_value]) && (top_num_val == num_value)) 
-		{
 			;
-		}
 		else
 		{
 			throw VM_exceptions("Asserted value is incorrect");

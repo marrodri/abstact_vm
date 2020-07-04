@@ -6,11 +6,11 @@
 
 // checkpoint for come back:
 // update the regex pattern in the instruction_parser function and error management for input
-// fix the double output
-// fix the assert function, and probably the double and float precision when creating
-// for the last clear any leaks!!! 
 
-// here's where the program runs
+// fix the assert function x
+// for the last clear any leaks!!! x
+
+
 int main(int argc, char **argv)
 {
 	Abstract_vm				virtual_machine;

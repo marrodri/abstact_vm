@@ -43,9 +43,7 @@ void Lexer::delete_comments(std::string &line)
 		}
 	}
 	if (line.find_first_not_of(' ') == line.npos)
-	{
 		line = "\0";
-	}
 }
 
 //CHECKPOINT continue here
@@ -74,15 +72,16 @@ std::string Lexer::new_line_concatonate(std::string curr_str, std::string conca_
 
 std::vector<std::string> Lexer::value_parser(std::string value_str)
 {
-
 	// if it matches parse the value, if wrong throw a parsing error
 	// that the inputed value wrongly inputted, that the value is inexistent
 	// or the syntax is wrong
 	std::vector<std::string> parsed_val;
-	std::regex rgx_val("\\b(int8|int16|int32|float|double)(\\()(\\d*|\\d*.\\d*)(\\))");
+	std::regex rgx_val_1("\\b(int8|int16|int32|float|double)(\\()(\\d*)(\\))");
+	std::regex rgx_val_2("\\b(float|double)(\\()(\\d*|\\d*.\\d*)(\\))");
 	std::smatch matches;
 
-	if (std::regex_match(value_str, matches, rgx_val))
+	if (std::regex_match(value_str, matches, rgx_val_1) ||
+		std::regex_match(value_str, matches, rgx_val_2))
 	{
 		std::string op = matches.str(1);
 		std::string val = matches.str(3);
@@ -93,7 +92,7 @@ std::vector<std::string> Lexer::value_parser(std::string value_str)
 	{
 		//if regex doesn't pass we could return an error
 		// std::cout <<  "Value " << value_str << " Is not properly formatted or operand doesn't exist, throwing error" << std::endl;
-		throw VM_exceptions("Type value doesn't exist, please input a type value that exists");
+		throw VM_exceptions("Inputed value doesn't exist, please input a type value that exists");
 	}
 	return (parsed_val);
 }
@@ -103,22 +102,20 @@ std::vector<std::string> Lexer::instruction_parser(std::string instr_str)
 	std::vector<std::string> new_instruction;
 	std::vector<std::string> new_value;
 	std::vector<std::string> unparsed_matches;
-
-	// updated pattern(prob)	
-	// (push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?:\s+)?)((?:.*)?)
 	
-	//useful pattern, 
-	// but change it to the upper one that its more complete,
-	//  than the current one, it's still buggy, it wo
-	//bug: wont accept instruction without spaces eg. 
-	// it works 	|dump| 
-	// but it works too	|dumpteswt| 
-	std::regex rgx_pat("(push|pop|dump|assert|add|sub|mul|div|mod|print|exit)((?:\\s+)?)(.*)");
+	//NOTE TO CHANGE
+	/*
+		I could use a second regex patten to separate both, and to check wether 
+		one of the both regex passed, it will continue the lexical separation
+		one for only one instruction, or the other that needs a value
+	*/
+	std::regex rgx_pat_1("(pop|dump|add|sub|mul|div|mod|print|exit)(.*)");
+	std::regex rgx_pat_2("(push|assert)((?:\\s+)?)(.*)");
 	std::smatch instr_match;
 
-	if (std::regex_match(instr_str, instr_match, rgx_pat))
+	if (std::regex_match(instr_str, instr_match, rgx_pat_1) || 
+		std::regex_match(instr_str, instr_match, rgx_pat_2))
 	{
-		// instructionTypes_map[instr_match.str(1)]
 		new_instruction.push_back(instr_match.str(1));
 		if (instr_match.str(1) == "push" || instr_match.str(1) == "assert")
 		{
@@ -127,13 +124,6 @@ std::vector<std::string> Lexer::instruction_parser(std::string instr_str)
 				new_value = value_parser(instr_match.str(3));
 				new_instruction.insert(new_instruction.end(), new_value.begin(), new_value.end());
 		}
-		//a way to check that a value is added and is not required!!
-		else if(0)
-		{
-			throw VM_exceptions("This instruction doesn't need a value");
-			//if it's any other instruction and there's a value inputted, throw an error,
-		}
-		//if not continue as normal without adding the value to the vector
 	}
 	else
 	{
