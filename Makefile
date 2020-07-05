@@ -1,9 +1,9 @@
 
 NAME = abstract_vm
-CFLAGS = -Wall -Wextra -Werror
-SRC = main.cpp Double.cpp Float.cpp Int8.cpp Int16.cpp\
-		Int32.cpp Abstract_vm.cpp Operand_factory.cpp Lexer.cpp\
-		Op_exceptions.cpp VM_exceptions.cpp
+CFLAGS = -Wall -Wextra -Werror 
+SRC = main.cpp src/Double.cpp src/Float.cpp src/Int8.cpp src/Int16.cpp\
+		src/Int32.cpp src/Abstract_vm.cpp src/Operand_factory.cpp src/Lexer.cpp\
+		src/Op_exceptions.cpp src/VM_exceptions.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -12,10 +12,10 @@ OBJ = $(SRC:.cpp=.o)
 all: $(NAME)
 
 $(OBJ): %.o: %.cpp
-	@clang++ -c  $< -o $@
+	@clang++ -I ./includes/ -c  $< -o $@
 
 $(NAME): $(OBJ)
-	@clang++ $(OBJ) $(CFLAGS) -o $(NAME)
+	@clang++ -I ./includes/ $(OBJ) $(CFLAGS) -o  $(NAME)
 
 clean:
 	@rm -rf $(OBJ)

@@ -136,7 +136,6 @@ void Abstract_vm::dump()
 	}
 }
 
-// done, probably;
 void Abstract_vm::assert(std::string op_value, std::string num_value)
 {
 	if (vm_heap.size() > 0)
@@ -230,7 +229,6 @@ void Abstract_vm::mul()
 	}
 }
 
-//edge case div added, TEST!!
 void Abstract_vm::div()
 {
 	const IOperand *first_val;
@@ -252,7 +250,6 @@ void Abstract_vm::div()
 	}
 }
 
-//edge case mod added, TEST!!
 void Abstract_vm::mod()
 {
 	const IOperand *first_val;
