@@ -18,13 +18,6 @@ enum eInstructionValue	{ push_val, pop_val,
 class Abstract_vm
 {
 private:
-	/*
-	** initialize an array here that runs as a stack
-	** for every new Operand created return a 
-	** pointer of the class to the new space
-	** of the stack
-	*/
-
 	std::stack<const IOperand*> vm_heap;
 	std::map<std::string, eOperandType> operandTypes_map;
 	std::map<std::string, eInstructionValue> instructionTypes_map;

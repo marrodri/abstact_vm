@@ -1,6 +1,7 @@
 
 #include "Int32.hpp" 
 #include "Operand_factory.hpp"
+
 Int32::Int32(double value)
 {
 	if(value > INT_MAX)

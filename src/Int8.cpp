@@ -20,7 +20,6 @@ Int8::Int8(double value)
 	}
 }
 
-void Int8::setValue(char value){}
 int Int8::getPrecision(void) const
 {
 	return (8);

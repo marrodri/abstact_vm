@@ -15,8 +15,6 @@ public:
 	Double(Double const & src);
 	~Double();
 
-	//get function
-	//set function
 	char const getValue();
 	void setValue(char value);
 

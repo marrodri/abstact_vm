@@ -8,7 +8,7 @@ Double::Double(long double value)
 	{
 		throw Op_exceptions("overflow with the double operand");
 	}
-	else if (value < DBL_MIN)
+	else if (value < -DBL_MIN)
 	{
 		throw Op_exceptions("underflow with the double operand");
 	}
@@ -76,7 +76,6 @@ IOperand const *Double::operator*(IOperand const & rhs) const
 		return factory.createOperand(rhs.getType(), val_string);
 }
 
-//here set the exception when div is wih 0
 IOperand const *Double::operator/(IOperand const & rhs) const
 {
 	Operand_factory factory;
@@ -97,7 +96,6 @@ IOperand const *Double::operator/(IOperand const & rhs) const
 		return factory.createOperand(rhs.getType(), val_string);
 }
 
-//here set the exception when mod is wih 0
 IOperand const *Double::operator%(IOperand const & rhs) const
 {
 	Operand_factory factory;

@@ -136,6 +136,21 @@ void Abstract_vm::dump()
 	}
 }
 
+std::string assert_prec(std::string top_num_val, std::string num_value)
+{
+	// std::string prec_val;
+	// std::stringstream ss;
+	// double prec_val = std::stod(top_num_val);
+	// int dot_pos = num_value.find_last_of(".");
+	
+	// if(dot_pos == num_value.npos)
+	// 	dot_pos = 0;
+	// ss << std::fixed << std::setprecision(dot_pos) << prec_val;
+	// prec_val = ss.str();
+	// return (prec_val);
+	return "";
+}
+
 void Abstract_vm::assert(std::string op_value, std::string num_value)
 {
 	if (vm_heap.size() > 0)
@@ -152,7 +167,10 @@ void Abstract_vm::assert(std::string op_value, std::string num_value)
 				dot_pos = 0;
 			ss << std::fixed << std::setprecision(dot_pos) << prec_val;
 			top_num_val = ss.str();
+			// top_num_val = assert_prec(top_num_val,);
 		}
+		std::cout <<  "top_num_val:" << top_num_val << std::endl;
+		std::cout <<  "input num_val:" << num_value << std::endl;
 		if ((top_type == operandTypes_map[op_value]) && (top_num_val == num_value)) 
 			;
 		else
@@ -275,7 +293,6 @@ void Abstract_vm::print()
 {
 	const IOperand *top_val = vm_heap.top();
 	char char_value = '\0';
-	int dec_code = 0;
 
 	if(vm_heap.empty())
 	{

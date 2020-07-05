@@ -19,9 +19,7 @@ public:
 	Lexer(Lexer const & src);
 	~Lexer();
 
-	// Lexer & operator=(Lexer const & rhs);
 	std::vector<std::string> value_parser(std::string value);
-	//empty needed to check every instruction allowed
 	std::vector<std::string> instruction_parser(std::string instruction);
 
 	

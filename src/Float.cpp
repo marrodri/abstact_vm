@@ -8,7 +8,7 @@ Float::Float(double value)
 	{
 		throw Op_exceptions("overflow with the float operand");
 	}
-	else if (value < FLT_MIN)
+	else if (value < -FLT_MIN)
 	{
 		throw Op_exceptions("underflow with the float operand");
 	}
@@ -37,8 +37,6 @@ eOperandType Float::getType(void) const
 {
 	return (float_class);
 }
-
-
 
 IOperand const *Float::operator+(IOperand const & rhs) const
 {

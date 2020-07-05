@@ -1,6 +1,6 @@
 
 NAME = abstract_vm
-CFLAGS = -Wall -Wextra -Werror 
+
 SRC = main.cpp src/Double.cpp src/Float.cpp src/Int8.cpp src/Int16.cpp\
 		src/Int32.cpp src/Abstract_vm.cpp src/Operand_factory.cpp src/Lexer.cpp\
 		src/Op_exceptions.cpp src/VM_exceptions.cpp

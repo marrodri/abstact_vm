@@ -11,7 +11,6 @@
 class Operand_factory
 {
 private:
-	// IOperand const * (Operand_factory::*operandCreators[5])(std::string const &) const;
 
 	IOperand const * createInt8(std::string const & value) const;
 	IOperand const * createInt16(std::string const & value) const;
@@ -26,11 +25,5 @@ public:
 	Operand_factory & operator=(Operand_factory const & rhs);
 
 	IOperand const * createOperand(eOperandType type, std::string const & value) const;
-	//move all the operand create operands here
-
-
-	//get function
-	//set function
-
 };
 #endif
