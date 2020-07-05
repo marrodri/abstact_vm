@@ -1,0 +1,13 @@
+
+push int8(2)
+push int32(43)
+push int16(53)
+push int32(23)
+
+dump    
+add  
+dump 
+exit
+
+
+
