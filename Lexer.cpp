@@ -83,8 +83,8 @@ std::vector<std::string> Lexer::value_parser(std::string value_str)
 	if (std::regex_match(value_str, matches, rgx_val_1) ||
 		std::regex_match(value_str, matches, rgx_val_2))
 	{
-		std::string op = matches.str(1);
-		std::string val = matches.str(3);
+		if(matches.str(3) == "")
+			throw VM_exceptions("Numeric value is empty, please put a value");
 		parsed_val.push_back(matches.str(1));
 		parsed_val.push_back(matches.str(3));
 	}
@@ -109,8 +109,10 @@ std::vector<std::string> Lexer::instruction_parser(std::string instr_str)
 		one of the both regex passed, it will continue the lexical separation
 		one for only one instruction, or the other that needs a value
 	*/
-	std::regex rgx_pat_1("(pop|dump|add|sub|mul|div|mod|print|exit)(.*)");
-	std::regex rgx_pat_2("(push|assert)((?:\\s+)?)(.*)");
+	std::regex rgx_pat_1("(pop|dump|add|sub|mul|div|mod|print|exit)");
+	// std::regex rgx_pat_2("(push|assert)((?:\\s+)?)(.*)");
+	// (push|assert)\\s+(.*)
+	std::regex rgx_pat_2("(push|assert)\\s+(.*)");
 	std::smatch instr_match;
 
 	if (std::regex_match(instr_str, instr_match, rgx_pat_1) || 
@@ -121,7 +123,8 @@ std::vector<std::string> Lexer::instruction_parser(std::string instr_str)
 		{
 				//if the instruction is push or assert
 				//check if there is a second group for parsing, if not throw an error in the parser
-				new_value = value_parser(instr_match.str(3));
+				// std::cout <<  instr_match.str(2) << std::endl;
+				new_value = value_parser(instr_match.str(2));
 				new_instruction.insert(new_instruction.end(), new_value.begin(), new_value.end());
 		}
 	}
