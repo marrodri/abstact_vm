@@ -158,7 +158,7 @@ void Abstract_vm::assert(std::string op_value, std::string num_value)
 		std::string top_num_val = vm_heap.top()->toString();
 		eOperandType top_type = vm_heap.top()->getType(); 
 		eOperandType op_type = operandTypes_map[op_value];
-		if(op_value == "double" || op_value == "float")
+		if (op_value == "double" || op_value == "float")
 		{
 			std::stringstream ss;
 			double prec_val = std::stod(top_num_val);
@@ -181,7 +181,7 @@ void Abstract_vm::assert(std::string op_value, std::string num_value)
 	else
 	{
 		throw VM_exceptions("stack is empty, can't assert");
-	}	
+	}
 }
 
 void Abstract_vm::add()

@@ -4,20 +4,6 @@
 #include "VM_exceptions.hpp"
 #include "Op_exceptions.hpp"
 
-// checkpoint for come back:
-
-//still working!!  
-// update the regex pattern in the instruction_parser function and error management for input
-
-// todo:
-//do some tests and run valgrind with them for any leaks founded and to check any proper
-// exits founded!!
-
-
-// fix the assert function x
-// for the last clear any leaks!!! x
-
-
 int main(int argc, char **argv)
 {
 	Abstract_vm				virtual_machine;
