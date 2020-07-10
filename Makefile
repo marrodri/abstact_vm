@@ -12,10 +12,10 @@ OBJ = $(SRC:.cpp=.o)
 all: $(NAME)
 
 $(OBJ): %.o: %.cpp
-	@clang++ -I ./includes/ -c  $< -o $@
+	@clang++ -I ./includes/ -c  $< -o $@ -g
 
 $(NAME): $(OBJ)
-	@clang++ -I ./includes/ $(OBJ) $(CFLAGS) -o  $(NAME)
+	@clang++ -I ./includes/ $(OBJ) $(CFLAGS) -o  $(NAME) -g
 
 clean:
 	@rm -rf $(OBJ)

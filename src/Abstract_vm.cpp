@@ -155,23 +155,24 @@ void Abstract_vm::assert(std::string op_value, std::string num_value)
 {
 	if (vm_heap.size() > 0)
 	{
-		std::string top_num_val = vm_heap.top()->toString();
+		double top_num_val = std::stod(vm_heap.top()->toString());
 		eOperandType top_type = vm_heap.top()->getType(); 
+		double inp_num_val = std::stod(num_value);
 		eOperandType op_type = operandTypes_map[op_value];
-		if (op_value == "double" || op_value == "float")
-		{
-			std::stringstream ss;
-			double prec_val = std::stod(top_num_val);
-			int dot_pos = num_value.find_last_of(".");
-			if(dot_pos == num_value.npos)
-				dot_pos = 0;
-			ss << std::fixed << std::setprecision(dot_pos) << prec_val;
-			top_num_val = ss.str();
-			// top_num_val = assert_prec(top_num_val,);
-		}
-		std::cout <<  "top_num_val:" << top_num_val << std::endl;
-		std::cout <<  "input num_val:" << num_value << std::endl;
-		if ((top_type == operandTypes_map[op_value]) && (top_num_val == num_value)) 
+		// if (op_value == "double" || op_value == "float")
+		// {
+		// 	std::stringstream ss;
+		// 	double prec_val = std::stod(top_num_val);
+		// 	int dot_pos = num_value.find_last_of(".");
+		// 	if(dot_pos == num_value.npos)
+		// 		dot_pos = 0;
+		// 	ss << std::fixed << std::setprecision(dot_pos) << prec_val;
+		// 	top_num_val = ss.str();
+		// 	// top_num_val = assert_prec(top_num_val,);
+		// }
+		// std::cout <<  "top_num_val:" << top_num_val << std::endl;
+		// std::cout <<  "input num_val:" << num_value << std::endl;
+		if ((top_type == operandTypes_map[op_value]) && (top_num_val == inp_num_val)) 
 			;
 		else
 		{
